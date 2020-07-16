@@ -1,9 +1,13 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var models = require('./models/user');
+var items = require('./models/user');
+var Nany = items.Nany;
+var User = items.User;
+
 
 var app = express();
-var port = process.env.PORT || 8000
+var port = process.env.PORT || 5000
+console.log(Nany)
 
 
 require('dotenv').config(); // to read .env file
@@ -13,23 +17,17 @@ app.get('/', function (req, res) {
     console.log('test')
     res.send('server is a go!')
 });
-console.log(Nany)
-console.log(User)
-    
-app.getAlldatafromNanySchema ('/ret',function(req,res){
-      models.find({}, function(err, user){
-         //console.log('user')  
+
+   app.get ('/ret',function getAlldatafromNanySchema(req,res){
+      Nany.findOne({}, function(err, nany){
          if(err){
            res.json(err);
          } else {
-           res.json(user);
+            console.log(nany)  
+             res.send(nany);
          }
        });
      });
-
-
-
-
 
 const mongoURI = process.env.ATLAS_URI;
 

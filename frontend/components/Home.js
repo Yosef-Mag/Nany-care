@@ -22,6 +22,7 @@ export function place () {
 export function howManyKidsCanHandle () {
   const [selectedValue, setSelectedValue] = useState(" For how many kids" );
         return (
+    
      <View style={styles.container}>
       <Picker
         selectedValue={selectedValue}
@@ -33,7 +34,11 @@ export function howManyKidsCanHandle () {
         <Picker.Item label="3" value="3" />
         <Picker.Item label="4" value="4" />
       </Picker>
+      <View> 
+      
+      </View>
     </View>
+  
         )}
 
 // dropdown list for the Education Level
@@ -42,7 +47,7 @@ export function educationLevel() {
           return (
        <View style={styles.container}>
         <Picker
-          selectedValue={selectedValue}
+          selectedValue={selectedValue} 
           style={{ height: 50, width: 150 }}
           onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
         >
@@ -64,4 +69,9 @@ const styles = StyleSheet.create({
 });
 
 
+// loadUserTypes() {
+//   return this.state.userTypes.map(user => (
+//   <Picker.Item label={user.userName} value={user.userType} />
+// ))
+// }
 
