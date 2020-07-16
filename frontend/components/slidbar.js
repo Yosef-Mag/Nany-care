@@ -8,7 +8,6 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -29,7 +28,7 @@ function Profile({ navigation }) {
         <View style={{ alignSelf: "center" }}>
           <View style={styles.profileImage}>
             <Image
-              source={require("./assets/profile-pic.jpg")}
+              source={require("../assets/profile-pic.jpg")}
               style={styles.image}
               resizeMode="center"
             ></Image>
@@ -50,6 +49,13 @@ function Profile({ navigation }) {
   );
 }
 
+function Home() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
 function LogOut() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -62,14 +68,6 @@ function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.closeDrawer()}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.toggleDrawer()}
-      />
     </DrawerContentScrollView>
   );
 }
@@ -81,6 +79,7 @@ function MyDrawer() {
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
+      <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="LogOut" component={LogOut} />
     </Drawer.Navigator>
