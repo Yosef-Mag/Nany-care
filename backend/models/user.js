@@ -52,5 +52,7 @@ const Nany = mongoose.model('Nany', nanySchema);
 ​
 const User = mongoose.model('User', userSchema);
 ​
-module.exports.Nany  = Nany;
-module.exports.User  = User;
+// module.exports.Nany  = Nany;
+// module.exports.User  = User;
+module.exports = { Nany : Nany,
+                  User : User}
