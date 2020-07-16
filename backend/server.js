@@ -20,6 +20,24 @@ mongoose
     .then(() => console.log('DataBase connected to the server'))
     .catch(err => console.log(err))
 
+
+
+    //get data from database.
+    const list = require('./models/user');
+    app.get("http://localhost:5000/nany", function(req, res)  {
+        list.find(function(err,n)  {
+            
+            if(err){
+                throw err;
+            }
+
+            console.log(res.data)
+            res.json(res.data);
+        });
+        })
+
+
+
 app.listen(port, () => {
     console.log(`Server is running on ${port} Visit https://localhost:${port}`)
 })
