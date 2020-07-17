@@ -3,18 +3,20 @@ import { View, Picker, NativeModules } from "react-native";
 
 import axios from 'axios'
 
+
+
+
+// dropdown list for the place
+ export function Place () {
+  const [selectedValue, setSelectedValue] = useState([]);
+  const[isError, setIsError] = useState(false)
 // function to load  Nany Place List based on user selection
-function loadNanyPlaceList() { 
+  function loadNanyPlaceList() { 
     return (
       selectedValue.map((item) => (
         <Picker.Item label={item.place} value={item.place} />
   ))
     )}
-
-// dropdown list for the place
- export function Place () {
-  const [selectedValue, setSelectedValue] = useState("amman");
-  const[isError, setIsError] = useState(false)
   // fetching data from server side
   useEffect(()=>{
     const fetchData = async()=>{
@@ -24,7 +26,9 @@ function loadNanyPlaceList() {
     result.data.map((item)=>{
       setSelectedValue(item.place)
       console.log(item.place)
-    })} 
+    })
+   // console.log(result.data[0])
+  } 
       catch (error) {
                setIsError(true)
        }
@@ -39,7 +43,7 @@ function loadNanyPlaceList() {
 
         selectedValue={selectedValue}
         style={{ height: 50, width: 150 }}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+        onValueChange={(item) => setSelectedValue(item.place)}
       >  
        {loadNanyPlaceList}
       </Picker> 
