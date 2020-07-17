@@ -4,16 +4,16 @@ import axios from "axios";
 
 export default class SignUp extends React.Component {
   state = {
-    username: "",
+    name: "",
     password: "",
     email: "",
-    phone_number: "",
+    phoneNumber: "",
   };
   onChangeText = (key, val) => {
     this.setState({ [key]: val });
   };
   signUp = async () => {
-    const { username, password, email, phone_number } = this.state;
+    const { name, password, email, phoneNumber } = this.state;
     try {
       // here place your signup logic
       console.log("user successfully signed up!: ", success);
@@ -21,7 +21,6 @@ export default class SignUp extends React.Component {
       console.log("error signing up: ", err);
     }
   };
-  
 
   render() {
     return (
@@ -31,7 +30,7 @@ export default class SignUp extends React.Component {
           placeholder="Username"
           autoCapitalize="none"
           placeholderTextColor="white"
-          onChangeText={(val) => this.onChangeText("username", val)}
+          onChangeText={(val) => this.onChangeText("name", val)}
         />
         <TextInput
           style={styles.input}
@@ -53,7 +52,7 @@ export default class SignUp extends React.Component {
           placeholder="Phone Number"
           autoCapitalize="none"
           placeholderTextColor="white"
-          onChangeText={(val) => this.onChangeText("phone_number", val)}
+          onChangeText={(val) => this.onChangeText("phoneNumber", val)}
         />
         <Button title="Sign Up" onPress={this.signUp} />
       </View>
@@ -79,15 +78,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-             
-
-
-
-
-
-
-
-
-
-
-
