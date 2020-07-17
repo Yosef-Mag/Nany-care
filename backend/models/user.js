@@ -1,56 +1,41 @@
-
-var mongoose = require('mongoose');
-​
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-
 const userSchema = new Schema({
-​
   email: {
-      type: String,
-      required: true,
-      unique: true,
-      minlength: 3,
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 3,
   },
-  password:{type: String,
-      required: true,
-       minlength: 8
-  },
-  name:{
+  password: { type: String, required: true, minlength: 8 },
+  name: {
     type: String,
     required: true,
   },
-  phoneNumber:{
-    type:Number ,
+  phoneNumber: {
+    type: Number,
     required: true,
-    unique:true,
+    unique: true,
     minlength: 10,
-​
   },
-  image:{
+  image: {
     type: String,
   },
 });
-​
-​
-​
-var nanySchema= new Schema({
-  name : { type: String, required: true },
-  image :{ type: String, required: true},
-  email :{ type: String, required: true },
-  phoneNumber :{ type: Number, required: true, unique:true },
-  kidsNum: { type: Number, required: true, unique:true },
+var nanySchema = new Schema({
+  name: { type: String, required: true },
+  image: { type: String, required: true },
+  email: { type: String, required: true },
+  phoneNumber: { type: Number, required: true, unique: true },
+  kidsNum: { type: Number, required: true, unique: true },
   place: { type: String, required: true },
-  educationLevel:{ type: String, required: true },
-  age:{ type: Number, required: true },
-  workingHour:{ type: Number, required: true },
-  cost:{ type: Number, required: true },
-  experianceLevel:{ type: String, required: true },
+  educationLevel: { type: String, required: true },
+  age: { type: Number, required: true },
+  workingHour: { type: Number, required: true },
+  cost: { type: Number, required: true },
+  experianceLevel: { type: String, required: true },
 });
-
-
-const Nany = mongoose.model('Nany', nanySchema);
-​
-const User = mongoose.model('User', userSchema);
-​
-module.exports.Nany  = Nany;
-module.exports.User  = User;
+const Nany = mongoose.model("Nany", nanySchema);
+const User = mongoose.model("User", userSchema);
+module.exports.Nany = Nany;
+module.exports.User = User;

@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import MyDrawer from "./components/slidbar";
 import { NavigationContainer } from "@react-navigation/native";
