@@ -1,46 +1,28 @@
 import React from "react";
 import { View, Button, TextInput, StyleSheet } from "react-native";
-import axios from "axios";
 
-export default class SignUp extends React.Component {
+export default class Login extends React.Component {
   state = {
-    username: "",
+
     password: "",
-    email: "",
-    phone_number: "",
+    email: ""
   };
   onChangeText = (key, val) => {
     this.setState({ [key]: val });
   };
-  signUp = async () => {
-    const { username, password, email, phone_number } = this.state;
+  login = async () => {
+    const { password, email} = this.state;
     try {
-      // here place your signup logic
-      console.log("user successfully signed up!: ", success);
+      // here place your login logic
+      console.log("user successfully login!: ", success);
     } catch (err) {
-      console.log("error signing up: ", err);
+      console.log("error logining in: ", err);
     }
   };
-  
 
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          autoCapitalize="none"
-          placeholderTextColor="white"
-          onChangeText={(val) => this.onChangeText("username", val)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor="white"
-          onChangeText={(val) => this.onChangeText("password", val)}
-        />
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -50,12 +32,15 @@ export default class SignUp extends React.Component {
         />
         <TextInput
           style={styles.input}
-          placeholder="Phone Number"
+          placeholder="Password"
+          secureTextEntry={true}
           autoCapitalize="none"
           placeholderTextColor="white"
-          onChangeText={(val) => this.onChangeText("phone_number", val)}
+          onChangeText={(val) => this.onChangeText("password", val)}
         />
-        <Button title="Sign Up" onPress={this.signUp} />
+        
+       
+        <Button title="login" onPress={this.login} />
       </View>
     );
   }
@@ -79,15 +64,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-             
-
-
-
-
-
-
-
-
-
-
-
