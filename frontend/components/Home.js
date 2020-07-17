@@ -21,11 +21,10 @@ function loadNanyPlaceList() {
       setIsError(false)
       try {
     const result = await axios.get('http://localhost:5000/ret')
-    setSelectedValue(result.data)
-    console.log(result.data.map(()=>{
-      place
-    }))
-       } 
+    result.data.map((item)=>{
+      setSelectedValue(item.place)
+      console.log(item.place)
+    })} 
       catch (error) {
                setIsError(true)
        }
@@ -42,7 +41,7 @@ function loadNanyPlaceList() {
         style={{ height: 50, width: 150 }}
         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
       >  
-       {/* {loadNanyPlaceList} */}
+       {loadNanyPlaceList}
       </Picker> 
       </View>
        )}
