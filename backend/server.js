@@ -1,13 +1,14 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var items = require('./models/user');
+
 var Nany = items.Nany;
 var User = items.User;
 
 
 var app = express();
 var port = process.env.PORT || 5000
-console.log(Nany)
+console.log(items)
 
 
 require('dotenv').config(); // to read .env file
@@ -18,16 +19,18 @@ app.get('/', function (req, res) {
     res.send('server is a go!')
 });
 
-   app.get ('/ret',function getAlldatafromNanySchema(req,res){
-      Nany.findOne({}, function(err, nany){
+// get the selection based on place category  from database    
+app.get ('/ret',function getAlldatafromNanySchema(req,res){
+      Nany.find({"place": "amman"}, function(err, nany){
          if(err){
            res.json(err);
          } else {
-            console.log(nany)  
-             res.send(nany);
+            console.log(req)  
+             res.json(nany);
          }
        });
      });
+app.post('/Home', )
 
 const mongoURI = process.env.ATLAS_URI;
 
