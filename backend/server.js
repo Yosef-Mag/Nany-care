@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var items = require('./models/user');
+
 var Nany = items.Nany;
 var User = items.User;
 
@@ -24,12 +25,12 @@ app.get ('/ret',function getAlldatafromNanySchema(req,res){
          if(err){
            res.json(err);
          } else {
-            console.log(nany)  
+            console.log(req)  
              res.json(nany);
          }
        });
      });
-
+app.post('/Home', )
 
 const mongoURI = process.env.ATLAS_URI;
 

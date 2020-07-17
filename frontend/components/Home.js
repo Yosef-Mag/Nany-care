@@ -6,30 +6,50 @@ import axios from 'axios'
 // function to load  Nany Place List based on user selection
 function loadNanyPlaceList() { 
     return (
-      selectedValue.map(user => (
-        <Picker.Item label={selectedValue} value={selectedValue} />
+      selectedValue.map((item) => (
+        <Picker.Item label={item.place} value={item.place} />
   ))
     )}
 
 // dropdown list for the place
  export function Place () {
   const [selectedValue, setSelectedValue] = useState("amman");
+  const[isError, setIsError] = useState(false)
   // fetching data from server side
-  useEffect(async()=>{
-    const result = await axios('http://localhost:5000/ret')
+  useEffect(()=>{
+    const fetchData = async()=>{
+      setIsError(false)
+      try {
+    const result = await axios.get('http://localhost:5000/ret')
     setSelectedValue(result.data)
-  }, [])
+    console.log(result.data.map(()=>{
+      place
+    }))
+       } 
+      catch (error) {
+               setIsError(true)
+       }
+    }  
+    fetchData();  
+}, [])
+   
   return (
     <View > 
+      {/* <Text>Place</Text> */}
       <Picker
+
         selectedValue={selectedValue}
         style={{ height: 50, width: 150 }}
         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
       >  
-       {loadNanyPlaceList}
+       {/* {loadNanyPlaceList} */}
       </Picker> 
       </View>
        )}
+
+
+
+//*************************************************************************************
 
 // dropdown list for the number of Kids Can Handle
  export function HowManyKidsCanHandle () {
@@ -72,17 +92,4 @@ function loadNanyPlaceList() {
       </View>
           )}
 
-// function Home() {
-//     return(
-//        <>
-//         <EducationLevel/>
-//         <HowManyKidsCanHandle/> 
-//         <Place/>
-//       </>
-         //    ) }
-  
-
-
-
-// export default Home;
 
