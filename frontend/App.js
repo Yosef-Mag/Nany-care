@@ -1,8 +1,21 @@
-import React from 'react';
-import { StyleSheet, Text, View ,Button} from 'react-native';
-import Nany from './component/Home.js'
-export default function App() {
-  return (
-    <Nany></Nany>
-  )
+
+// import React from 'react';
+import React, { Component } from "react";
+import { AppRegistry, View } from "react-native";
+import Routes from "./components/Routes.js";
+import Nany from "./components/Home.js";
+
+
+
+
+class NanyApp extends Component {
+  render() {
+    return  <Nany />
+
+    
   }
+}
+
+AppRegistry.registerComponent("NanyApp", () => NanyApp);
+export default NanyApp;
+

@@ -1,8 +1,15 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var items = require('./models/user');
+var Nany = items.Nany;
+const cors = require('cors')
+var User = items.User;
+
 
 var app = express();
 var port = process.env.PORT || 5000
+app.use(cors())
+console.log(Nany)
 
 
 require('dotenv').config(); // to read .env file
@@ -12,6 +19,17 @@ app.get('/', function (req, res) {
     console.log('test')
     res.send('server is a go!')
 });
+
+//    app.get ('/ret',function getAlldatafromNanySchema(req,res){
+//       Nany.findOne({}, function(err, nany){
+//          if(err){
+//            res.json(err);
+//          } else {
+//             console.log(nany)  
+//              res.send(nany);
+//          }
+//        });
+//      });
 
 const mongoURI = process.env.ATLAS_URI;
 
@@ -23,16 +41,16 @@ mongoose
 
 
     //get data from database.
-    const list = require('./models/user');
-    app.get("http://localhost:5000/nany", function(req, res)  {
-        list.find(function(err,n)  {
+    // const list = require('./models/user');
+    app.get('/ret', function(req, res)  {
+        Nany.find(function(err,n)  {
             
             if(err){
                 throw err;
             }
 
-            console.log(res.data)
-            res.json(res.data);
+            console.log(n)
+            res.json(n);
         });
         })
 
