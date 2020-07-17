@@ -7,7 +7,7 @@ var User = items.User;
 
 var app = express();
 var port = process.env.PORT || 5000;
-console.log(items);
+// console.log(items);
 
 require("dotenv").config(); // to read .env file
 
@@ -17,7 +17,7 @@ app.get("/", function (req, res) {
   res.send("server is a go!");
 });
 
-app.get("userProf", function (req, res) {
+app.get("/userProf", function (req, res) {
   User.find({}, function (err, user) {
     if (err) {
       res.json(err);
@@ -27,7 +27,23 @@ app.get("userProf", function (req, res) {
     }
   });
 });
-
+// users.get("/profile", function (req, res) {
+//   var decoded = jwt.verify(req.headers["authorization"], process.env.JWT_KEY);
+//   User.findOne({
+//     _id: decoded._id,
+//   })
+//     .then((user) => {
+//       if (user) {
+//         console.log(user);
+//         res.json(user);
+//       } else {
+//         res.send("User does not exist");
+//       }
+//     })
+//     .catch((err) => {
+//       res.send("error: " + err);
+//     });
+// });
 // get the selection based on place category  from database
 app.get("/ret", function getAlldatafromNanySchema(req, res) {
   Nany.find({ place: "amman" }, function (err, nany) {

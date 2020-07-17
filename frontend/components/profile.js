@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,6 +10,23 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import TopPic from "./TopPic";
 export default function Profile() {
+  const [isError, setIsError] = useState(false);
+  // fetching data from server side
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsError(false);
+      try {
+        const result = await axios.get("http://localhost:5000/userProf");
+        // result.data.map((item) => {
+        //   setSelectedValue(item.place);
+        console.log(result);
+        // });
+      } catch (error) {
+        setIsError(true);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
