@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useState, useEffect } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -6,23 +7,7 @@ import { View, Button, TextInput, StyleSheet } from "react-native";
 import axios from "axios";
 
 export default function SignUp() {
-  // const onChangeText = (key, val) => {
-  //   this.setState({ [key]: val });
-  // };
 
-  // const [customerSignUp, setCustomerSignUp] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   phoneNumber: ""
-  // });
-
-  // const handleChange = (event) => {
-  //   setCustomerSignUp({
-  //     ...customerSignUp,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
   const onSubmit = (e) => {
     e.preventDefault();
     axios
@@ -41,50 +26,6 @@ export default function SignUp() {
     register("password");
     register("phoneNumber");
   }, [register]);
-  // const [name, setName] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [phoneNumber, setPhoneNumber] = useState("");
-  // const [isError, setIsError] = useState(false);
-
-  // const signUp = {
-  //   email: this.state.email,
-  //   password: this.state.password,
-  //   phoneNumber: this.state.phoneNumber,
-  //   name: this.state.name,
-  // };
-
-  // const { name, password, email, phoneNumber } = this.state;
-
-  // fetching data from server side
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsError(false);
-  //     try {
-  //       const result = await axios.post("http://localhost:5000/signup",{name:'Afnan',
-  //     email:'fnh@jh.hb',
-  //   password:'ygvfghvv',
-  // } );
-
-  //       console.log(req.body);
-  //     } catch (error) {
-  //       setIsError(true);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  // signUp = async () => {
-  //   const { name, password, email, phoneNumber } = this.state;
-  //   try {
-
-  //     // here place your signup logic
-  //     console.log("user successfully signed up!: ", success);
-  //   } catch (err) {
-  //     console.log("error signing up: ", err);
-  //   }
-  // };
-
   return (
     <View style={styles.container}>
       <TextInput
@@ -157,3 +98,67 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+  // const onChangeText = (key, val) => {
+  //   this.setState({ [key]: val });
+  // };
+
+  // const [customerSignUp, setCustomerSignUp] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   phoneNumber: ""
+  // });
+
+  // const handleChange = (event) => {
+  //   setCustomerSignUp({
+  //     ...customerSignUp,
+  //     [event.target.name]: event.target.value,
+  //   });
+  // };
+
+  // const [name, setName] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState("");
+  // const [isError, setIsError] = useState(false);
+
+  // const signUp = {
+  //   email: this.state.email,
+  //   password: this.state.password,
+  //   phoneNumber: this.state.phoneNumber,
+  //   name: this.state.name,
+  // };
+
+  // const { name, password, email, phoneNumber } = this.state;
+
+  // fetching data from server side
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setIsError(false);
+  //     try {
+  //       const result = await axios.post("http://localhost:5000/signup",{name:'Afnan',
+  //     email:'fnh@jh.hb',
+  //   password:'ygvfghvv',
+  // } );
+
+  //       console.log(req.body);
+  //     } catch (error) {
+  //       setIsError(true);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  // signUp = async () => {
+  //   const { name, password, email, phoneNumber } = this.state;
+  //   try {
+
+  //     // here place your signup logic
+  //     console.log("user successfully signed up!: ", success);
+  //   } catch (err) {
+  //     console.log("error signing up: ", err);
+  //   }
+  // };
+
+  
