@@ -22,21 +22,6 @@ export default class LoginInputs extends React.Component {
             placeholder="Enter Password"
           />
         </View>
-
-        <View>
-          <TextInput
-            secureTextEntry={true}
-            style={style.inputs}
-            placeholder="Enter Name"
-          />
-        </View>
-        <View>
-          <TextInput
-            secureTextEntry={true}
-            style={style.inputs}
-            placeholder="Enter Phone Number"
-          />
-        </View>
       </View>
     );
   }
