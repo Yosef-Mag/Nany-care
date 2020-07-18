@@ -7,6 +7,7 @@ import {
 } from "@react-navigation/drawer";
 
 import AboutUS from "./AboutsUS";
+import ContactUS from "./ContactUS";
 import { EducationLevel, HowManyKidsCanHandle, Place } from "./Home";
 
 import Profile from "./profile";
@@ -34,12 +35,8 @@ function LogOut() {
 function AboutUs() {
   return <AboutUS />;
 }
-function ContactUS() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Contact US Screen</Text>
-    </View>
-  );
+function ContactUs() {
+  return <ContactUS />;
 }
 function CustomDrawerContent(props) {
   return (
@@ -59,7 +56,7 @@ function MyDrawer() {
       <Drawer.Screen name="Home" component={Home1} />
       <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="About US" component={AboutUs} />
-      <Drawer.Screen name="Contact Us" component={ContactUS} />
+      <Drawer.Screen name="Contact Us" component={ContactUs} />
       <Drawer.Screen name="LogOut" component={LogOut} />
     </Drawer.Navigator>
   );
