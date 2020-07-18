@@ -1,13 +1,19 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+
 import MyDrawer from "./components/slidbar";
 import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyDrawer />
-    </NavigationContainer>
 
-  );
+import React, { Component } from "react";
+import { AppRegistry, View } from "react-native";
+import Routes from "./components/Routes.js";
+
+
+class NanyApp extends Component {
+  render() {
+    return <Routes />;
+  }
 }
+
+AppRegistry.registerComponent("NanyApp", () => NanyApp);
+export default NanyApp;
