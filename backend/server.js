@@ -56,19 +56,21 @@ mongoose
 
 
     //get data from database.
-    const list = require('./models/user');
-    app.get('/ret', function(req, res)  {
-        list.find(function(err,n)  {
-            
-            if(err){
-                throw err;
-            }
-
-            console.log(n)
-            res.json(n);
-        });
-        })
-
+    // const list = require('./models/user');
+    // // app.get('/ret', function(req, res)  {
+    // //     list.find({}).limit(11).exe((err,data)=>{
+    // //         res.send(data)
+    // //     });
+    // //     })
+    // app.get('/ret', function(req, res)  {
+    //     list.find(function(err,n)  {
+    //         if(err){	            
+    //             throw err;	                
+    //         }	            	            
+    //         res.json(n);
+    //         res.send(data)	            
+    //     });	       
+    //     })	       
 
 
 app.listen(port, () => {

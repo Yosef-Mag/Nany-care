@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Picker, StyleSheet, NativeModules ,FlatList, SafeAreaView,Text} from "react-native";
+import { View, Picker,  ListView, StyleSheet, NativeModules ,FlatList, SafeAreaView,Text} from "react-native";
 import axios from 'axios'
 
 
@@ -10,11 +10,11 @@ export function allNany() {
   useEffect ( ()=> {
      axios.get('http://localhost:5000/ret')
     .then(res => {
-      console.log(res)
+      console.log(res.data)
       setNanylist(res.data)
-      break
+      
       //  console.log(nanyList)
-    })
+    },[])
   }) 
 
 
@@ -38,22 +38,25 @@ export function allNany() {
 // }, []);
 return (
   <View>
-    <Text>
-      hello
-      </Text>
     
-    <FlatList
-    {...nanyList.map(nany =>( 
+    
+    {/* <FlatList */}
+    <View>
+    {nanyList.map(nany =>( 
       // console.log(nany)
-      <View>
-        <Text>{nany.name}</Text>
+     
+      // <FlatList 
+      // data = {nany}
+      // />
+        <Text>NAME : {nany.name}  PLACE: {nany.place}  HOURLY COST: {nany.cost}  EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL : {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE : {nany.age} WORKING HOURS : {nany.workingHour}   </Text>
+         ))}
         </View>
-    ))}
-  />
+   
+  {/* /> */}
   
 </View>
 )
-    
+
 
  }
 
