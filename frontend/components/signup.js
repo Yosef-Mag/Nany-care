@@ -1,17 +1,25 @@
-import React from "react";
-
-import { useState, useEffect } from "react-hook-form";
-import { useForm } from "react-hook-form";
-
-import { View, Button, TextInput, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function SignUp() {
+export default function Signup() {
+  const [customerSignUp, setCustomerSignUp] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+  });
 
-  const onSubmit = (e) => {
+  const handleChange = (event) => {
+    setCustomerSignUp({
+      ...customerSignup,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/signup", customerSignUp)
+      .post("/api/Customer/SignUp", customerSignup)
       .then(function (response) {
         console.log(response);
       })
@@ -19,146 +27,29 @@ export default function SignUp() {
         console.log(error);
       });
   };
-  const { register, handleSubmit, setValue } = useForm();
-  useEffect(() => {
-    register("name");
-    register("email");
-    register("password");
-    register("phoneNumber");
-  }, [register]);
+  // Also remember to give a name attribute to each input that corresponds to a field in the state. (Which looks like you already have)
+
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        autoCapitalize="none"
-        placeholderTextColor="white"
-        onChangeText={(text) => setValue("name", text)}
-        // value={customerSignUp.name}
-        // onChange={handleChange}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry={true}
-        autoCapitalize="none"
-        placeholderTextColor="white"
-        onChangeText={(text) => setValue("password", text)}
-
-        // value={customerSignUp.password}
-        // onChange={handleChange}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        autoCapitalize="none"
-        placeholderTextColor="white"
-        // onChangeText={(val) => setEmail(val)}
-        onChangeText={(text) => setValue("email", text)}
-
-        // value={customerSignUp.email}
-        // onChange={handleChange}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Phone Number"
-        autoCapitalize="none"
-        placeholderTextColor="white"
-        onChangeText={(text) => setValue("phoneNumber", text)}
-
-        // onChangeText={(val) => setPhoneNumber(val)}
-        // value={customerSignUp.phoneNumber}
-        // onChange={handleChange}
-      />
-      <Button
-        title="sign Up "
-        color="white"
-        style={styles.buttonText}
-        onPress={handleSubmit(onSubmit)}
-      />
-    </View>
+    <div className="container">
+      <form className="white" onSubmit={handleSubmit}>
+        <h5 className="grey-text.text-darken-3">Sign Up With Email</h5>
+        <div className="input-field">
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            value={customerSignUp.lastName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="input-field">
+          <button className="btn blue darken-3" type="submit">
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: 351,
-    height: 55,
-    backgroundColor: "#42A5F5",
-    margin: 10,
-    padding: 8,
-    color: "white",
-    borderRadius: 14,
-    fontSize: 18,
-    fontWeight: "500",
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
-
-  // const onChangeText = (key, val) => {
-  //   this.setState({ [key]: val });
-  // };
-
-  // const [customerSignUp, setCustomerSignUp] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   phoneNumber: ""
-  // });
-
-  // const handleChange = (event) => {
-  //   setCustomerSignUp({
-  //     ...customerSignUp,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
-
-  // const [name, setName] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [phoneNumber, setPhoneNumber] = useState("");
-  // const [isError, setIsError] = useState(false);
-
-  // const signUp = {
-  //   email: this.state.email,
-  //   password: this.state.password,
-  //   phoneNumber: this.state.phoneNumber,
-  //   name: this.state.name,
-  // };
-
-  // const { name, password, email, phoneNumber } = this.state;
-
-  // fetching data from server side
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsError(false);
-  //     try {
-  //       const result = await axios.post("http://localhost:5000/signup",{name:'Afnan',
-  //     email:'fnh@jh.hb',
-  //   password:'ygvfghvv',
-  // } );
-
-  //       console.log(req.body);
-  //     } catch (error) {
-  //       setIsError(true);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  // signUp = async () => {
-  //   const { name, password, email, phoneNumber } = this.state;
-  //   try {
-
-  //     // here place your signup logic
-  //     console.log("user successfully signed up!: ", success);
-  //   } catch (err) {
-  //     console.log("error signing up: ", err);
-  //   }
-  // };
-
-  
+export default Signup;
