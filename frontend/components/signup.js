@@ -1,55 +1,76 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import EnterName from './App/Components/EnterName
+import React from "react";
+import {
+  AppRegistry,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from "react-native";
 
-export default function Signup() {
-  const [customerSignUp, setCustomerSignUp] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-  });
+import { requireNativeViewManager } from "expo-core";
 
-  const handleChange = (event) => {
-    setCustomerSignUp({
-      ...customerSignup,
-      [event.target.name]: event.target.value,
-    });
-  };
+// components import
+import FbLogin from "./FbLogin";
+import GoogleLogin from "./GoogleLogin";
+import SignUpInputs from "./SignUpInputs";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("/api/Customer/SignUp", customerSignup)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-  // Also remember to give a name attribute to each input that corresponds to a field in the state. (Which looks like you already have)
+export default class SignUpPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onPressLearnMore = this.onPressLearnMore.bind(this);
+  }
+  onPressLearnMore() {}
+  render() {
+    return (
+      <View>
+        <KeyboardAvoidingView behavior="position" disabled>
+          <View
+            style={{ marginTop: 50, marginLeft: "auto", marginRight: "auto" }}
+          >
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+              Welcome To Nany App !
+            </Text>
+          </View>
 
-  return (
-    <div className="container">
-      <form className="white" onSubmit={handleSubmit}>
-        <h5 className="grey-text.text-darken-3">Sign Up With Email</h5>
-        <div className="input-field">
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={customerSignUp.lastName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="input-field">
-          <button className="btn blue darken-3" type="submit">
-            Sign Up
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+          <SignUpInputs />
+
+          <View></View>
+
+          {/* own buttons design */}
+
+          <TouchableOpacity>
+            <Text style={style.textButton}>Sign Up </Text>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+      </View>
+    );
+  }
 }
-export default Signup;
+const style = StyleSheet.create({
+  title: {
+    color: "red",
+    textAlign: "center",
+    marginTop: 50,
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  center: {
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  textButton: {
+    width: 140,
+    padding: 10,
+    fontSize: 20,
+    marginTop: 10 + "%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    fontWeight: "bold",
+    borderRadius: 30,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "green",
+  },
+});

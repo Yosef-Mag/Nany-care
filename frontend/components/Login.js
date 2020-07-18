@@ -11,9 +11,6 @@ import {
 
 import { requireNativeViewManager } from "expo-core";
 
-// components import
-import FbLogin from "./FbLogin";
-import GoogleLogin from "./GoogleLogin";
 import LoginInputs from "./LoginInputs";
 
 export default class LoginPage extends React.Component {
@@ -34,29 +31,7 @@ export default class LoginPage extends React.Component {
             </Text>
           </View>
 
-          <FbLogin />
-          <GoogleLogin />
-
-          <View style={style.center}>
-            <Text>or</Text>
-          </View>
-
-          <View style={style.center}>
-            <Text>Login With Email.</Text>
-          </View>
-
           <LoginInputs />
-
-          <View>
-            <Text
-              style={{ textAlign: "right", marginTop: 10, marginRight: 10 }}
-              onPress={this.props.onPressForgotPass}
-            >
-              Forgot Password?
-            </Text>
-          </View>
-
-          {/* own buttons design */}
 
           <TouchableOpacity>
             <Text style={style.textButton}>Login</Text>
@@ -93,6 +68,9 @@ const style = StyleSheet.create({
     width: 140,
     padding: 10,
     fontSize: 20,
+    marginTop: 10 + "%",
+    marginLeft: "auto",
+    marginRight: "auto",
     marginLeft: 10,
     fontWeight: "bold",
     borderRadius: 30,
