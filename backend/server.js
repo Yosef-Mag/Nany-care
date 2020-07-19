@@ -20,29 +20,17 @@ app.get('/', function (req, res) {
     res.send('server is a go!')
 });
 
-
-//    app.get ('/ret',function getAlldatafromNanySchema(req,res){
-//       Nany.findOne({}, function(err, nany){
-//          if(err){
-//            res.json(err);
-//          } else {
-//             console.log(nany)  
-//              res.send(nany);
-//          }
-//        });
-//      });
-
-// get the selection based on place category  from database    
+// get data from database    
 app.get ('/ret',function getAlldatafromNanySchema(req,res){
-      Nany.find({"place": "amman"}, function(err, nany){
+      Nany.find({}, function(err, nany){
          if(err){
            res.json(err);
-         } else {
-            console.log(req)  
+         } else {  
              res.json(nany);
          }
        });
      });
+
 app.post('/Home', )
 
 
@@ -54,23 +42,6 @@ mongoose
     .catch(err => console.log(err))
 
 
-
-    //get data from database.
-    // const list = require('./models/user');
-    // // app.get('/ret', function(req, res)  {
-    // //     list.find({}).limit(11).exe((err,data)=>{
-    // //         res.send(data)
-    // //     });
-    // //     })
-    // app.get('/ret', function(req, res)  {
-    //     list.find(function(err,n)  {
-    //         if(err){	            
-    //             throw err;	                
-    //         }	            	            
-    //         res.json(n);
-    //         res.send(data)	            
-    //     });	       
-    //     })	       
 
 
 app.listen(port, () => {
