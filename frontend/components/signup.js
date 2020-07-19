@@ -29,7 +29,14 @@ export default class SignUpPage extends React.Component {
           <View
             style={{ marginTop: 50, marginLeft: "auto", marginRight: "auto" }}
           >
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                color: "#E88877",
+                marginTop: 100,
+              }}
+            >
               Welcome To Nany App !
             </Text>
           </View>
@@ -71,6 +78,6 @@ const style = StyleSheet.create({
     borderRadius: 30,
     color: "white",
     textAlign: "center",
-    backgroundColor: "green",
+    backgroundColor: "#E88877",
   },
 });

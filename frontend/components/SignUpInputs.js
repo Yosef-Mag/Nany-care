@@ -43,11 +43,11 @@ export default class SignUpInputs extends React.Component {
 const style = StyleSheet.create({
   inputs: {
     marginTop: 50,
-    color: "red",
+    color: "#6FE6E0",
     fontSize: 20,
     marginLeft: 10,
     marginRight: 10,
-    borderBottomColor: "red",
+    borderBottomColor: "#6FE6E0",
     borderBottomWidth: 2,
   },
 });

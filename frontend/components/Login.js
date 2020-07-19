@@ -26,21 +26,33 @@ export default class LoginPage extends React.Component {
           <View
             style={{ marginTop: 50, marginLeft: "auto", marginRight: "auto" }}
           >
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                color: "#CC7575",
+                marginTop: 150,
+              }}
+            >
               Welcome To Nany App !
             </Text>
           </View>
 
           <LoginInputs />
 
-          <TouchableOpacity>
+          <TouchableOpacity style={{ center: "auto" }}>
             <Text style={style.textButton}>Login</Text>
           </TouchableOpacity>
 
           <View style={style.center}>
             <TouchableOpacity>
               <Text
-                style={{ textAlign: "center", padding: 20, margin: 10 }}
+                style={{
+                  textAlign: "center",
+                  padding: 20,
+                  margin: 10,
+                  color: "#CC7575",
+                }}
                 onPress={this.props.onPressCreateAcc}
               >
                 create an Account ?
@@ -54,7 +66,7 @@ export default class LoginPage extends React.Component {
 }
 const style = StyleSheet.create({
   title: {
-    color: "red",
+    color: "#8E9BEA",
     textAlign: "center",
     marginTop: 50,
     fontSize: 30,
@@ -63,19 +75,18 @@ const style = StyleSheet.create({
   center: {
     marginLeft: "auto",
     marginRight: "auto",
+    marginTop: 30,
   },
   textButton: {
     width: 140,
     padding: 10,
     fontSize: 20,
-    marginTop: 10 + "%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginLeft: 10,
+    marginTop: 100,
+    marginLeft: 100,
     fontWeight: "bold",
     borderRadius: 30,
     color: "white",
     textAlign: "center",
-    backgroundColor: "green",
+    backgroundColor: "#CC7575",
   },
 });
