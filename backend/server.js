@@ -143,7 +143,7 @@ app.get("/ret", function getAlldatafromNanySchema(req, res) {
 });
 
 app.get("/profile", (req, res) => {
-  console.log(req.header, "header");
+  console.log(req.header);
   console.log(req.body, "body");
   var decoded = jwt.verify(req.headers["authorization"], process.env.JWT_KEY);
 
@@ -172,7 +172,6 @@ mongoose
 app.listen(port, () => {
   console.log(`Server is running on ${port} Visit https://localhost:${port}`);
 });
-const jwt = require("jsonwebtoken");
 // middleware to validate token
 const verifyToken = (req, res, next) => {
   const token = req.header("auth-token");
