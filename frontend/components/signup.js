@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react-hook-form";
+import { useState, useEffect} from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 import { View, Button, TextInput, StyleSheet } from "react-native";
@@ -19,6 +19,10 @@ export default function SignUp() {
       });
   };
   const { register, handleSubmit, setValue } = useForm();
+  
+
+
+  
   useEffect(() => {
     register("name");
     register("email");
