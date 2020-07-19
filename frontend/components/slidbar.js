@@ -8,7 +8,8 @@ import {
 
 import AboutUS from "./AboutsUS";
 import ContactUS from "./ContactUS";
-import { EducationLevel, HowManyKidsCanHandle, Place } from "./Home";
+
+import AllNany from "./Home";
 
 import Profile from "./profile";
 
@@ -17,13 +18,7 @@ function Profile1() {
 }
 
 function Home1() {
-  return (
-    <View>
-      <Place />
-      <EducationLevel />
-      <HowManyKidsCanHandle />
-    </View>
-  );
+  return <AllNany />;
 }
 function LogOut() {
   return (
@@ -38,6 +33,7 @@ function AboutUs() {
 function ContactUs() {
   return <ContactUS />;
 }
+
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -57,6 +53,7 @@ function MyDrawer() {
       <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="About US" component={AboutUs} />
       <Drawer.Screen name="Contact Us" component={ContactUs} />
+
       <Drawer.Screen name="LogOut" component={LogOut} />
     </Drawer.Navigator>
   );
