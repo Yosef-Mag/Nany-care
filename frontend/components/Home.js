@@ -1,50 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { View, Picker, NativeModules } from "react-native";
 
-import axios from "axios";
+//import body-parser from "body-parser"
+import axios from 'axios'
 
-// function to load  Nany Place List based on user selection
-function loadNanyPlaceList() {
-  return selectedValue.map((item) => (
-    <Picker.Item label={item.place} value={item.place} />
-  ));
-}
+
+
 
 // dropdown list for the place
-export function Place() {
-  const [selectedValue, setSelectedValue] = useState("amman");
-  const [isError, setIsError] = useState(false);
-  // fetching data from server side
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsError(false);
-      try {
-        const result = await axios.get("http://localhost:5000/ret");
-        result.data.map((item) => {
-          setSelectedValue(item.place);
-          console.log(item.place);
-        });
-      } catch (error) {
-        setIsError(true);
-      }
-    };
-    fetchData();
-  }, []);
+ export function Place () {
+  const [selectedValue, setSelectedValue] = useState([]);
+  const[isError, setIsError] = useState(false)
+// function to load  Nany Place List based on user selection
+
+    useEffect(() => {
+    axios.get('http://localhost:5000/ret').then(res =>{
+    // console.log(Array.isArray(res.data))
+     setSelectedValue(res.data)
+     console.log(selectedValue)
+     selectedValue.map((item)=> {
+       //setSelectedValue(item.place)
+       
+       console.log(item.place)
+     })
+    // console.log(Array.isArray(res.data))
+ })
+    }); 
 
   return (
     <View>
       <Picker
         selectedValue={selectedValue}
         style={{ height: 50, width: 150 }}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-      >
-        {loadNanyPlaceList}
-      </Picker>
-    </View>
-  );
-}
 
-//*************************************************************************************
+        onValueChange={(item) => {item.place}}
+      >  {selectedValue.map(place =>(
+        <Picker.Item label={place.place} value={place.place} />
+      ))}  
+      </Picker> 
+      </View>
+       )}
+
+
+
+
 
 // dropdown list for the number of Kids Can Handle
 export function HowManyKidsCanHandle() {
