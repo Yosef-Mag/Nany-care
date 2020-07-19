@@ -161,6 +161,16 @@ app.get("/profile", (req, res) => {
       res.send("error: " + err);
     });
 });
+app.get("/profilee", (req, res) => {
+  User.find({ email: "a@a.a" }, function (err, user) {
+    if (err) {
+      res.json(err);
+    } else {
+      console.log(user[0]);
+      res.json(user[0]);
+    }
+  });
+});
 
 const mongoURI = process.env.ATLAS_URI;
 
