@@ -18,17 +18,7 @@ function Profile1() {
 }
 
 function Home1() {
-<<<<<<< HEAD
-  return (
-    <View>
-      <Place />
-      {/* <EducationLevel /> */}
-      {/* <HowManyKidsCanHandle /> */}
-    </View>
-  );
-=======
   return <AllNany />;
->>>>>>> c321cd7e10caf535643a0afad76228bba254ea88
 }
 function LogOut() {
   return (

@@ -21,7 +21,6 @@
     "axios-hooks": "^2.1.0",
     "body-parser": "^1.19.0",
     "expo": "^38.0.8",
-
     "expo-core": "^3.0.1",
     "expo-notifications": "~0.3.3",
     "expo-react-native-adapter": "^3.0.1",
@@ -38,7 +37,6 @@
     "react-native-linear-gradient": "^2.5.6",
     "react-native-navbar": "^2.1.0",
     "react-native-paper": "^4.0.1",
-
     "react-native-gesture-handler": "^1.6.1",
     "react-native-reanimated": "^1.9.0",
     "react-native-router-flux": "^4.2.0",

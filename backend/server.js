@@ -2,7 +2,7 @@ var express = require("express");
 var mongoose = require("mongoose");
 var items = require("./models/user");
 var jwt = require("jsonwebtoken");
-
+const cors = require('cors');
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
 var Nany = items.Nany;
@@ -12,6 +12,7 @@ const dashboardRoutes = require("./dashboard");
 // this route is protected with token
 // app.use("/api/dashboard", verifyToken, dashboardRoutes);
 var app = express();
+app.use(cors());
 var port = process.env.PORT || 5000;
 // console.log(items);
 var items = require("./models/user");
@@ -128,11 +129,13 @@ app.post("/login", function (req, res) {
 
 // get the selection based on place category  from database
 app.get("/ret", function getAlldatafromNanySchema(req, res) {
-  Nany.find({}, function (err, nany) {
+  Nany.find(function (err, nany) {
     if (err) {
       res.json(err);
     } else {
-      console.log(req);
+      console.log(res);
+      
+      //res.send(nany)
       res.json(nany);
     }
   });
