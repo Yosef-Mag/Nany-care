@@ -1,6 +1,7 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var items = require("./models/user");
+var jwt = require("jsonwebtoken");
 
 var Nany = items.Nany;
 var User = items.User;
