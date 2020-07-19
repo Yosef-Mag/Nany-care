@@ -1,6 +1,6 @@
 import React from "react";
-import MapScreen from "./components/map";
+import SignUpPage from "./components/signup";
 import { NavigationContainer } from "@react-navigation/native";
 export default function App() {
-  return <MapScreen />;
+  return <SignUpPage />;
 }
