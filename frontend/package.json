@@ -8,8 +8,12 @@
     "eject": "expo eject"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+=======
+    "@hookform/resolvers": "0.0.6",
+>>>>>>> 7a2596eca202138d0bfd93473dcf88b3401a3dbf
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.7.1",
@@ -18,11 +22,13 @@
     "@react-navigation/native": "^5.7.0",
     "axios": "^0.19.2",
     "axios-hooks": "^2.1.0",
-    "body-parser": "^1.19.0",
     "expo": "~38.0.8",
     "expo-core": "^3.0.1",
     "expo-notifications": "~0.3.3",
+<<<<<<< HEAD
     "expo-react-native-adapter": "^3.0.1",
+=======
+>>>>>>> 7a2596eca202138d0bfd93473dcf88b3401a3dbf
     "expo-status-bar": "^1.0.2",
     "firebase": "^7.16.1",
     "react": "^16.11.0",
@@ -36,8 +42,14 @@
     "react-native-gesture-handler": "^1.6.1",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-navbar": "^2.1.0",
+<<<<<<< HEAD
     "react-native-paper": "^4.0.1",
     "react-native-reanimated": "~1.9.0",
+=======
+    "react-native-vector-icons": "^7.0.0",
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-reanimated": "^1.9.0",
+>>>>>>> 7a2596eca202138d0bfd93473dcf88b3401a3dbf
     "react-native-router-flux": "^4.2.0",
     "react-native-safe-area-context": "^3.1.1",
     "react-native-screens": "^2.9.0",

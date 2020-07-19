@@ -22,6 +22,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 8,
   },
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 7a2596eca202138d0bfd93473dcf88b3401a3dbf
   name: {
     type: String,
     required: true,
