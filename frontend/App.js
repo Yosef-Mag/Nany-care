@@ -1,6 +1,6 @@
 import React from "react";
-
-import SignUp from "./components/signup";
+import MyDrawer from "./components/slidbar";
+import { NavigationContainer } from "@react-navigation/native";
 export default function App() {
   return (
     <NavigationContainer>
@@ -8,7 +8,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-
-//up to date
-
