@@ -1,6 +1,6 @@
 import React from "react";
-import MyDrawer from "./components/slidbar";
-import { NavigationContainer } from "@react-navigation/native";
+
+import SignUp from "./components/signup";
 export default function App() {
   return (
     <NavigationContainer>
@@ -11,3 +11,4 @@ export default function App() {
 
 
 //up to date
+

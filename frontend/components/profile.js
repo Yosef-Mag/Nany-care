@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import {
   StyleSheet,
   Text,
@@ -10,23 +12,15 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import TopPic from "./TopPic";
 export default function Profile() {
-  const [isError, setIsError] = useState(false);
-  // fetching data from server side
+  const [userData, setUserData] = useState({});
   useEffect(() => {
-    const fetchData = async () => {
-      setIsError(false);
-      try {
-        const result = await axios.get("http://localhost:5000/userProf");
-        // result.data.map((item) => {
-        //   setSelectedValue(item.place);
-        console.log(result);
-        // });
-      } catch (error) {
-        setIsError(true);
-      }
-    };
-    fetchData();
-  }, []);
+    axios.get("http://localhost:5000/profile").then((res) => {
+      console.log(res.data);
+      setUserData(res.data);
+
+      //  console.log(nanyList)
+    }, []);
+  });
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -48,21 +42,21 @@ export default function Profile() {
           <View style={styles.infoContainer}>
             <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>
               <AntDesign name="user" size={24} color="black" />
-              Julie
+              {userData.name}
             </Text>
             <View>
               <Text></Text>
             </View>
             <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>
               <AntDesign name="mail" size={20} color="black" />
-              Julie@gmail.com
+              {userData.email}
             </Text>
             <View>
               <Text></Text>
             </View>
             <Text>
               <AntDesign name="phone" size={24} color="black" />
-              0775177216
+              {userData.phoneNumber}
             </Text>
           </View>
         </View>
