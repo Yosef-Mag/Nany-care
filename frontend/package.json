@@ -8,7 +8,12 @@
     "eject": "expo eject"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+=======
     "@hookform/resolvers": "0.0.6",
+>>>>>>> 7a2596eca202138d0bfd93473dcf88b3401a3dbf
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.7.1",
@@ -18,7 +23,12 @@
     "axios": "^0.19.2",
     "axios-hooks": "^2.1.0",
     "expo": "~38.0.8",
+    "expo-core": "^3.0.1",
     "expo-notifications": "~0.3.3",
+<<<<<<< HEAD
+    "expo-react-native-adapter": "^3.0.1",
+=======
+>>>>>>> 7a2596eca202138d0bfd93473dcf88b3401a3dbf
     "expo-status-bar": "^1.0.2",
     "firebase": "^7.16.1",
     "react": "^16.11.0",
@@ -26,17 +36,29 @@
     "react-hook-form": "^6.0.7",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-animatable": "^1.3.3",
+    "react-native-button": "^3.0.1",
+    "react-native-cookies": "^3.3.0",
+    "react-native-elements": "^2.0.4",
+    "react-native-gesture-handler": "^1.6.1",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-navbar": "^2.1.0",
+<<<<<<< HEAD
+    "react-native-paper": "^4.0.1",
+    "react-native-reanimated": "~1.9.0",
+=======
     "react-native-vector-icons": "^7.0.0",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-reanimated": "^1.9.0",
+>>>>>>> 7a2596eca202138d0bfd93473dcf88b3401a3dbf
     "react-native-router-flux": "^4.2.0",
     "react-native-safe-area-context": "^3.1.1",
     "react-native-screens": "^2.9.0",
+    "react-native-vector-icons": "^7.0.0",
     "react-native-web": "^0.11.7",
     "react-navigation": "^4.4.0",
-    "slick-carousel": "^1.8.1"
+    "react-navigation-stack": "^2.8.2",
+    "slick-carousel": "^1.8.1",
+    "tcomb-form-native": "^0.6.20"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

@@ -1,12 +1,13 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var items = require("./models/user");
+var jwt = require("jsonwebtoken");
+
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
 const dashboardRoutes = require("./dashboard");
-
 
 // this route is protected with token
 // app.use("/api/dashboard", verifyToken, dashboardRoutes);
@@ -59,14 +60,11 @@ app.post("/signup", function (req, res) {
     });
 });
 
-app.get('/logout', function(req, res) {
+app.get("/logout", function (req, res) {
   res.status(200).send({ auth: false, token: null });
 });
 
-
-
 app.post("/login", function (req, res) {
-
   var newUser = {};
   newUser.email = req.query.email;
   newUser.password = req.query.password;
@@ -130,7 +128,7 @@ app.post("/login", function (req, res) {
 
 // get the selection based on place category  from database
 app.get("/ret", function getAlldatafromNanySchema(req, res) {
-  Nany.find({ place: "amman" }, function (err, nany) {
+  Nany.find({}, function (err, nany) {
     if (err) {
       res.json(err);
     } else {
@@ -140,10 +138,25 @@ app.get("/ret", function getAlldatafromNanySchema(req, res) {
   });
 });
 
-app.post("/Home");
+app.get("/profile", (req, res) => {
+  console.log(req.header, "header");
+  console.log(req.body, "body");
+  var decoded = jwt.verify(req.headers["authorization"], process.env.JWT_KEY);
 
-
-
+  User.findOne({
+    _id: decoded._id,
+  })
+    .then((user) => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.send("User does not exist");
+      }
+    })
+    .catch((err) => {
+      res.send("error: " + err);
+    });
+});
 
 const mongoURI = process.env.ATLAS_URI;
 
