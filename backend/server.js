@@ -3,14 +3,20 @@ var mongoose = require('mongoose');
 var items = require('./models/user');
 
 var Nany = items.Nany;
+const cors = require('cors')
 var User = items.User;
 
 
 var app = express();
 var port = process.env.PORT || 5000
-console.log(items)
 
+<<<<<<< HEAD
 require("dotenv").config(); // to read .env file
+=======
+app.use(cors())
+
+require('dotenv').config(); // to read .env file
+>>>>>>> b64d822e6359ab45e55568213d7f02764f3e6218
 
 // test get req
 app.get("/", function (req, res) {
@@ -18,18 +24,18 @@ app.get("/", function (req, res) {
   res.send("server is a go!");
 });
 
-// get the selection based on place category  from database    
+// get data from database    
 app.get ('/ret',function getAlldatafromNanySchema(req,res){
-      Nany.find({"place": "amman"}, function(err, nany){
+      Nany.find({}, function(err, nany){
          if(err){
            res.json(err);
-         } else {
-            console.log(req)  
+         } else {  
              res.json(nany);
          }
        });
      });
 
+<<<<<<< HEAD
      app.post ('/signup',function (req,res){
       const userData = {
         name : req.body.name,
@@ -65,7 +71,10 @@ app.get ('/ret',function getAlldatafromNanySchema(req,res){
 
 
 
+=======
+>>>>>>> b64d822e6359ab45e55568213d7f02764f3e6218
 app.post('/Home', )
+
 
 const mongoURI = process.env.ATLAS_URI;
 
@@ -73,6 +82,9 @@ mongoose
   .connect(mongoURI, { useNewUrlParser: true })
   .then(() => console.log("DataBase connected to the server"))
   .catch((err) => console.log(err));
+
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on ${port} Visit https://localhost:${port}`);

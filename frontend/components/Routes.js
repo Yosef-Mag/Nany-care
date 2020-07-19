@@ -1,17 +1,22 @@
 import React from "react";
 import { Router, Scene } from "react-native-router-flux";
-import  {EducationLevel,HowManyKidsCanHandle, Place} from "./Home"
+import  {allNany} from "./Home.js"
 import SignUp from "./signup.js";
 import Login from "./Login.js";
 
 const Routes = () => (
   <Router>
     <Scene key="root">
+<<<<<<< HEAD
       <Scene key="home" component={EducationLevel} title="EducationLevel" initial={true} />
       <Scene key="home" component={HowManyKidsCanHandle} title="HowManyKidsCanHandle" initial={true} />
       <Scene key="home" component={Place} title="Place" initial={true} />
       {/* <Scene key="SignUp" component={SignUp} title="SignUp" />
       <Scene key="Login" component={Login} title="Login" /> */}
+=======
+    <Scene key="home" component={allNany} title="all Nany" initial={true} />
+      <Scene key="SignUp" component={SignUp} title="SignUp" />
+>>>>>>> b64d822e6359ab45e55568213d7f02764f3e6218
     </Scene>
   </Router>
 );
