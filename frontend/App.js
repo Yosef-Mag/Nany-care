@@ -1,19 +1,23 @@
-import { StatusBar } from "expo-status-bar";
-
-import MyDrawer from "./components/slidbar";
-import { NavigationContainer } from "@react-navigation/native";
-
-
 import React, { Component } from "react";
 import { AppRegistry, View } from "react-native";
 import Routes from "./components/Routes.js";
+import SignUp from "./components/signup.js";
 
-
-class NanyApp extends Component {
-  render() {
-    return <Routes />;
-  }
+function NanyApp() {
+  return (
+    <View>
+      <Routes />
+      {/* <SignUp /> */}
+    </View>
+  );
 }
 
-AppRegistry.registerComponent("NanyApp", () => NanyApp);
-export default NanyApp;
+// // AppRegistry.registerComponent("NanyApp", () => NanyApp);
+// // export default NanyApp;
+// import React from "react";
+// // import SignUp from "./components/signup.js";
+// import { View ,Text} from "react-native";
+
+// export default function App() {
+//   return <SignUp />;
+// }

@@ -29,6 +29,42 @@ app.get ('/ret',function getAlldatafromNanySchema(req,res){
          }
        });
      });
+
+     app.post ('/signup',function (req,res){
+      const userData = {
+        name : req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        phoneNumer: req.body.phoneNumer
+
+    }
+        User.findOne({
+            email: req.body.email
+        })
+        .then(user => {
+            if(!user) {
+                bcrypt.hash(req.body.password, 10, (err, hash) => {
+                    userData.password = hash;
+                    User.create(userData)
+                    .then(user => {
+                        res.json({status: user.email + 'added'})
+                    })
+                    .catch(err=> {
+                        res.send('error: ' + err)
+                    })
+                })
+            } else {
+                        res.json({error: 'email already exist'})
+            }
+        })
+        .catch(res => {
+            res.send('error: ' + err)
+        })
+     });
+
+
+
+
 app.post('/Home', )
 
 const mongoURI = process.env.ATLAS_URI;
