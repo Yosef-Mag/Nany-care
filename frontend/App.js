@@ -1,12 +1,10 @@
 import React from "react";
-import SignUpPage from "./components/signup";
-import { StyleSheet, Text, View } from "react-native";
-
+import MyDrawer from "./components/slidbar";
 import { NavigationContainer } from "@react-navigation/native";
 export default function App() {
   return (
-    <View>
-      <SignUpPage />
-    </View>
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
   );
 }
