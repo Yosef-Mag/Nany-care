@@ -14,12 +14,11 @@ import TopPic from "./TopPic";
 export default function Profile() {
   const [userData, setUserData] = useState({});
   useEffect(() => {
-    axios.get("http://localhost:5000/profile").then((res) => {
+    axios.get("http://localhost:5000/profilee").then((res) => {
       console.log(res.data);
       setUserData(res.data);
-
-      //  console.log(nanyList)
     }, []);
+    console.log(userData);
   });
   return (
     <SafeAreaView style={styles.container}>
