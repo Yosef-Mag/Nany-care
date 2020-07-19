@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Picker, NativeModules } from "react-native";
+import { View, Picker, NativeModules, Text } from "react-native";
 
 //import body-parser from "body-parser"
 import axios from 'axios'
@@ -26,18 +26,22 @@ import axios from 'axios'
     // console.log(Array.isArray(res.data))
  })
     }); 
+    // <Picker.Item label={place.place} value={place.place} />
 
   return (
     <View>
+      <Text> City </Text>
       <Picker
         selectedValue={selectedValue}
         style={{ height: 50, width: 150 }}
-
-        onValueChange={(item) => {item.place}}
-      >  {selectedValue.map(place =>(
-        <Picker.Item label={place.place} value={place.place} />
-      ))}  
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+      >  
+        <Picker.Item label= "Amman" value= "amman" />
+        <Picker.Item label= "Irbed" value= "irbed" />
+        <Picker.Item label= "Zarqa" value= "zarqa" />
+        <Picker.Item label= "Aqaba" value= "aqaba" />
       </Picker> 
+       <Text> {selectedValue} </Text>
       </View>
        )}
 
@@ -61,7 +65,7 @@ export function HowManyKidsCanHandle() {
         <Picker.Item label="3" value="3" />
         <Picker.Item label="4" value="4" /> */}
       </Picker>
-      <View></View>
+      <View> </View>
     </View>
   );
 }

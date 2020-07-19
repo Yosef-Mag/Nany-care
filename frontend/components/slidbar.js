@@ -20,8 +20,8 @@ function Home1() {
   return (
     <View>
       <Place />
-      <EducationLevel />
-      <HowManyKidsCanHandle />
+      {/* <EducationLevel /> */}
+      {/* <HowManyKidsCanHandle /> */}
     </View>
   );
 }
