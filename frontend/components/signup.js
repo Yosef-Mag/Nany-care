@@ -1,6 +1,5 @@
 import React from "react";
-
-import { useState, useEffect } from "react-hook-form";
+import { useState, useEffect} from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 import { View, Button, TextInput, StyleSheet } from "react-native";
@@ -20,6 +19,10 @@ export default function SignUp() {
       });
   };
   const { register, handleSubmit, setValue } = useForm();
+  
+
+
+  
   useEffect(() => {
     register("name");
     register("email");
@@ -62,6 +65,7 @@ export default function SignUp() {
       <TextInput
         style={styles.input}
         placeholder="Phone Number"
+        // type='Tel'
         autoCapitalize="none"
         placeholderTextColor="white"
         onChangeText={(text) => setValue("phoneNumber", text)}
@@ -98,25 +102,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-
-  // const onChangeText = (key, val) => {
-  //   this.setState({ [key]: val });
-  // };
-
-  // const [customerSignUp, setCustomerSignUp] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   phoneNumber: ""
-  // });
-
-  // const handleChange = (event) => {
-  //   setCustomerSignUp({
-  //     ...customerSignUp,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
-
   // const [name, setName] = useState("");
   // const [password, setPassword] = useState("");
   // const [email, setEmail] = useState("");

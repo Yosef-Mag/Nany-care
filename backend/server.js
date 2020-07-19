@@ -1,14 +1,19 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var items = require("./models/user");
-
+var bcrypt = require("bcrypt");
+var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
+const dashboardRoutes = require("./dashboard");
 
+
+// this route is protected with token
+// app.use("/api/dashboard", verifyToken, dashboardRoutes);
 var app = express();
 var port = process.env.PORT || 5000;
 // console.log(items);
-
+var items = require("./models/user");
 require("dotenv").config(); // to read .env file
 
 // test get req
@@ -17,34 +22,112 @@ app.get("/", function (req, res) {
   res.send("server is a go!");
 });
 
-<<<<<<< HEAD
-app.get("/userProf", function (req, res) {
-  User.find({}, function (err, user) {
-    if (err) {
-      res.json(err);
-    } else {
-      console.log(user);
-      res.json(user);
-    }
+app.post("/signup", function (req, res) {
+  console.log(req);
+  var newUser = new User({
+    email: req.query.email,
+    password: req.query.password,
+    name: req.query.name,
+    phoneNumber: req.query.phoneNumber,
   });
+  console.log(newUser, "Sura");
+
+  User.findOne({ email: newUser.email })
+    .then((profile) => {
+      if (!profile) {
+        bcrypt.hash(newUser.password, saltRounds, function (err, hash) {
+          if (err) {
+            console.log("Error is", err.message);
+          } else {
+            newUser.password = hash;
+            newUser
+              .save()
+              .then(() => {
+                res.send("User authenticated");
+              })
+              .catch((err) => {
+                console.log("Error is ", err.message);
+              });
+          }
+        });
+      } else {
+        res.send("User already exists...");
+      }
+    })
+    .catch((err) => {
+      console.log("Error is", err.message);
+    });
 });
-// users.get("/profile", function (req, res) {
-//   var decoded = jwt.verify(req.headers["authorization"], process.env.JWT_KEY);
-//   User.findOne({
-//     _id: decoded._id,
-//   })
-//     .then((user) => {
-//       if (user) {
-//         console.log(user);
-//         res.json(user);
-//       } else {
-//         res.send("User does not exist");
-//       }
-//     })
-//     .catch((err) => {
-//       res.send("error: " + err);
-//     });
-// });
+
+app.get('/logout', function(req, res) {
+  res.status(200).send({ auth: false, token: null });
+});
+
+
+
+app.post("/login", function (req, res) {
+
+  var newUser = {};
+  newUser.email = req.query.email;
+  newUser.password = req.query.password;
+  User.findOne({ email: newUser.email })
+    .then((profile) => {
+      if (!profile) {
+        console.log("NOT");
+        res.send("User not exist");
+      } else {
+        bcrypt.compare(newUser.password, profile.password, function (
+          err,
+          result
+        ) {
+          if (err) {
+            return res.status(401).json({
+              message: "Auth failed",
+              token: token,
+            });
+            console.log("Error is", err.message);
+          } else if (result == true) {
+            // create token
+            const token = jwt.sign(
+              {
+                email: profile.email,
+                password: profile.id,
+              },
+              process.env.JWT_KEY,
+              {
+                expiresIn: "1h",
+              }
+            );
+
+            res.status(200).json({
+              message: "Auth granted, welcome!",
+              token: token,
+            });
+            console.log(token);
+          } else {
+            res.send("User Unauthorized Access");
+          }
+        });
+      }
+    })
+    .catch((err) => {
+      console.log("Error is ", err.message);
+    });
+});
+
+// var auth = function(req, res, next) {
+
+//   if(login) {
+
+//       return next();
+
+//   } else {
+
+//       return res.status(400)
+
+//   }
+// };
+
 // get the selection based on place category  from database
 app.get("/ret", function getAlldatafromNanySchema(req, res) {
   Nany.find({ place: "amman" }, function (err, nany) {
@@ -56,57 +139,11 @@ app.get("/ret", function getAlldatafromNanySchema(req, res) {
     }
   });
 });
+
 app.post("/Home");
-=======
-// get the selection based on place category  from database    
-app.get ('/ret',function getAlldatafromNanySchema(req,res){
-      Nany.find({"place": "amman"}, function(err, nany){
-         if(err){
-           res.json(err);
-         } else {
-            console.log(req)  
-             res.json(nany);
-         }
-       });
-     });
-
-     app.post ('/signup',function (req,res){
-      const userData = {
-        name : req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        phoneNumer: req.body.phoneNumer
-
-    }
-        User.findOne({
-            email: req.body.email
-        })
-        .then(user => {
-            if(!user) {
-                bcrypt.hash(req.body.password, 10, (err, hash) => {
-                    userData.password = hash;
-                    User.create(userData)
-                    .then(user => {
-                        res.json({status: user.email + 'added'})
-                    })
-                    .catch(err=> {
-                        res.send('error: ' + err)
-                    })
-                })
-            } else {
-                        res.json({error: 'email already exist'})
-            }
-        })
-        .catch(res => {
-            res.send('error: ' + err)
-        })
-     });
 
 
 
-
-app.post('/Home', )
->>>>>>> 806150db8d56baba7200ace9cfb6590847d3e2f4
 
 const mongoURI = process.env.ATLAS_URI;
 
@@ -118,3 +155,17 @@ mongoose
 app.listen(port, () => {
   console.log(`Server is running on ${port} Visit https://localhost:${port}`);
 });
+const jwt = require("jsonwebtoken");
+// middleware to validate token
+const verifyToken = (req, res, next) => {
+  const token = req.header("auth-token");
+  if (!token) return res.status(401).json({ error: "Access denied" });
+  try {
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+    req.user = verified;
+    next(); // to continue the flow
+  } catch (err) {
+    res.status(400).json({ error: "Token is not valid" });
+  }
+};
+module.exports = verifyToken;
