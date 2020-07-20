@@ -5,14 +5,25 @@ import { AppRegistry, View, StyleSheet, TextInput } from "react-native";
 import { requireNativeViewManager } from "expo-core";
 
 export default class LoginInputs extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  state = {
+    email: "",
+    password: "",
+  };
+  login = (email, pass) => {
+    alert("email: " + email + " password: " + pass);
+  };
+  handleEmail = (text) => {
+    this.setState({ email: text });
+  };
+  handlePassword = (text) => {
+    this.setState({ password: text });
+  };
   render() {
     return (
       <View>
         <View>
-          <TextInput style={style.inputs} placeholder="Enter email" />
+          <TextInput style={style.inputs}
+           placeholder="Enter email" />
         </View>
 
         <View>
@@ -22,6 +33,18 @@ export default class LoginInputs extends React.Component {
             placeholder="Enter Password"
           />
         </View>
+        <TouchableOpacity
+          style={style.submitButton}
+          onPress={() =>
+            this.login(
+              this.state.email,
+              this.state.password
+              
+            )
+          }
+        >
+          <Text style={style.textButton}>Sign Up </Text>
+        </TouchableOpacity>
       </View>
     );
   }

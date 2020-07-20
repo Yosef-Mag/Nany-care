@@ -14,11 +14,7 @@ import { requireNativeViewManager } from "expo-core";
 import LoginInputs from "./LoginInputs";
 
 export default class LoginPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onPressLearnMore = this.onPressLearnMore.bind(this);
-  }
-  onPressLearnMore() {}
+  
   render() {
     return (
       <View>
