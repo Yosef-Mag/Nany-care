@@ -2,6 +2,15 @@
 
 import React from "react";
 
+import { AppRegistry, View, StyleSheet, TextInput } from "react-native";
+import { requireNativeViewManager } from "expo-core";
+
+export default class SignUpInputs extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+
 import {
   Text,
   AppRegistry,
@@ -36,10 +45,14 @@ export default class SignUpInputs extends React.Component {
     alert("email: " + email + " password: " + pass);
   };
 
+
   render() {
     return (
       <View>
         <View>
+
+          <TextInput style={style.inputs} placeholder="Enter email" />
+
           <TextInput
             style={style.inputs}
             onChangeText={(text) => onChangeText(text)}
@@ -48,6 +61,7 @@ export default class SignUpInputs extends React.Component {
             onChangeText={this.handleEmail}
             
           />
+
         </View>
 
         <View>
@@ -55,18 +69,34 @@ export default class SignUpInputs extends React.Component {
             secureTextEntry={true}
             style={style.inputs}
             placeholder="Enter Password"
+
+
             onChangeText={this.handlePassword}
+
           />
         </View>
         <View>
           <TextInput
+
+            secureTextEntry={true}
+            style={style.inputs}
+            placeholder="Enter Name"
+
             style={style.inputs}
             placeholder="Enter Name"
             onChangeText={this.handlename}
+
           />
         </View>
         <View>
           <TextInput
+
+            secureTextEntry={true}
+            style={style.inputs}
+            placeholder="Enter Phone Number"
+          />
+        </View>
+
             style={style.inputs}
             placeholder="Enter Phone Number"
             type='tel'
@@ -87,6 +117,7 @@ export default class SignUpInputs extends React.Component {
         >
           <Text style={style.textButton}>Sign Up </Text>
         </TouchableOpacity>
+
       </View>
     );
   }
@@ -101,6 +132,8 @@ const style = StyleSheet.create({
     borderBottomColor: "#6FE6E0",
     borderBottomWidth: 2,
   },
+
+
   textButton: {
     width: 140,
     padding: 10,
@@ -114,4 +147,5 @@ const style = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "#E88877",
   },
+
 });

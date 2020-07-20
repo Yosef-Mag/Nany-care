@@ -2,15 +2,12 @@ var express = require("express");
 var mongoose = require("mongoose");
 var items = require("./models/user");
 var jwt = require("jsonwebtoken");
-
+const cors = require('cors')
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
-
-
 const dashboardRoutes = require("./dashboard");
-
 app.use(express.json())
 app.use("/api/user", authRoutes)
 // this route is protected with token
@@ -18,8 +15,60 @@ app.use("/api/dashboard", verifyToken, dashboardRoutes);
 var app = express();
 var port = process.env.PORT || 5000;
 
+
+// this route is protected with token
+// app.use("/api/dashboard", verifyToken, dashboardRoutes);
+var app = express();
+var port = process.env.PORT || 5000;
+app.use(cors())
+// console.log(items);
 var items = require("./models/user");
 require("dotenv").config(); // to read .env file
+
+// test get req
+app.get("/", function (req, res) {
+  console.log("test");
+  res.send("server is a go!");
+});
+
+app.post("/signup", function (req, res) {
+  console.log(req);
+  var newUser = new User({
+    email: req.query.email,
+    password: req.query.password,
+    name: req.query.name,
+    phoneNumber: req.query.phoneNumber,
+  });
+  console.log(newUser, "Sura");
+
+  User.findOne({ email: newUser.email })
+    .then((profile) => {
+      if (!profile) {
+        bcrypt.hash(newUser.password, saltRounds, function (err, hash) {
+          if (err) {
+            console.log("Error is", err.message);
+          } else {
+            newUser.password = hash;
+            newUser
+              .save()
+              .then(() => {
+                res.send("User authenticated");
+              })
+              .catch((err) => {
+                console.log("Error is ", err.message);
+              });
+          }
+        });
+      } else {
+        res.send("User already exists...");
+      }
+    })
+    .catch((err) => {
+      console.log("Error is", err.message);
+    });
+});
+
+
 
 // test get req
 app.get("/", function (req, res) {
@@ -117,20 +166,7 @@ app.post("/login", function (req, res) {
     });
 });
 
-// var auth = function(req, res, next) {
-
-//   if(login) {
-
-//       return next();
-
-//   } else {
-
-//       return res.status(400)
-
-//   }
-// };
-
-// get the selection based on place category  from database
+// get data from database
 app.get("/ret", function getAlldatafromNanySchema(req, res) {
   Nany.find({}, function (err, nany) {
     if (err) {
@@ -141,6 +177,7 @@ app.get("/ret", function getAlldatafromNanySchema(req, res) {
     }
   });
 });
+
 
 app.get("/profile", (req, res) => {
   console.log(req.header);
@@ -161,6 +198,7 @@ app.get("/profile", (req, res) => {
       res.send("error: " + err);
     });
 });
+
 app.get("/profilee", (req, res) => {
   User.find({ email: "test@test.con" }, function (err, user) {
     if (err) {
@@ -171,6 +209,7 @@ app.get("/profilee", (req, res) => {
     }
   });
 });
+
 
 const mongoURI = process.env.ATLAS_URI;
 
