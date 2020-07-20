@@ -11,12 +11,9 @@ import {
 
 import { requireNativeViewManager } from "expo-core";
 
-// components import
-import FbLogin from "./FbLogin";
-import GoogleLogin from "./GoogleLogin";
-import SignUpInputs from "./SignUpInputs";
+import LoginInputs from "./LoginInputs";
 
-export default class SignUpPage extends React.Component {
+export default class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.onPressLearnMore = this.onPressLearnMore.bind(this);
@@ -33,23 +30,35 @@ export default class SignUpPage extends React.Component {
               style={{
                 fontSize: 20,
                 fontWeight: "bold",
-                color: "#E88877",
-                marginTop: 100,
+                color: "#CC7575",
+                marginTop: 150,
               }}
             >
               Welcome To Nany App !
             </Text>
           </View>
 
-          <SignUpInputs />
+          <LoginInputs />
 
-          <View></View>
-
-          {/* own buttons design */}
-
-          <TouchableOpacity>
-            <Text style={style.textButton}>Sign Up </Text>
+          <TouchableOpacity style={{ center: "auto" }}>
+            <Text style={style.textButton}>Login</Text>
           </TouchableOpacity>
+
+          <View style={style.center}>
+            <TouchableOpacity>
+              <Text
+                style={{
+                  textAlign: "center",
+                  padding: 20,
+                  margin: 10,
+                  color: "#CC7575",
+                }}
+                onPress={this.props.onPressCreateAcc}
+              >
+                create an Account ?
+              </Text>
+            </TouchableOpacity>
+          </View>
         </KeyboardAvoidingView>
       </View>
     );
@@ -57,7 +66,7 @@ export default class SignUpPage extends React.Component {
 }
 const style = StyleSheet.create({
   title: {
-    color: "red",
+    color: "#8E9BEA",
     textAlign: "center",
     marginTop: 50,
     fontSize: 30,
@@ -66,18 +75,18 @@ const style = StyleSheet.create({
   center: {
     marginLeft: "auto",
     marginRight: "auto",
+    marginTop: 30,
   },
   textButton: {
     width: 140,
     padding: 10,
     fontSize: 20,
-    marginTop: 10 + "%",
-    marginLeft: "auto",
-    marginRight: "auto",
+    marginTop: 100,
+    marginLeft: 100,
     fontWeight: "bold",
     borderRadius: 30,
     color: "white",
     textAlign: "center",
-    backgroundColor: "#E88877",
+    backgroundColor: "#CC7575",
   },
 });
