@@ -27,10 +27,10 @@ export default function AllNany() {
 
   function renderList () { 
     console.log('hi')
-   var selected = nanyList.filter((op) => op.place === "amman")
+   var selected = nanyList.filter((op) => op.place === "zarqa")
    
    if (selected){
-     console.log('hi')
+     console.log(selected)
    return(
     <View>
     {selected.map((nany) => (

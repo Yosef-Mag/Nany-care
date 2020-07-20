@@ -7,14 +7,18 @@ var bcrypt = require("bcrypt");
 var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
+
+
 const dashboardRoutes = require("./dashboard");
 
+app.use(express.json())
+app.use("/api/user", authRoutes)
 // this route is protected with token
-// app.use("/api/dashboard", verifyToken, dashboardRoutes);
+app.use("/api/dashboard", verifyToken, dashboardRoutes);
 var app = express();
 app.use(cors());
 var port = process.env.PORT || 5000;
-// console.log(items);
+
 var items = require("./models/user");
 require("dotenv").config(); // to read .env file
 
@@ -159,6 +163,16 @@ app.get("/profile", (req, res) => {
     .catch((err) => {
       res.send("error: " + err);
     });
+});
+app.get("/profilee", (req, res) => {
+  User.find({ email: "a@a.a" }, function (err, user) {
+    if (err) {
+      res.json(err);
+    } else {
+      console.log(user[0]);
+      res.json(user[0]);
+    }
+  });
 });
 
 const mongoURI = process.env.ATLAS_URI;
