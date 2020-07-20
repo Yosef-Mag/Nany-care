@@ -8,6 +8,12 @@ var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
 const dashboardRoutes = require("./dashboard");
+app.use(express.json())
+app.use("/api/user", authRoutes)
+// this route is protected with token
+app.use("/api/dashboard", verifyToken, dashboardRoutes);
+var app = express();
+var port = process.env.PORT || 5000;
 
 
 // this route is protected with token
@@ -18,6 +24,51 @@ app.use(cors())
 // console.log(items);
 var items = require("./models/user");
 require("dotenv").config(); // to read .env file
+
+// test get req
+app.get("/", function (req, res) {
+  console.log("test");
+  res.send("server is a go!");
+});
+
+app.post("/signup", function (req, res) {
+  console.log(req);
+  var newUser = new User({
+    email: req.query.email,
+    password: req.query.password,
+    name: req.query.name,
+    phoneNumber: req.query.phoneNumber,
+  });
+  console.log(newUser, "Sura");
+
+  User.findOne({ email: newUser.email })
+    .then((profile) => {
+      if (!profile) {
+        bcrypt.hash(newUser.password, saltRounds, function (err, hash) {
+          if (err) {
+            console.log("Error is", err.message);
+          } else {
+            newUser.password = hash;
+            newUser
+              .save()
+              .then(() => {
+                res.send("User authenticated");
+              })
+              .catch((err) => {
+                console.log("Error is ", err.message);
+              });
+          }
+        });
+      } else {
+        res.send("User already exists...");
+      }
+    })
+    .catch((err) => {
+      console.log("Error is", err.message);
+    });
+});
+
+
 
 // test get req
 app.get("/", function (req, res) {
@@ -115,38 +166,17 @@ app.post("/login", function (req, res) {
     });
 });
 
-// var auth = function(req, res, next) {
-
-//   if(login) {
-
-//       return next();
-
-//   } else {
-
-//       return res.status(400)
-
-//   }
-// };
-
-
-
-
-    //get data from database.	
-    // app.get('/ret', function(req, res)  {	
-    //     list.find({}).limit(11).exe((err,data)=>{	
-    //         res.send(data)	
-    //     });	
-    //     })	
-    app.get('/ret', function(req, res)  {	
-        Nany.find(function(err,n)  {	
-            if(err){	            	
-                throw err;	                	
-            }	         
-            console.log("test")   	            	
-            res.json(n);	
-            // res.send(n)	            	
-        });	       	
-        })	       	
+// get data from database
+app.get("/ret", function getAlldatafromNanySchema(req, res) {
+  Nany.find({}, function (err, nany) {
+    if (err) {
+      res.json(err);
+    } else {
+      console.log(req);
+      res.json(nany);
+    }
+  });
+});
 
 
 app.get("/profile", (req, res) => {
@@ -168,6 +198,18 @@ app.get("/profile", (req, res) => {
       res.send("error: " + err);
     });
 });
+
+app.get("/profilee", (req, res) => {
+  User.find({ email: "test@test.con" }, function (err, user) {
+    if (err) {
+      res.json(err);
+    } else {
+      console.log(user[0]);
+      res.json(user[0]);
+    }
+  });
+});
+
 
 const mongoURI = process.env.ATLAS_URI;
 

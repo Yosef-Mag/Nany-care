@@ -28,6 +28,7 @@ export default function AllNany() {
             - EDUCATION LEVEL : {nany.educationLevel} - ECPERIANCE LEVEL :{" "}
             {nany.experianceLevel} - KIDS NUMBER : {nany.kidsNumber} - AGE :{" "}
             {nany.age} - WORKING HOURS : {nany.workingHour}{" "}
+
           </Text>
         ))}
       </View>
