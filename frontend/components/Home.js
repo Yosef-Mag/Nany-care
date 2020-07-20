@@ -23,29 +23,15 @@ export default function AllNany() {
       
     }, []);
   });
-  //console.log(nanyList)
+ // console.log(nanyList)
 
-  function renderList () { 
-    console.log('hi')
-   var selected = nanyList.filter((op) => op.place === "zarqa")
-   
-   if (selected){
-     console.log(selected)
-   return(
-    <View>
-    {selected.map((nany) => (
-      <Text>
-        NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
-        EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
-        {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
-        {nany.age} WORKING HOURS : {nany.workingHour}{" "}
-      </Text>
-    ))}
-  </View>
-   )
-    }
+  // function renderList () { 
+  //   console.log('hi')
+  //   //console.log(nanyList)
+  
+  //   }
     
-  };
+  // };
   return (
     <View>
       <View>
@@ -61,10 +47,34 @@ export default function AllNany() {
       <View>
       <Text> City </Text>
       <Picker
-        // nanyList={ele.place}
+        nanyList = {nanyList}
         style={{ height: 50, width: 150 }}
-        onValueChange={()=> {renderList()}}
-          //(itemValue, itemIndex) => setSelectedValue(itemValue)}
+        onValueChange={(itemValue, itemIndex) => {
+          
+          var selected = nanyList.filter(op =>{
+            console.log(op.place)
+            return op.place === itemValue 
+         })
+
+         console.log("selected" , nanyList)
+         if (selected){
+          // console.log(selected)
+         return(
+          <View>
+          {selected.map((nany) => (
+            <Text>
+              NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
+              EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
+              {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
+              {nany.age} WORKING HOURS : {nany.workingHour}{" "}
+            </Text>
+          ))}
+        </View>
+         )
+        }
+       return setNanylist(itemValue)
+      }
+    }
       >  
         <Picker.Item label= "Amman" value= "amman" />
         <Picker.Item label= "Irbed" value= "irbed" />

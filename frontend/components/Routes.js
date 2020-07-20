@@ -10,7 +10,7 @@ const Routes = () => (
       <Scene key="home" component={EducationLevel} title="EducationLevel" initial={true} />
       <Scene key="home" component={HowManyKidsCanHandle} title="HowManyKidsCanHandle" initial={true} />
       <Scene key="home" component={Place} title="Place" initial={true} />
-      <Scene key="SignUp" component={SignUp} title="SignUp" />
+      {/* <Scene key="SignUp" component={SignUp} title="SignUp" /> */}
       <Scene key="Login" component={Login} title="Login" />
     </Scene>
   </Router>
