@@ -1,11 +1,8 @@
 import React from "react";
-import MapScreen from "./components/map";
+import SignUpPage from "./components/signup";
+import LoginPage from "./components/Login";
+import MyDrawer from "./components/slidbar";
 import { NavigationContainer } from "@react-navigation/native";
 export default function App() {
-  return (
-    // <NavigationContainer>
-    //   <MyDrawer />
-    // </NavigationContainer>
-    <MapScreen />
-  );
+  return <LoginPage />;
 }
