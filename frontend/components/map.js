@@ -97,11 +97,11 @@
 //   }
 // }
 import React, { useState, useEffect } from "react";
-import { Platform, StyleSheet } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE, Callout } from "react-native-maps";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
-
+import TopPic from "./TopPic";
 export default function MapScreen() {
   const [selectedLocation, setSelectedLocation] = useState();
   const [location, setLocation] = useState({
@@ -175,6 +175,7 @@ export default function MapScreen() {
 
 const styles = StyleSheet.create({
   map: {
-    flex: 1,
+    marginTop: 20 + "%",
+    flex: 0.7,
   },
 });
