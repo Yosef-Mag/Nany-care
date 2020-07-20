@@ -14,7 +14,7 @@ import TopPic from "./TopPic";
 export default function Profile() {
   const [userData, setUserData] = useState({});
   useEffect(() => {
-    axios.get("http://localhost:5000/profilee").then((res) => {
+    axios.get("http://192.168.127.43:5000/profilee").then((res) => {
       console.log(res.data);
       setUserData(res.data);
     }, []);
@@ -30,7 +30,9 @@ export default function Profile() {
         <View style={{ alignSelf: "center" }}>
           <View style={styles.profileImage}>
             <Image
-              source={require("../assets/profile-pic.jpg")}
+              source={{
+                uri: userData.image,
+              }}
               style={styles.image}
               resizeMode="center"
             ></Image>

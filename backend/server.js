@@ -158,7 +158,7 @@ app.get("/profile", (req, res) => {
     });
 });
 app.get("/profilee", (req, res) => {
-  User.find({ email: "a@a.a" }, function (err, user) {
+  User.find({ email: "test@test.con" }, function (err, user) {
     if (err) {
       res.json(err);
     } else {
