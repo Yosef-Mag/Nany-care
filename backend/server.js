@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var items = require("./models/user");
 var jwt = require("jsonwebtoken");
+const cors = require('cors')
 var bcrypt = require("bcrypt");
 var app = express();
 
@@ -15,9 +16,15 @@ app.use(bodyParser.json());
 var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
-
 var port = process.env.PORT || 5000;
 
+
+// this route is protected with token
+// app.use("/api/dashboard", verifyToken, dashboardRoutes);
+var app = express();
+var port = process.env.PORT || 5000;
+app.use(cors())
+// console.log(items);
 var items = require("./models/user");
 require("dotenv").config(); // to read .env file
 // test get req
@@ -150,6 +157,8 @@ app.get("/profilee", (req, res) => {
     }
   });
 });
+
+
 const mongoURI = process.env.ATLAS_URI;
 mongoose
   .connect(mongoURI, { useNewUrlParser: true })

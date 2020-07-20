@@ -49,11 +49,11 @@ function MyDrawer() {
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
+
       <Drawer.Screen name="Home" component={Home1} />
       <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="About US" component={AboutUs} />
       <Drawer.Screen name="Contact Us" component={ContactUs} />
-
       <Drawer.Screen name="LogOut" component={LogOut} />
     </Drawer.Navigator>
   );
