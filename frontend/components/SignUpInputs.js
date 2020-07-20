@@ -1,117 +1,67 @@
-// import EnterName from './App/Components/EnterName
-
 import React from "react";
+import { Formik } from "formik";
+import { View } from "react-native-animatable";
+import { TextInput, Button } from "react-native-paper";
+import axios from "axios";
 
-import {
-  Text,
-  AppRegistry,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
-import { requireNativeViewManager } from "expo-core";
+export default function Signup() {
+  return (
+    <View>
+      <Formik
+        initialValues={{
+          Name: "",
+          Email: "",
+          PhoneNumber: "",
+          password: "",
+        }}
+        onSubmit={(values) => {
+          axios
+            .post("http://192.168.127.34:5000/signup", values)
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }}
+      >
+        {(props) => (
+          <View>
+            {/* Name inpute */}
+            <TextInput
+              placeholder="Please enter name "
+              onChangeText={props.handleChange("Name")}
+              value={props.values.Name}
+            ></TextInput>
+            {/* Email input */}
+            <TextInput
+              placeholder="Please enter email "
+              onChangeText={props.handleChange("Email")}
+              value={props.values.Email}
+            ></TextInput>
+            {/* PhoneNumber input */}
+            <TextInput
+              placeholder="Please enter your phone number "
+              onChangeText={props.handleChange("PhoneNumber")}
+              value={props.values.PhoneNumber}
+            ></TextInput>
 
-export default class SignUpInputs extends React.Component {
-  state = {
-    email: "",
-    password: "",
-    name: "",
-    phoneNumber: "",
-  };
-  handleEmail = (text) => {
-    this.setState({ email: text });
-  };
-  handlePassword = (text) => {
-    this.setState({ password: text });
-  };
-  handlename = (text) => {
-    this.setState({ name: text });
-  };
-  handlephoneNumber = (text) => {
-    this.setState({ phoneNumber: text });
-  };
+            {/* password input  */}
+            <TextInput
+              placeholder="password"
+              onChangeText={props.handleChange("password")}
+              value={props.values.password}
+            ></TextInput>
 
-  SingUp = (email, pass) => {
-    alert("email: " + email + " password: " + pass);
-  };
-
-  render() {
-    return (
-      <View>
-        <View>
-          <TextInput
-            style={style.inputs}
-            onChangeText={(text) => onChangeText(text)}
-            placeholder="Enter email"
-            type='email'
-            onChangeText={this.handleEmail}
-            
-          />
-        </View>
-
-        <View>
-          <TextInput
-            secureTextEntry={true}
-            style={style.inputs}
-            placeholder="Enter Password"
-            onChangeText={this.handlePassword}
-          />
-        </View>
-        <View>
-          <TextInput
-            style={style.inputs}
-            placeholder="Enter Name"
-            onChangeText={this.handlename}
-          />
-        </View>
-        <View>
-          <TextInput
-            style={style.inputs}
-            placeholder="Enter Phone Number"
-            type='tel'
-            onChangeText={this.handlephoneNumber}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={style.submitButton}
-          onPress={() =>
-            this.SingUp(
-              this.state.email,
-              this.state.password,
-              this.state.name,
-              this.state.phoneNumber
-            )
-          }
-        >
-          <Text style={style.textButton}>Sign Up </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+            {/* submit bttn  */}
+            <Button
+              title="signUp"
+              mode="contained"
+              onPress={props.handleSubmit}
+            />
+          </View>
+        )}
+      </Formik>
+    </View>
+  );
 }
-const style = StyleSheet.create({
-  inputs: {
-    marginTop: 50,
-    color: "#6FE6E0",
-    fontSize: 20,
-    marginLeft: 10,
-    marginRight: 10,
-    borderBottomColor: "#6FE6E0",
-    borderBottomWidth: 2,
-  },
-  textButton: {
-    width: 140,
-    padding: 10,
-    fontSize: 20,
-    marginTop: 10 + "%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    fontWeight: "bold",
-    borderRadius: 30,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#E88877",
-  },
-});
