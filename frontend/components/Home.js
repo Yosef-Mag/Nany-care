@@ -10,36 +10,55 @@ import {
   Text,
 } from "react-native";
 import axios from "axios";
+import {Button} from "react-native-paper";
 
-// render all nanys information
+
 
 export default function AllNany() {
-  const [nanyList, setNanylist] = useState([]);
-  const [selectedValue, setSelectedValue] = useState([]);
-  useEffect(() => {
-    axios.get("http://localhost:5000/ret").then((res) => {
-      //console.log(res.data);
-      setNanylist(res.data);
-      
-    }, []);
-  });
- // console.log(nanyList)
 
+  const [nanylist, setNanylist] = useState([]);
+  const [selectedValue, setSelectedValue] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      `http://localhost:5000/ret`,
+      {
+        method: "GET",
+        headers: new Headers({
+          Accept: "application/vnd.github.cloak-preview"
+        })
+      }
+    )
+      .then(res => res.json())
+      .then(response => {
+        setNanylist(response);
+        console.log(response)
+      })
+      .catch(error => console.log(error));
+  }, []);
+
+  console.log(nanylist)
+var selected;
   function renderList () { 
-    console.log('hi')
-    var selected = nanyList.filter(op =>{
+     selected = nanylist.filter(op =>{
       return op.name === selectedValue 
    })
-   console.log("selected" , selected)
-    }
-
-    if (nanyList){
-
+  }
     return(
       <View>
+      <View>
+        {nanylist.map((nany) => (
+          <Text>
+            NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
+            EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
+            {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
+            {nany.age} WORKING HOURS : {nany.workingHour}{" "}
+          </Text>
+        ))}
+      </View>
       <Text> City </Text>
       <Picker
-        nanyList = {nanyList}
+        nanylist = {nanylist}
         style={{ height: 50, width: 150 }}
         onValueChange={(itemValue, itemIndex) => { setSelectedValue(itemValue)}}
       >  
@@ -49,39 +68,24 @@ export default function AllNany() {
         <Picker.Item label= "Aqaba" value= "aqaba" />
         
       </Picker> 
-      <button onClick= {renderList} >go</button>
+      <Button onClick= {renderList} >go</Button>
       </View>
-    )
-    }
-    if (selected.length === 0){
-  return (
-    <View>
-      <View>
-        {nanyList.map((nany) => (
-          <Text>
-            NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
-            EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
-            {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
-            {nany.age} WORKING HOURS : {nany.workingHour}{" "}
-          </Text>
-        ))}
-      </View>
-    </View>
-  );
-        }
+    
+//   )}
+// else{
 
-  return(
-    <View>
-    {selected.map((nany) => (
-      <Text>
-        NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
-        EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
-        {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
-        {nany.age} WORKING HOURS : {nany.workingHour}{" "}
-      </Text>
-    ))}
-  </View>
-   )
+  
+  //   <View>
+  //   {selected.map((nany) => (
+  //     <Text>
+  //       NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
+  //       EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
+  //       {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
+  //       {nany.age} WORKING HOURS : {nany.workingHour}{" "}
+  //     </Text>
+  //   ))}
+  // </View>
+   
+    )  
+
 } 
-
-
