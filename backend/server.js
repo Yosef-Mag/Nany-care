@@ -3,12 +3,12 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var items = require("./models/user");
 var jwt = require("jsonwebtoken");
+
 const cors = require('cors')
 var bcrypt = require("bcrypt");
 var app = express();
 
 const cors = require("cors");
-app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -32,8 +32,14 @@ app.get("/", function (req, res) {
   console.log("test");
   res.send("server is a go!");
 });
+
+
+app.post("/select", function (req, res) {
+  console.log("test", req);
+});
+
 app.post("/signup", function (req, res) {
-  console.log(req);
+  console.log(req.body);
   var newUser = new User({
     email: req.body.Email,
     password: req.body.password,
@@ -157,7 +163,6 @@ app.get("/profilee", (req, res) => {
     }
   });
 });
-
 
 const mongoURI = process.env.ATLAS_URI;
 mongoose

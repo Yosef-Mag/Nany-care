@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {View,SafeAreaView,Text} from "react-native";
+import { View, SafeAreaView, Text } from "react-native";
+
 import axios from "axios";
 
 // render all nanys information
@@ -9,6 +10,7 @@ export default function AllNany() {
   const [nanyList, setNanylist] = useState([]);
 
   useEffect(() => {
+
     axios.get('http://192.168.127.105:5000/ret')
     .then(res => {
       console.log(res.data)	      
@@ -20,6 +22,7 @@ export default function AllNany() {
 
   return (
     <SafeAreaView>
+
     <View>
       <View>
         {nanyList.map((nany) => (
