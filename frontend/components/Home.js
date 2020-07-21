@@ -18,6 +18,9 @@ export default function AllNany() {
 
   const [nanylist, setNanylist] = useState([]);
   const [selectedValue, setSelectedValue] = useState([]);
+  const [selected, setSelected] = useState([]);
+
+
 
   useEffect(() => {
     fetch(
@@ -32,60 +35,72 @@ export default function AllNany() {
       .then(res => res.json())
       .then(response => {
         setNanylist(response);
-        console.log(response)
+        //console.log(response)
       })
       .catch(error => console.log(error));
   }, []);
 
-  console.log(nanylist)
-var selected;
-  function renderList () { 
-     selected = nanylist.filter(op =>{
-      return op.name === selectedValue 
-   })
-  }
-    return(
-      <View>
-      <View>
-        {nanylist.map((nany) => (
-          <Text>
-            NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
-            EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
-            {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
-            {nany.age} WORKING HOURS : {nany.workingHour}{" "}
-          </Text>
-        ))}
-      </View>
-      <Text> City </Text>
-      <Picker
-        nanylist = {nanylist}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(itemValue, itemIndex) => { setSelectedValue(itemValue)}}
-      >  
-        <Picker.Item label= "ahlam" value= "ahlam" />
-        <Picker.Item label= "Irbed" value= "irbed" />
-        <Picker.Item label= "Zarqa" value= "zarqa" />
-        <Picker.Item label= "Aqaba" value= "aqaba" />
-        
-      </Picker> 
-      <Button onClick= {renderList} >go</Button>
-      </View>
-    
-//   )}
-// else{
+  //console.log(nanylist)
 
+
+  function renderList () { 
+    if(selectedValue === "allNany"){
+      setSelected(nanylist)
+    }
+    else{
+    var selected1;
+     selected1 = nanylist.filter(op =>{
+      //  console.log("op", op.place)
+      //  console.log("select", selectedValue)
+      //  console.log("hi" ,op.place === selectedValue)
+      return op["name"] === selectedValue 
+   })
   
-  //   <View>
-  //   {selected.map((nany) => (
-  //     <Text>
-  //       NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
-  //       EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
-  //       {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
-  //       {nany.age} WORKING HOURS : {nany.workingHour}{" "}
-  //     </Text>
-  //   ))}
-  // </View>
-   
+   setSelected(selected1)
+   console.log (selected)
+  }
+}
+  
+    return(
+      
+      <View>
+          {/* <View>
+            {nanylist.map((nany) => (
+              <Text>
+                NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
+                EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
+                {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
+                {nany.age} WORKING HOURS : {nany.workingHour}{" "}
+              </Text>
+            ))}
+          </View> */}
+      <Text> City </Text>
+          <Picker
+            nanylist = {nanylist}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) => { setSelectedValue(itemValue)}}
+          > 
+            <Picker.Item label= "All" value= "allNany" /> 
+            <Picker.Item label= "Amman" value= "amman" />
+            <Picker.Item label= "Ahlam" value= "ahlam" />
+            <Picker.Item label= "Zarqa" value= "zarqa" />
+            <Picker.Item label= "Aqaba" value= "aqaba" />
+            
+          </Picker> 
+      <Button onClick= {renderList} >go</Button>
+      
+  
+    <View>
+    {selected.map((nany) => (
+      <Text>
+        NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
+        EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
+        {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
+        {nany.age} WORKING HOURS : {nany.workingHour}{" "}
+      </Text>
+    ))}
+  </View>
+   </View>
     )  
 
 } 
