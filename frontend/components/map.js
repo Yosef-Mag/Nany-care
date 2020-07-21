@@ -96,16 +96,49 @@
 //     );
 //   }
 // }
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Platform, StyleSheet } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE, Callout } from "react-native-maps";
+import Constants from "expo-constants";
+import * as Location from "expo-location";
 
 export default function MapScreen() {
   const [selectedLocation, setSelectedLocation] = useState();
+  const [location, setLocation] = useState({
+    coords: {
+      accuracy: 20,
+      altitude: 5,
+      heading: 0,
+      latitude: 37.4219983,
+      longitude: -122.084,
+      speed: 0,
+    },
+    mocked: false,
+    timestamp: 1577294172000,
+  });
+  const [errorMsg, setErrorMsg] = useState(null);
 
+  useEffect(() => {
+    if (Platform.OS === "android" && !Constants.isDevice) {
+      setErrorMsg(
+        "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
+      );
+    } else {
+      (async () => {
+        let { status } = await Location.requestPermissionsAsync();
+        if (status !== "granted") {
+          setErrorMsg("Permission to access location was denied");
+        }
+
+        let location1 = await Location.getCurrentPositionAsync({});
+        console.log(JSON.stringify(location1));
+        setLocation(location1);
+      })();
+    }
+  });
   const mapRegion = {
-    latitude: 31.963158,
-    longitude: 35.930359,
+    latitude: location.coords.latitude,
+    longitude: location.coords.longitude,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
