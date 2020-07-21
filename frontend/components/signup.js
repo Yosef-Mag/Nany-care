@@ -1,164 +1,83 @@
+// import EnterName from './App/Components/EnterName
 import React from "react";
+import {
+  AppRegistry,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from "react-native";
 
-import { useState, useEffect } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { requireNativeViewManager } from "expo-core";
 
-import { View, Button, TextInput, StyleSheet } from "react-native";
-import axios from "axios";
+// components import
+import FbLogin from "./FbLogin";
+import GoogleLogin from "./GoogleLogin";
+import SignUpInputs from "./SignUpInputs";
 
-export default function SignUp() {
+export default class SignUpPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onPressLearnMore = this.onPressLearnMore.bind(this);
+  }
+  onPressLearnMore() {}
+  render() {
+    return (
+      <View>
+        <KeyboardAvoidingView behavior="position" disabled>
+          <View
+            style={{ marginTop: 50, marginLeft: "auto", marginRight: "auto" }}
+          >
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                color: "#E88877",
+                marginTop: 100,
+              }}
+            >
+              Welcome To Nany App !
+            </Text>
+          </View>
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:5000/signup", customerSignUp)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-  const { register, handleSubmit, setValue } = useForm();
-  useEffect(() => {
-    register("name");
-    register("email");
-    register("password");
-    register("phoneNumber");
-  }, [register]);
-  return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        autoCapitalize="none"
-        placeholderTextColor="white"
-        onChangeText={(text) => setValue("name", text)}
-        // value={customerSignUp.name}
-        // onChange={handleChange}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry={true}
-        autoCapitalize="none"
-        placeholderTextColor="white"
-        onChangeText={(text) => setValue("password", text)}
+          <SignUpInputs />
 
-        // value={customerSignUp.password}
-        // onChange={handleChange}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        autoCapitalize="none"
-        placeholderTextColor="white"
-        // onChangeText={(val) => setEmail(val)}
-        onChangeText={(text) => setValue("email", text)}
+          <View></View>
 
-        // value={customerSignUp.email}
-        // onChange={handleChange}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Phone Number"
-        autoCapitalize="none"
-        placeholderTextColor="white"
-        onChangeText={(text) => setValue("phoneNumber", text)}
+          {/* own buttons design */}
 
-        // onChangeText={(val) => setPhoneNumber(val)}
-        // value={customerSignUp.phoneNumber}
-        // onChange={handleChange}
-      />
-      <Button
-        title="sign Up "
-        color="white"
-        style={styles.buttonText}
-        onPress={handleSubmit(onSubmit)}
-      />
-    </View>
-  );
+          <TouchableOpacity>
+            <Text style={style.textButton}>Sign Up </Text>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+      </View>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: 351,
-    height: 55,
-    backgroundColor: "#42A5F5",
-    margin: 10,
-    padding: 8,
-    color: "white",
-    borderRadius: 14,
-    fontSize: 18,
-    fontWeight: "500",
+const style = StyleSheet.create({
+  title: {
+    color: "red",
+    textAlign: "center",
+    marginTop: 50,
+    fontSize: 30,
+    fontWeight: "bold",
   },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  center: {
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  textButton: {
+    width: 140,
+    padding: 10,
+    fontSize: 20,
+    marginTop: 10 + "%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    fontWeight: "bold",
+    borderRadius: 30,
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#E88877",
   },
 });
-
-  // const onChangeText = (key, val) => {
-  //   this.setState({ [key]: val });
-  // };
-
-  // const [customerSignUp, setCustomerSignUp] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   phoneNumber: ""
-  // });
-
-  // const handleChange = (event) => {
-  //   setCustomerSignUp({
-  //     ...customerSignUp,
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
-
-  // const [name, setName] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [phoneNumber, setPhoneNumber] = useState("");
-  // const [isError, setIsError] = useState(false);
-
-  // const signUp = {
-  //   email: this.state.email,
-  //   password: this.state.password,
-  //   phoneNumber: this.state.phoneNumber,
-  //   name: this.state.name,
-  // };
-
-  // const { name, password, email, phoneNumber } = this.state;
-
-  // fetching data from server side
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsError(false);
-  //     try {
-  //       const result = await axios.post("http://localhost:5000/signup",{name:'Afnan',
-  //     email:'fnh@jh.hb',
-  //   password:'ygvfghvv',
-  // } );
-
-  //       console.log(req.body);
-  //     } catch (error) {
-  //       setIsError(true);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  // signUp = async () => {
-  //   const { name, password, email, phoneNumber } = this.state;
-  //   try {
-
-  //     // here place your signup logic
-  //     console.log("user successfully signed up!: ", success);
-  //   } catch (err) {
-  //     console.log("error signing up: ", err);
-  //   }
-  // };
-
-  

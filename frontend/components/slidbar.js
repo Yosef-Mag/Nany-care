@@ -1,20 +1,30 @@
 import * as React from "react";
-import { View, Text, Button } from "react-native";
-import Home from './Home';
+import { View, Text } from "react-native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from "@react-navigation/drawer";
 
-function Profile({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-     <Home />
-     
-    </View>
-  );
+import AboutUS from "./AboutsUS";
+import ContactUS from "./ContactUS";
+
+import AllNany from "./Home";
+
+import Profile from "./profile";
+
+import HiringForm from "./hiringForm"
+
+function Profile1() {
+  return <Profile />;
+}
+
+function Home1() {
+  return <AllNany />;
+}
+
+function HiringFormFunc() {
+ return <HiringForm />
 }
 
 function LogOut() {
@@ -24,19 +34,17 @@ function LogOut() {
     </View>
   );
 }
+function AboutUs() {
+  return <AboutUS />;
+}
+function ContactUs() {
+  return <ContactUS />;
+}
 
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.closeDrawer()}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.toggleDrawer()}
-      />
     </DrawerContentScrollView>
   );
 }
@@ -45,9 +53,14 @@ const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
   return (
-    <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Profile" component={Profile} />
+    <Drawer.Navigator
+      drawerContent={(props) => <CustomDrawerContent {...props} />}>
+      <Drawer.Screen name="Home" component={Home1} />
+      <Drawer.Screen name="Profile" component={Profile1} />
+      <Drawer.Screen name="About US" component={AboutUs} />
+      <Drawer.Screen name="Contact Us" component={ContactUs} />
       <Drawer.Screen name="LogOut" component={LogOut} />
+      <Drawer.Screen name="Hiring Form" component={HiringForm} />
     </Drawer.Navigator>
   );
 }

@@ -1,48 +1,20 @@
 import React from "react";
 import { Router, Scene } from "react-native-router-flux";
-import  {allNany} from "./Home.js"
+import  {EducationLevel,HowManyKidsCanHandle, Place} from "./Home"
 import SignUp from "./signup.js";
 import Login from "./Login.js";
+import { HiringForm } from "./hiringForm"
 
 const Routes = () => (
   <Router>
     <Scene key="root">
-<<<<<<< HEAD
       <Scene key="home" component={EducationLevel} title="EducationLevel" initial={true} />
       <Scene key="home" component={HowManyKidsCanHandle} title="HowManyKidsCanHandle" initial={true} />
       <Scene key="home" component={Place} title="Place" initial={true} />
-      {/* <Scene key="SignUp" component={SignUp} title="SignUp" />
-      <Scene key="Login" component={Login} title="Login" /> */}
-=======
-    <Scene key="home" component={allNany} title="all Nany" initial={true} />
       <Scene key="SignUp" component={SignUp} title="SignUp" />
->>>>>>> b64d822e6359ab45e55568213d7f02764f3e6218
+      <Scene key="Login" component={Login} title="Login" />
+      <Scene key="HiringForm" component={HiringForm} title="HiringForm" />
     </Scene>
   </Router>
 );
 export default Routes;
-// if (state.isLoading) {
-//   // We haven't finished checking for the token yet
-//   return <SplashScreen />;
-// }
-
-// return (
-//   <Stack.Navigator>
-//     {state.userToken == null ? (
-//       // No token found, user isn't signed in
-//       <Stack.Screen
-//         name="SignIn"
-//         component={SignInScreen}
-//         options={{
-//           title: 'Sign in',
-//           // When logging out, a pop animation feels intuitive
-//           // You can remove this if you want the default 'push' animation
-//           animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-//         }}
-//       />
-//     ) : (
-//       // User is signed in
-//       <Stack.Screen name="Home" component={HomeScreen} />
-//     )}
-//   </Stack.Navigator>
-// );
