@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Formik } from "formik";
 import { View } from "react-native-animatable";
@@ -14,7 +15,8 @@ export default function LoginInputs() {
         }}
         onSubmit={(values) => {
           axios
-            .post("http://192.168.127.43:5000/login", values)
+
+            .post("http://192.168.127.34:5000/login", values)
             .then(function (response) {
               console.log(response);
             })
@@ -25,6 +27,7 @@ export default function LoginInputs() {
       >
         {(props) => (
           <View>
+
             {/* Email input */}
             <TextInput
               placeholder="enter email "

@@ -61,6 +61,7 @@ function MyDrawer() {
       <Drawer.Screen name="Home" component={Home1} />
       <Drawer.Screen name="Sign Up" component={Signup} />
       <Drawer.Screen name="Log in " component={Login} />
+
       <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="About US" component={AboutUs} />
       <Drawer.Screen name="Contact Us" component={ContactUs} />

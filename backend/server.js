@@ -3,12 +3,12 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var items = require("./models/user");
 var jwt = require("jsonwebtoken");
-// const cors = require('cors')
+
+const cors = require('cors')
 var bcrypt = require("bcrypt");
 var app = express();
 
 const cors = require("cors");
-app.use(cors({ origin: true, credentials: true }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -18,10 +18,12 @@ var Nany = items.Nany;
 var User = items.User;
 var port = process.env.PORT || 5000;
 
+
 // this route is protected with token
 // app.use("/api/dashboard", verifyToken, dashboardRoutes);
-// var port = process.env.PORT || 5000;
-app.use(cors());
+var app = express();
+var port = process.env.PORT || 5000;
+app.use(cors())
 // console.log(items);
 var items = require("./models/user");
 require("dotenv").config(); // to read .env file
@@ -31,9 +33,11 @@ app.get("/", function (req, res) {
   res.send("server is a go!");
 });
 
+
 app.post("/select", function (req, res) {
   console.log("test", req);
 });
+
 app.post("/signup", function (req, res) {
   console.log(req.body);
   var newUser = new User({
