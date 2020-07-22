@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Picker,
-  ListView,
-  StyleSheet,
-  NativeModules,
-  FlatList,
-  SafeAreaView,
-  Text,
-} from "react-native";
+import { View, SafeAreaView, Text } from "react-native";
+
 import axios from "axios";
 import {Button} from "react-native-paper";
 
