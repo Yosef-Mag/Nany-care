@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, SafeAreaView, Text } from "react-native";
+import { View, SafeAreaView, Text , Picker} from "react-native";
 
 import axios from "axios";
 import {Button} from "react-native-paper";
@@ -53,7 +53,6 @@ export default function AllNany() { // function to render results based on selec
     //  console.log("selected city",selectedCity)
     //  console.log("selected level",selectedEdu)
     //  console.log("selected kids",selectedKids)
-    // 
     }
   }
   
@@ -105,13 +104,17 @@ export default function AllNany() { // function to render results based on selec
   {/* rendering based on the selection condition */}
     <View>
     {selected.map((nany) => (
+      <>
       <Text>
         NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
         EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
         {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
         {nany.age} WORKING HOURS : {nany.workingHour}{" "}
       </Text>
-        ))}
+      <Button> Reserve A Nanny </Button> 
+      </>
+       ))}
+        
     </View>
    </View>
     )  
