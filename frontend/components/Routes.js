@@ -3,6 +3,7 @@ import { Router, Scene } from "react-native-router-flux";
 import  AllNany, {EducationLevel,HowManyKidsCanHandle, Place} from "./Home"
 import SignUp from "./signup.js";
 import Login from "./Login.js";
+import { HiringForm } from "./hiringForm"
 
 const Routes = () => (
   <Router>
@@ -13,6 +14,7 @@ const Routes = () => (
       <Scene key="home" component={Place} title="Place" initial={true} />
       <Scene key="SignUp" component={SignUp} title="SignUp" />
       <Scene key="Login" component={Login} title="Login" />
+      <Scene key="HiringForm" component={HiringForm} title="HiringForm" />
     </Scene>
   </Router>
 );

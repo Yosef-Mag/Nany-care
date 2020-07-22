@@ -15,6 +15,8 @@ import AllNany from "./Home";
 import Profile from "./profile";
 import Signup from "./SignUpInputs";
 
+import HiringForm from "./hiringForm"
+
 function Profile1() {
   return <Profile />;
 }
@@ -27,8 +29,13 @@ function SignUp() {
 }
 
 function Home1() {
-  return <AllNany />;
+  return <AllNany />
 }
+
+function HiringFormFunc() {
+  return <HiringForm />
+ }
+
 function LogOut() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -66,6 +73,7 @@ function MyDrawer() {
       <Drawer.Screen name="About US" component={AboutUs} />
       <Drawer.Screen name="Contact Us" component={ContactUs} />
       <Drawer.Screen name="LogOut" component={LogOut} />
+      <Drawer.Screen name="Hiring Form" component={HiringForm} />
     </Drawer.Navigator>
   );
 }
