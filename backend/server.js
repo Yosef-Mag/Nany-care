@@ -1,3 +1,4 @@
+
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
@@ -19,7 +20,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
@@ -84,7 +85,6 @@ app.post("/signup", function (req, res) {
     name: req.body.Name,
     phoneNumber: req.body.PhoneNumber,
   });
-
   User.findOne({ email: newUser.email })
     .then((profile) => {
       if (!profile) {
@@ -162,7 +162,6 @@ app.post("/login", function (req, res) {
       console.log("Error is ", err.message);
     });
 });
-
 app.get("/ret", function getAlldatafromNanySchema(req, res) {
   Nany.find({}, function (err, nany) {
     if (err) {
@@ -201,7 +200,6 @@ app.get("/profilee", (req, res) => {
     }
   });
 });
-
 const mongoURI = process.env.ATLAS_URI;
 mongoose
   .connect(mongoURI, { useNewUrlParser: true })
