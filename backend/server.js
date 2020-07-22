@@ -3,29 +3,38 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var items = require("./models/user");
 var jwt = require("jsonwebtoken");
+
 const cors = require('cors')
 const sendEmail = require('./sendform')
 
 
 var bcrypt = require("bcrypt");
+var items = require("./models/user");
+
+
+
 var app = express();
 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
-var port = process.env.PORT || 5000;
+var port = 5000;
+
 
 
 // this route is protected with token
 // app.use("/api/dashboard", verifyToken, dashboardRoutes);
+
+
 // console.log(items);
 var items = require("./models/user");
 require("dotenv").config(); // to read .env file
-// test get req
+
 app.get("/", function (req, res) {
   console.log("test");
   res.send("server is a go!");
@@ -63,8 +72,12 @@ app.post('/HiringForm', (req, res) => {
   }
 })
 
+app.post("/select", function (req, res) {
+  console.log("user location is ", req.body);
+});
+
 app.post("/signup", function (req, res) {
-  console.log(req);
+  console.log(req.body);
   var newUser = new User({
     email: req.body.Email,
     password: req.body.password,
@@ -188,7 +201,6 @@ app.get("/profilee", (req, res) => {
     }
   });
 });
-
 
 const mongoURI = process.env.ATLAS_URI;
 mongoose

@@ -1,7 +1,6 @@
 // import EnterName from './App/Components/EnterName
 import React from "react";
 import {
-  AppRegistry,
   View,
   Text,
   StyleSheet,
@@ -16,8 +15,7 @@ import {
 
 
 // components import
-// import FbLogin from "./FbLogin";
-// import GoogleLogin from "./GoogleLogin";
+
 import SignUpInputs from "./SignUpInputs";
 
 export default class SignUpPage extends React.Component {
