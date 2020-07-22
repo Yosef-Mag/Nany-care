@@ -57,6 +57,19 @@ export default function MapScreen() {
     longitudeDelta: 0,
   };
 
+  Geolocation.getCurrentPosition(
+    position => { 
+      setSelectedLocation({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+      coordinates: this.state.coordinates.concat({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+      })
+      })
+
+    }
+  )
   const selectLocationHandler = (event) => {
     event.preventDefault();
     setSelectedLocation({
