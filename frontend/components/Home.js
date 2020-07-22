@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { View, SafeAreaView, Text , Picker} from "react-native";
-
+import { View, SafeAreaView, Text , Picker, ScrollView} from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from "axios";
 import {Button} from "react-native-paper";
+import {
+  StyleSheet,
+  TextInput,
+  TouchableHighlight,
+  Alert,
+  Image,
+  ListView,
+  TouchableOpacity
+} from 'react-native';
 
 
 
@@ -16,19 +25,12 @@ export default function AllNany() { // function to render results based on selec
 
 //fetching data from the db 
   useEffect(() => {
-    fetch(
-      `http://localhost:5000/ret`,
-      {
-        method: "GET",
-        headers: new Headers({
-          Accept: "application/vnd.github.cloak-preview"
-        })
-      }
-    )
+    fetch(`http://192.168.1.14:5000/ret`)
       .then(res => res.json())
       .then(response => {
+        console.log("====== == ===  ");
+        console.log(response);
         setNanylist(response);
-        //console.log(response)
       })
       .catch(error => console.log(error));
   }, []);
@@ -99,19 +101,39 @@ export default function AllNany() { // function to render results based on selec
             <Picker.Item label= "High school" value= "high school" />  
           </Picker> 
 
-      <Button onClick= {listFilter} >go</Button>
+          <Button
+        title="Press me"
+        mode="contained"
+        onPress={listFilter}
+      />
       
   {/* rendering based on the selection condition */}
     <View>
     {selected.map((nany) => (
       <>
-      <Text>
-        NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
-        EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
-        {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
-        {nany.age} WORKING HOURS : {nany.workingHour}{" "}
-      </Text>
-      <Button> Reserve A Nanny </Button> 
+      <ScrollView style={{ width: '100%' }}>
+       
+          
+            <View style={styles.box}>
+              <Image style={styles.image} source={nany.image} />
+              <View style={styles.boxContent}>
+          <Text style={styles.title}> {nany.name}</Text>
+                <Text style={styles.description}>{nany.place}</Text>
+                <Text style={styles.description}>{nany.kidsNumber}</Text>
+                <Text style={styles.description}>{nany.educationLevel}</Text>
+                <Text style={styles.description}>{nany.cost}</Text>
+
+                <View style={styles.buttons}>
+                  <TouchableHighlight style={[styles.button, styles.view]}>
+                    <Image style={styles.icon} source={'https://png.icons8.com/ok/androidL/30/ffffff'}/>
+                  </TouchableHighlight>
+
+                </View>
+              </View>
+            </View>
+            
+          
+        </ScrollView>
       </>
        ))}
         
@@ -119,3 +141,61 @@ export default function AllNany() { // function to render results based on selec
    </View>
     )  
 } 
+
+
+
+
+/*******************************Styling********************************/
+const styles = StyleSheet.create({
+  image: {
+    width: 100,
+    height:100,
+  },
+  box: {
+    padding:20,
+    marginTop:5,
+    marginBottom:5,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+  },
+  boxContent: {
+    flex:1,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginLeft:10,
+  },
+  title:{
+    fontSize:18,
+    color:"#151515",
+  },
+  description:{
+    fontSize:15,
+    color: "#646464",
+  },
+  buttons:{
+    flexDirection: 'row',
+  },
+  button: {
+    height:35,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius:10,
+    width:50,
+    marginRight:5,
+    marginTop:5,
+  },
+  icon:{
+    width:20,
+    height:20,
+  },
+  view: {
+    backgroundColor: "#FF1493",
+  },
+  profile: {
+    backgroundColor: "#1E90FF",
+  },
+  message: {
+    backgroundColor: "#228B22",
+  },
+});
