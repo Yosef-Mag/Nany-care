@@ -6,28 +6,30 @@ var jwt = require("jsonwebtoken");
 
 const cors = require('cors')
 var bcrypt = require("bcrypt");
-var app = express();
+var items = require("./models/user");
 
 const cors = require("cors");
 
+var app = express();
+
+app.use(cors({ origin: true, credentials: true }));
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
-var port = process.env.PORT || 5000;
+var port = 5000;
 
 
-// this route is protected with token
-// app.use("/api/dashboard", verifyToken, dashboardRoutes);
-var app = express();
 var port = process.env.PORT || 5000;
-app.use(cors())
 // console.log(items);
 var items = require("./models/user");
 require("dotenv").config(); // to read .env file
-// test get req
+
 app.get("/", function (req, res) {
   console.log("test");
   res.send("server is a go!");
@@ -35,7 +37,7 @@ app.get("/", function (req, res) {
 
 
 app.post("/select", function (req, res) {
-  console.log("test", req);
+  console.log("user location is ", req.body);
 });
 
 app.post("/signup", function (req, res) {

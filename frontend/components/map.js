@@ -5,7 +5,6 @@ import Constants from "expo-constants";
 import * as Location from "expo-location";
 import axios from "axios";
 
-const Separator = () => <View style={styles.separator} />;
 export default function MapScreen() {
   const [selectedLocation, setSelectedLocation] = useState();
   const [location, setLocation] = useState({
@@ -45,12 +44,13 @@ export default function MapScreen() {
         }
 
         let userLocation = await Location.getCurrentPositionAsync({});
-        // console.log(JSON.stringify(userLocation));
+
+        console.log(JSON.stringify(userLocation));
         setLocation(userLocation);
       })();
     }
-  });
-  const mapRegion = {
+  }, []);
+  var mapRegion = {
     latitude: location.coords.latitude,
     longitude: location.coords.longitude,
     latitudeDelta: 0,
@@ -58,9 +58,10 @@ export default function MapScreen() {
   };
 
   const selectLocationHandler = (event) => {
+    event.preventDefault();
     setSelectedLocation({
-      lat: event.nativeEvent.coordinate.latitude,
-      lng: event.nativeEvent.coordinate.longitude,
+      latitude: event.nativeEvent.coordinate.latitude,
+      longitude: event.nativeEvent.coordinate.longitude,
     });
   };
 
@@ -68,13 +69,20 @@ export default function MapScreen() {
 
   if (selectedLocation) {
     markerCoordinates = {
-      latitude: selectedLocation.lat,
-      longitude: selectedLocation.lng,
+      latitude: selectedLocation.latitude,
+      longitude: selectedLocation.longitude,
       latitudeDelta: 0,
       longitudeDelta: 0,
     };
   }
-
+  if (selectedLocation) {
+    mapRegion = {
+      latitude: selectedLocation.latitude,
+      longitude: selectedLocation.longitude,
+      latitudeDelta: 0.005,
+      longitudeDelta: 0.005,
+    };
+  }
   return (
     <View style={styles.mapContainer}>
       <Text
@@ -96,18 +104,6 @@ export default function MapScreen() {
         {markerCoordinates && (
           <Marker title="Picked Location" coordinate={markerCoordinates} />
         )}
-        <MapView.Marker
-          coordinate={{
-            latitude: mapRegion.latitude,
-            longitude: mapRegion.longitude,
-            latitudeDelta: 0,
-            longitudeDelta: 0,
-          }}
-        >
-          <View style={styles.rad}>
-            <View style={styles.mark} />
-          </View>
-        </MapView.Marker>
       </MapView>
       <View style={styles.button}>
         <Button onPress={this.buttonClickListener} title="NEXT!" color="blue" />
