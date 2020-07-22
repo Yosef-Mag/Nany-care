@@ -14,14 +14,15 @@ import {Button} from "react-native-paper";
 
 
 
-export default function AllNany() {
-
+export default function AllNany() { // function to render results based on selected category
+// states to use 
   const [nanylist, setNanylist] = useState([]);
-  const [selectedValue, setSelectedValue] = useState([]);
+  const [selectedCity, setSelectedCity] = useState([]);
+  const [selectedKids, setSelectedKids] = useState([]);
+  const [selectedEdu, setSelectedEdu] = useState([]);
   const [selected, setSelected] = useState([]);
 
-
-
+//fetching data from the db 
   useEffect(() => {
     fetch(
       `http://localhost:5000/ret`,
@@ -40,56 +41,76 @@ export default function AllNany() {
       .catch(error => console.log(error));
   }, []);
 
-  //console.log(nanylist)
 
-
-  function renderList () { 
-    if(selectedValue === "allNany"){
+// filtering the list data 
+  function listFilter () { 
+    if(selectedCity === "allNany"){
       setSelected(nanylist)
     }
     else{
     var selected1;
-     selected1 = nanylist.filter(op =>{
-      //  console.log("op", op.place)
-      //  console.log("select", selectedValue)
-      //  console.log("hi" ,op.place === selectedValue)
-      return op["name"] === selectedValue 
-   })
-  
-   setSelected(selected1)
-   console.log (selected)
+     selected1 = nanylist.filter(op => { 
+       console.log(op["place"])
+              return ((op["place"] === selectedCity) && (op["educationLevel"] ===  selectedEdu) && ( op["kidsNumber"] === selectedKids)) 
+            }
+             )
+      setSelected(selected1)
+     // console.log(op["place"])
+    //  console.log(selected1)
+    //  console.log("selected",selected)
+    //  console.log("selected city",selectedCity)
+    //  console.log("selected level",selectedEdu)
+    //  console.log("selected kids",selectedKids)
+    // 
+    }
   }
-}
   
-    return(
-      
+    return(  
       <View>
-          {/* <View>
-            {nanylist.map((nany) => (
-              <Text>
-                NAME : {nany.name} PLACE: {nany.place} HOURLY COST: {nany.cost}{" "}
-                EDUCATION LEVEL : {nany.educationLevel} ECPERIANCE LEVEL :{" "}
-                {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
-                {nany.age} WORKING HOURS : {nany.workingHour}{" "}
-              </Text>
-            ))}
-          </View> */}
-      <Text> City </Text>
+{/* city picker */}
+      <Text> Select a city </Text>
           <Picker
             nanylist = {nanylist}
             style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) => { setSelectedValue(itemValue)}}
+            onValueChange={(itemValue, itemIndex) => { setSelectedCity(itemValue)}}
           > 
-            <Picker.Item label= "All" value= "allNany" /> 
+            <Picker.Item label= "All Cities" value= "allNany" /> 
             <Picker.Item label= "Amman" value= "amman" />
-            <Picker.Item label= "Ahlam" value= "ahlam" />
+            <Picker.Item label= "Irbid" value= "irbid" />
             <Picker.Item label= "Zarqa" value= "zarqa" />
-            <Picker.Item label= "Aqaba" value= "aqaba" />
-            
+            <Picker.Item label= "Aqaba" value= "aqaba" />  
           </Picker> 
-      <Button onClick= {renderList} >go</Button>
+
+
+
+          {/* Kids can handle picker */}
+      <Text> Kids can Handle </Text>
+          <Picker
+            nanylist = {nanylist}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) => { setSelectedKids(itemValue)}}
+          > 
+            <Picker.Item label= "1 kid" value= "1" />
+            <Picker.Item label= "2 kids" value= "2" />
+            <Picker.Item label= "3 kids" value= "3" />
+            <Picker.Item label= "4 kids" value= "4" />  
+          </Picker> 
+
+
+          {/* Education level picker */}
+      <Text> Education level </Text>
+          <Picker
+            nanylist = {nanylist}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) => { setSelectedEdu(itemValue)}}
+          > 
+            <Picker.Item label= "College" value= "college" />
+            <Picker.Item label= "High school" value= "high school" />  
+          </Picker> 
+
+      <Button onClick= {listFilter} >go</Button>
       
-  
+  {/* rendering based on the selection condition */}
     <View>
     {selected.map((nany) => (
       <Text>
@@ -98,9 +119,8 @@ export default function AllNany() {
         {nany.experianceLevel} KIDS NUMBER : {nany.kidsNumber} AGE :{" "}
         {nany.age} WORKING HOURS : {nany.workingHour}{" "}
       </Text>
-    ))}
-  </View>
+        ))}
+    </View>
    </View>
     )  
-
 } 
