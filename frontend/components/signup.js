@@ -1,7 +1,6 @@
 // import EnterName from './App/Components/EnterName
 import React from "react";
 import {
-  AppRegistry,
   View,
   Text,
   StyleSheet,
