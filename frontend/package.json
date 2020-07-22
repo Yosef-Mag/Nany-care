@@ -22,8 +22,10 @@
     "expo": "~38.0.8",
     "expo-core": "^3.0.1",
     "expo-notifications": "~0.3.3",
+    "expo-payments-stripe": "^8.2.3",
     "expo-react-native-adapter": "^3.0.1",
     "expo-status-bar": "^1.0.2",
+    "expo-stripe-checkout": "^1.0.1",
     "firebase": "^7.16.1",
     "react": "^16.11.0",
     "react-dom": "~16.11.0",
@@ -46,7 +48,8 @@
     "react-navigation": "^4.4.0",
     "react-navigation-stack": "^2.8.2",
     "slick-carousel": "^1.8.1",
-    "tcomb-form-native": "^0.6.20"
+    "tcomb-form-native": "^0.6.20",
+    "tipsi-stripe": "^7.5.3"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
