@@ -59,7 +59,7 @@ export default function HiringForm () {
                 initialValues = { {
                     Name : '',
                     Age : '',
-                    Email : '',
+                    // Email : '',
                     PhoneNumber : '',
                     NumberOfKidsYouCanHandel : '',
                     Place : '',
@@ -70,17 +70,8 @@ export default function HiringForm () {
                 validationSchema = { reviewSchema }
                 onSubmit = { (values) => {
                     console.log(values)
-                    axios.post('http://localhost:5000/HiringForm', {
-                        Name : values.Name,
-                        Age : values.Age,
-                        Email : values.Email,
-                        PhoneNumber : values.PhoneNumber,
-                        NumberOfKidsYouCanHandel : values.NumberOfKidsYouCanHandel,
-                        Place : values.Place,
-                        EducationLevel : values.EducationLevel,
-                        HowMannyHoursYouCanWorkADay : values.HowMannyHoursYouCanWorkADay,
-                        ExperensLevel : values.ExperensLevel
-                    })
+                    axios.post('"http://172.16.0.157:5000/HiringForm',  values)
+                    
                 } } >
                     { (props) => (
                     <View>
@@ -102,17 +93,17 @@ export default function HiringForm () {
                         onBlur = {props.handleBlur('Age')} >
                         </TextInput>
                         {/* Handling test for age */}
-                        <Text> { props.touched.Age && props.errors.Age } </Text>
+                        <Text> { props.touched.Age /* && props.errors.Age */ } </Text>
 
-                         {/* Email input */}
-                        {/* <TextInput 
+                         {/* Email input  */}
+                         {/* <TextInput 
                         placeholder = 'Please enter email '
                         onChangeText = { props.handleChange('Email') }
-                        value = { props.values.Email}
+                        value = { props.values.Email}                        *Buged on my phone*
                         onBlur = {props.handleBlur('Email')} >
-                        </TextInput>
+                        </TextInput> */}
                         {/* Handling test for email */}
-                        {/* <Text> { props.touched.Email && props.errors.Email } </Text> */} 
+                        {/* <Text> { props.touched.Email && props.errors.Email } </Text>  */}
 
                          {/* PhoneNumber input */}
                         <TextInput 

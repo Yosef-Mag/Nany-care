@@ -20,12 +20,12 @@ function Profile1() {
 }
 
 function Home1() {
-  return <AllNany />;
+  return <AllNany />
 }
 
 function HiringFormFunc() {
- return <HiringForm />
-}
+  return <HiringForm />
+ }
 
 function LogOut() {
   return (
@@ -54,7 +54,9 @@ const Drawer = createDrawerNavigator();
 function MyDrawer() {
   return (
     <Drawer.Navigator
-      drawerContent={(props) => <CustomDrawerContent {...props} />}>
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
+    >
+
       <Drawer.Screen name="Home" component={Home1} />
       <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="About US" component={AboutUs} />
