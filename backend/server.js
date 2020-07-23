@@ -1,4 +1,3 @@
-
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
@@ -196,7 +195,7 @@ app.get("/profile", (req, res) => {
     });
 });
 app.get("/profilee", (req, res) => {
-  User.find({ email: "a@a.a" }, function (err, user) {
+  User.find({ email: "sura@gmail.com" }, function (err, user) {
     if (err) {
       res.json(err);
     } else {

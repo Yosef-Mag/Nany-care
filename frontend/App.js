@@ -1,9 +1,9 @@
 import React from "react";
-import Home from "./components/Home";
+import Profile from "./components/profile";
 import { NavigationContainer } from "@react-navigation/native";
 export default function App() {
   return (
-    <Home />
+    <Profile />
     //   <NavigationContainer>
     // <MyDrawer />
     //   </NavigationContainer>
