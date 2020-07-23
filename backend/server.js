@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var items = require("./models/user");
 var jwt = require("jsonwebtoken");
-
+const nodemailer = require('nodemailer');
 const cors = require('cors')
 const sendEmail = require('./sendform')
 
@@ -42,7 +42,6 @@ app.get("/", function (req, res) {
 
 app.post('/HiringForm', (req, res) => {
   console.log(req.body)
-  const sendEmail = ( req, res) => {
     let transporter = nodemailer.createTransport({
       service : 'gmail',
       auth : {
@@ -56,7 +55,7 @@ app.post('/HiringForm', (req, res) => {
       to: 'nannycarecom@gmail.com',
       subject: 'Hiring form',
       text: 'Name : ' + req.body.Name + '\n Age : ' + req.body.Age +  /* '\n Email : ' + req.body.Email + */
-            '\n Phone number  : ' + req.body.PhoneNumber + '\n Number of kids i canHandel : ' + req.body.NumberOfKidsYouCanHandel +
+            '\n Phone number  : ' + req.body.PhoneNumber + '\n Number of kids i can handel : ' + req.body.NumberOfKidsYouCanHandel +
             '\n Place : ' + req.body.Place + '\n EducationLevel : ' + req.body.EducationLevel + 
             '\n How manny hours i can work a day : ' + req.body.HowMannyHoursYouCanWorkADay + 
             '\n Experens level : ' + req.body.ExperensLevel
@@ -69,7 +68,7 @@ app.post('/HiringForm', (req, res) => {
       }
       res.json("Email send");
     });
-  }
+  
 })
 
 app.post("/select", function (req, res) {
