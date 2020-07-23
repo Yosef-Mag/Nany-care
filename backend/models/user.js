@@ -47,7 +47,7 @@ var nanySchema = new Schema({
   educationLevel: { type: String, required: true },
   age: { type: Number, required: true },
   workingHour: { type: Number, required: true },
-  cost: { type: Number, required: true },
+  cost: { type: String, required: true },
   experianceLevel: { type: String, required: true },
 });
 const Nany = mongoose.model("Nany", nanySchema);

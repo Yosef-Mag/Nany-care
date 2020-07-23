@@ -25,7 +25,7 @@ export default function AllNany() { // function to render results based on selec
 
 //fetching data from the db 
   useEffect(() => {
-    fetch(`http://192.168.1.14:5000/ret`)
+    fetch(`http://192.168.127.74:5000/ret`)
       .then(res => res.json())
       .then(response => {
         console.log("====== == ===  ");
@@ -69,7 +69,7 @@ export default function AllNany() { // function to render results based on selec
           > 
             <Picker.Item label= "All Cities" value= "allNany" /> 
             <Picker.Item label= "Amman" value= "amman" />
-            <Picker.Item label= "Irbid" value= "irbid" />
+            <Picker.Item label= "Irbid" value= "arbed" />
             <Picker.Item label= "Zarqa" value= "zarqa" />
             <Picker.Item label= "Aqaba" value= "aqaba" />  
           </Picker> 
@@ -115,17 +115,17 @@ export default function AllNany() { // function to render results based on selec
        
           
             <View style={styles.box}>
-              <Image style={styles.image} source={nany.image} />
+              <Image style={styles.image} source={{uri:nany.image}}/>
               <View style={styles.boxContent}>
-          <Text style={styles.title}> {nany.name}</Text>
-                <Text style={styles.description}>{nany.place}</Text>
-                <Text style={styles.description}>{nany.kidsNumber}</Text>
-                <Text style={styles.description}>{nany.educationLevel}</Text>
-                <Text style={styles.description}>{nany.cost}</Text>
+                <Text style={styles.title}>Name: {nany.name}</Text>
+                <Text style={styles.title}>Place: {nany.place}</Text>
+                <Text style={styles.title}>Kids Can Handle: {nany.kidsNumber}</Text>
+                <Text style={styles.title}>Education Level: {nany.educationLevel}</Text>
+                <Text style={styles.title}>Cost: {nany.Houcost}</Text>
 
                 <View style={styles.buttons}>
                   <TouchableHighlight style={[styles.button, styles.view]}>
-                    <Image style={styles.icon} source={'https://png.icons8.com/ok/androidL/30/ffffff'}/>
+                    <Image style={styles.icon} source={{uri:'https://cdn.pixabay.com/photo/2016/01/20/18/59/confirmation-1152155__340.png'}}/>
                   </TouchableHighlight>
 
                 </View>
@@ -176,12 +176,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   button: {
-    height:35,
+    height:20,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius:10,
-    width:50,
+    width:20,
     marginRight:5,
     marginTop:5,
   },
