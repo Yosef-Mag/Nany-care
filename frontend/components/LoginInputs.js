@@ -1,39 +1,55 @@
-// import EnterName from './App/Components/EnterName
 
 import React from "react";
-import { AppRegistry, View, StyleSheet, TextInput } from "react-native";
-import { requireNativeViewManager } from "expo-core";
+import { Formik } from "formik";
+import { View } from "react-native-animatable";
+import { TextInput, Button } from "react-native-paper";
+import axios from "axios";
 
-export default class LoginInputs extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <View>
-        <View>
-          <TextInput style={style.inputs} placeholder="Enter email" />
-        </View>
+export default function LoginInputs() {
+  return (
+    <View>
+      <Formik
+        initialValues={{
+          Email: "",
+          password: "",
+        }}
+        onSubmit={(values) => {
+          axios
 
-        <View>
-          <TextInput
-            secureTextEntry={true}
-            style={style.inputs}
-            placeholder="Enter Password"
-          />
-        </View>
-      </View>
-    );
-  }
+            .post("http://192.168.127.34:5000/login", values)
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }}
+      >
+        {(props) => (
+          <View>
+
+            {/* Email input */}
+            <TextInput
+              placeholder="enter email "
+              onChangeText={props.handleChange("Email")}
+              value={props.values.Email}
+            ></TextInput>
+            {/* password input  */}
+            <TextInput
+              placeholder="password"
+              onChangeText={props.handleChange("password")}
+              value={props.values.password}
+            ></TextInput>
+
+            {/* submit bttn  */}
+            <Button
+              title="login"
+              mode="contained"
+              onPress={props.handleSubmit}
+            />
+          </View>
+        )}
+      </Formik>
+    </View>
+  );
 }
-const style = StyleSheet.create({
-  inputs: {
-    marginTop: 50,
-    color: "#6FE6E0",
-    fontSize: 20,
-    marginLeft: 10,
-    marginRight: 10,
-    borderBottomColor: "#6FE6E0",
-    borderBottomWidth: 2,
-  },
-});

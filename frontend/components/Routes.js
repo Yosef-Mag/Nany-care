@@ -4,6 +4,8 @@ import  AllNany, {EducationLevel,HowManyKidsCanHandle, Place} from "./Home"
 import SignUp from "./signup.js";
 import Login from "./Login.js";
 import payment from "./payment"
+import { HiringForm } from "./hiringForm"
+
 
 const Routes = () => (
   <Router>
@@ -15,6 +17,7 @@ const Routes = () => (
       <Scene key="SignUp" component={SignUp} title="SignUp" />
       <Scene key="Login" component={Login} title="Login" />
       <Scene key="payment" component={payment} title="payment" />
+      <Scene key="HiringForm" component={HiringForm} title="HiringForm" />
     </Scene>
   </Router>
 );
