@@ -1,4 +1,4 @@
-const mailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 var bodyParser = require('body-parser');
 var express = require("express");
 var app = express();
