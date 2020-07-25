@@ -121,7 +121,7 @@ export default function AllNany() { // function to render results based on selec
                 <Text style={styles.title}>Place: {nany.place}</Text>
                 <Text style={styles.title}>Kids Can Handle: {nany.kidsNumber}</Text>
                 <Text style={styles.title}>Education Level: {nany.educationLevel}</Text>
-                <Text style={styles.title}>Cost: {nany.Houcost}</Text>
+                <Text style={styles.title}>Cost: {nany.cost}</Text>
 
                 <View style={styles.buttons}>
                   <TouchableHighlight style={[styles.button, styles.view]}>
