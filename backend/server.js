@@ -1,24 +1,28 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+
 var items = require("./models/user");
-var jwt = require("jsonwebtoken");
+var Nany = items.Nany;
+var User = items.User;
+var User = items.User;
 
 const cors = require("cors");
-const nodemailer = require("nodemailer");
-
-var bcrypt = require("bcrypt");
-var items = require("./models/user");
-
+const router = express.Router();
+var Nannyhandlers = require("./handlers/Nannyhandlers");
+var Adminhandlers = require("./handlers/Adminhandlers");
+var userhandlers = require("./handlers/userhandlers");
 var app = express();
-
 app.use(cors({ origin: true, credentials: true }));
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+<<<<<<< HEAD
+=======
 var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
+>>>>>>> a728e51182936cfc75fa8b5ccf06e509c3408263
 var port = process.env.PORT || 5000;
 
 require("dotenv").config(); // to read .env file
@@ -29,6 +33,27 @@ app.get("/", function (req, res) {
   res.send("server is a go!");
 });
 
+<<<<<<< HEAD
+app.post("/HiringForm", Nannyhandlers.HiringForm);
+
+app.post("/select", userhandlers.selectLocation);
+
+app.post("/signup", userhandlers.userSignUp);
+app.get("/logout", userhandlers.userLogOut);
+app.post("/login", userhandlers.userLogIn);
+app.get("/ret", Nannyhandlers.retrieve);
+
+app.get("/profile", userhandlers.retriveUserByEmail);
+
+app.get("/profilee", userhandlers.retriveUserByToken);
+app.post("/api/doPayment/", userhandlers.payment);
+
+app.post("/insert", Adminhandlers.insert);
+
+app.post("adminSignUp", Adminhandlers.adminSignUp);
+
+app.post("adminLogIn", Adminhandlers.adminLogIn);
+=======
 app.post("/HiringForm", (req, res) => {
   console.log(req.body);
   let transporter = nodemailer.createTransport({
@@ -212,6 +237,7 @@ app.post("/api/doPayment/", (req, res) => {
     })
     .then((result) => res.status(200).json(result));
 });
+>>>>>>> a728e51182936cfc75fa8b5ccf06e509c3408263
 
 const mongoURI = process.env.ATLAS_URI;
 mongoose
@@ -221,16 +247,3 @@ mongoose
 app.listen(port, () => {
   console.log(`Server is running on ${port} Visit https://localhost:${port}`);
 });
-// middleware to validate token
-const verifyToken = (req, res, next) => {
-  const token = req.header("auth-token");
-  if (!token) return res.status(401).json({ error: "Access denied" });
-  try {
-    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-    req.user = verified;
-    next(); // to continue the flow
-  } catch (err) {
-    res.status(400).json({ error: "Token is not valid" });
-  }
-};
-module.exports = verifyToken;

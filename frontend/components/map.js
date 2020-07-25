@@ -1,10 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { Platform, StyleSheet, View, Text, Button } from "react-native";
+import {
+  Keyboard,
+  Platform,
+  StyleSheet,
+  View,
+  Text,
+  Button,
+} from "react-native";
+
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
 import axios from "axios";
 
+import { Notifications } from "expo";
+import * as Permissions from "expo-permissions";
+
+const localNotification = {
+  title: "Nany APP",
+  body: "You send yor location successfully!!",
+};
+
+const handleNotification = () => {
+  console.warn("ok! got your notif");
+};
+
+const askNotification = async () => {
+  // We need to ask for Notification permissions for ios devices
+  const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+  if (Constants.isDevice && status === "granted")
+    console.log("Notification permissions granted.");
+};
 export default function MapScreen() {
   const [selectedLocation, setSelectedLocation] = useState();
   const [location, setLocation] = useState({
@@ -20,7 +46,8 @@ export default function MapScreen() {
     timestamp: 1577294172000,
   });
   const [errorMsg, setErrorMsg] = useState(null);
-  buttonClickListener = () => {
+
+  const onSubmit = (text) => {
     axios
       .post("http://192.168.127.43:5000/select", selectedLocation)
       .then(function (response) {
@@ -29,7 +56,16 @@ export default function MapScreen() {
       .catch(function (error) {
         console.log(error);
       });
-    alert("You send your location !!!");
+    Keyboard.dismiss();
+    const schedulingOptions = {
+      time: new Date().getTime() + 1000,
+    };
+    // Notifications show only when app is not active.
+    // (ie. another app being used or device's screen is locked)
+    Notifications.scheduleLocalNotificationAsync(
+      localNotification,
+      schedulingOptions
+    );
   };
   useEffect(() => {
     if (Platform.OS === "android" && !Constants.isDevice) {
@@ -53,23 +89,10 @@ export default function MapScreen() {
   var mapRegion = {
     latitude: location.coords.latitude,
     longitude: location.coords.longitude,
-    latitudeDelta: 0,
-    longitudeDelta: 0,
+    latitudeDelta: 0.005,
+    longitudeDelta: 0.005,
   };
 
-  Geolocation.getCurrentPosition(
-    position => { 
-      setSelectedLocation({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-      coordinates: this.state.coordinates.concat({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude
-      })
-      })
-
-    }
-  )
   const selectLocationHandler = (event) => {
     event.preventDefault();
     setSelectedLocation({
@@ -84,8 +107,8 @@ export default function MapScreen() {
     markerCoordinates = {
       latitude: selectedLocation.latitude,
       longitude: selectedLocation.longitude,
-      latitudeDelta: 0,
-      longitudeDelta: 0,
+      latitudeDelta: 0.005,
+      longitudeDelta: 0.005,
     };
   }
   if (selectedLocation) {
@@ -96,6 +119,15 @@ export default function MapScreen() {
       longitudeDelta: 0.005,
     };
   }
+  useEffect(() => {
+    askNotification();
+    // If we want to do something with the notification when the app
+    // is active, we need to listen to notification events and
+    // handle them in a callback
+    const listener = Notifications.addListener(handleNotification);
+    return () => listener.remove();
+  }, []);
+
   return (
     <View style={styles.mapContainer}>
       <Text
@@ -119,7 +151,7 @@ export default function MapScreen() {
         )}
       </MapView>
       <View style={styles.button}>
-        <Button onPress={this.buttonClickListener} title="NEXT!" color="blue" />
+        <Button onPress={onSubmit} title="NEXT!" color="blue" />
       </View>
     </View>
   );

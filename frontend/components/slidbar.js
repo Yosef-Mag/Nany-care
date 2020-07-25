@@ -15,8 +15,8 @@ import AllNany from "./Home";
 import Profile from "./profile";
 import Signup from "./SignUpInputs";
 
-import HiringForm from "./hiringForm"
-
+import HiringForm from "./hiringForm";
+import MapScreen from "./map";
 function Profile1() {
   return <Profile />;
 }
@@ -29,12 +29,12 @@ function SignUp() {
 }
 
 function Home1() {
-  return <AllNany />
+  return <AllNany />;
 }
 
 function HiringFormFunc() {
-  return <HiringForm />
- }
+  return <HiringForm />;
+}
 
 function LogOut() {
   return (
@@ -43,8 +43,8 @@ function LogOut() {
     </View>
   );
 }
-function AboutUs() {
-  return <AboutUS />;
+function Map() {
+  return <MapScreen />;
 }
 function ContactUs() {
   return <ContactUS />;
@@ -66,11 +66,12 @@ function MyDrawer() {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen name="Home" component={Home1} />
-      <Drawer.Screen name="Sign Up" component={Signup} />
+      <Drawer.Screen name="Map" component={Map} />
+
+      <Drawer.Screen name="Sign Up" component={SignUp} />
       <Drawer.Screen name="Log in " component={Login} />
 
       <Drawer.Screen name="Profile" component={Profile1} />
-      <Drawer.Screen name="About US" component={AboutUs} />
       <Drawer.Screen name="Contact Us" component={ContactUs} />
       <Drawer.Screen name="LogOut" component={LogOut} />
       <Drawer.Screen name="Hiring Form" component={HiringForm} />
