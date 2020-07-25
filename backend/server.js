@@ -1,19 +1,20 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+
 var items = require("./models/user");
-var jwt = require("jsonwebtoken");
+var Nany = items.Nany;
+var User = items.User;
+var User = items.User;
 
 const cors = require("cors");
-const nodemailer = require("nodemailer");
-
-var bcrypt = require("bcrypt");
-var items = require("./models/user");
-
+const router = express.Router();
+var Nannyhandlers = require("./handlers/Nannyhandlers");
+var Adminhandlers = require("./handlers/Adminhandlers");
+var userhandlers = require("./handlers/userhandlers");
 var app = express();
-
 app.use(cors({ origin: true, credentials: true }));
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var saltRounds = 10;
@@ -221,16 +222,3 @@ mongoose
 app.listen(port, () => {
   console.log(`Server is running on ${port} Visit https://localhost:${port}`);
 });
-// middleware to validate token
-const verifyToken = (req, res, next) => {
-  const token = req.header("auth-token");
-  if (!token) return res.status(401).json({ error: "Access denied" });
-  try {
-    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-    req.user = verified;
-    next(); // to continue the flow
-  } catch (err) {
-    res.status(400).json({ error: "Token is not valid" });
-  }
-};
-module.exports = verifyToken;
