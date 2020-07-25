@@ -1,24 +1,25 @@
 // import React from "react";
 import { Router, Scene } from "react-native-router-flux";
 // import LoginPage from "./components/Login";
-// import LoginPage from "./components/Login";
-import Payment from "./components/payment";
+import Home from "./components/Home";
+//import Payment from "./components/payment";
 
 
 
 import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
-import Routes from './Routes.js'
+//import Routes from './Routes.js'
 
 class App extends Component {
    render() {
       return (
-         <Routes />
+         <Home />
       )
    }
 }
-export default reactTutorialApp
 AppRegistry.registerComponent('App', () => App)
+export default App
+
 
 
 // import MyDrawer from "./components/slidbar";

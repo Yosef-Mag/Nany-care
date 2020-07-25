@@ -131,7 +131,17 @@ export default function AllNany() { // function to render results based on selec
                 </View>
               </View>
             </View>
-            
+            <View style={styles.controlContainer}>
+                <Select
+                  style={styles.select}
+                  status='control'
+                  placeholder='Control'
+                  {...controlSelectState}>
+                  <SelectItem title='Option 1'/>
+                  <SelectItem title='Option 2'/>
+                  <SelectItem title='Option 3'/>
+                </Select>
+                </View> 
           
         </ScrollView>
       </>
@@ -197,5 +207,11 @@ const styles = StyleSheet.create({
   },
   message: {
     backgroundColor: "#228B22",
+  },
+  controlContainer: {
+    borderRadius: 4,
+    margin: 2,
+    padding: 6,
+    backgroundColor: '#3366FF',
   },
 });
