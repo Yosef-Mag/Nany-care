@@ -22,7 +22,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 8,
   },
- 
+
   name: {
     type: String,
     required: true,
@@ -50,7 +50,22 @@ var nanySchema = new Schema({
   cost: { type: Number, required: true },
   experianceLevel: { type: String, required: true },
 });
+
+const adminSchema = new Schema({
+  userName: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 8,
+  },
+});
+const Admin = mongoose.model("Admin", adminSchema);
 const Nany = mongoose.model("Nany", nanySchema);
 const User = mongoose.model("User", userSchema);
+module.exports.Admin = Admin;
 module.exports.Nany = Nany;
 module.exports.User = User;

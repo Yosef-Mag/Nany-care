@@ -1,11 +1,12 @@
 import React from "react";
-import Profile from "./components/profile";
+import MyDrawer from "./components/slidbar";
+import SignUpPage from "./components/signup";
 import { NavigationContainer } from "@react-navigation/native";
 export default function App() {
   return (
-    <Profile />
-    //   <NavigationContainer>
-    // <MyDrawer />
-    //   </NavigationContainer>
+    // <SignUpPage />
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
   );
 }
