@@ -1,10 +1,9 @@
-
 import React from "react";
 import { Formik } from "formik";
 import { View } from "react-native-animatable";
 import { TextInput, Button } from "react-native-paper";
 import axios from "axios";
-
+import { Actions } from 'react-native-router-flux';
 export default function LoginInputs() {
   return (
     <View>
@@ -19,6 +18,8 @@ export default function LoginInputs() {
             .post("http://192.168.127.34:5000/login", values)
             .then(function (response) {
               console.log(response);
+              if(res.data === "User login"){
+              Actions.home()}
             })
             .catch(function (error) {
               console.log(error);
@@ -27,7 +28,6 @@ export default function LoginInputs() {
       >
         {(props) => (
           <View>
-
             {/* Email input */}
             <TextInput
               placeholder="enter email "

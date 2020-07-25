@@ -1,84 +1,84 @@
-
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var items = require("./models/user");
 var jwt = require("jsonwebtoken");
 
-const cors = require('cors')
-const sendEmail = require('./sendform')
-
+const cors = require("cors");
+const nodemailer = require("nodemailer");
 
 var bcrypt = require("bcrypt");
 var items = require("./models/user");
-
-
 
 var app = express();
 
 app.use(cors({ origin: true, credentials: true }));
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
-var port = 5000;
+var port = process.env.PORT || 5000;
 
-
-
-// this route is protected with token
-// app.use("/api/dashboard", verifyToken, dashboardRoutes);
-
-
-// console.log(items);
-var items = require("./models/user");
 require("dotenv").config(); // to read .env file
 
+// test get req
 app.get("/", function (req, res) {
   console.log("test");
   res.send("server is a go!");
 });
 
-app.post('/HiringForm', (req, res) => {
-  console.log(req.body)
-  const sendEmail = ( req, res) => {
-    let transporter = nodemailer.createTransport({
-      service : 'gmail',
-      auth : {
-        user : 'nannyHirring@gmail.com',
-        pass : 'nannyHirring12345'
-      }
-    });
-  
-    let mailOptions = {
-      from: 'nannyHirring@gmail.com' ,
-      to: 'nannycarecom@gmail.com',
-      subject: 'Hiring form',
-      text: 'Name : ' + req.body.Name + '\n Age : ' + req.body.Age +  /* '\n Email : ' + req.body.Email + */
-            '\n Phone number  : ' + req.body.PhoneNumber + '\n Number of kids i canHandel : ' + req.body.NumberOfKidsYouCanHandel +
-            '\n Place : ' + req.body.Place + '\n EducationLevel : ' + req.body.EducationLevel + 
-            '\n How manny hours i can work a day : ' + req.body.HowMannyHoursYouCanWorkADay + 
-            '\n Experens level : ' + req.body.ExperensLevel
-    };
-  
-    // Step 3
-    transporter.sendMail(mailOptions, (err, data) => {
-      if (err) {
-          res.status(400).json('Error:'+err)
-      }
-      res.json("Email send");
-    });
-  }
-})
+app.post("/HiringForm", (req, res) => {
+  console.log(req.body);
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "nannyHirring@gmail.com",
+      pass: "nannyHirring12345",
+    },
+  });
+
+  let mailOptions = {
+    from: "nannyHirring@gmail.com",
+    to: "nannycarecom@gmail.com",
+    subject: "Hiring form",
+    text:
+      "Name : " +
+      req.body.Name +
+      "\n Age : " +
+      req.body.Age +
+      "\n Email : " +
+      req.body.Email +
+      "\n Phone number  : " +
+      req.body.PhoneNumber +
+      "\n Number of kids i canHandel : " +
+      req.body.NumberOfKidsYouCanHandel +
+      "\n Place : " +
+      req.body.Place +
+      "\n EducationLevel : " +
+      req.body.EducationLevel +
+      "\n How manny hours i can work a day : " +
+      req.body.HowMannyHoursYouCanWorkADay +
+      "\n Experens level : " +
+      req.body.ExperensLevel,
+  };
+
+  // Step 3
+  transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+      res.status(400).json("Error:" + err);
+    }
+    res.json("Email send");
+  });
+});
 
 app.post("/select", function (req, res) {
   console.log("user location is ", req.body);
 });
 
 app.post("/signup", function (req, res) {
-  console.log(req.body);
+  console.log(req);
   var newUser = new User({
     email: req.body.Email,
     password: req.body.password,
@@ -172,6 +172,7 @@ app.get("/ret", function getAlldatafromNanySchema(req, res) {
     }
   });
 });
+
 app.get("/profile", (req, res) => {
   console.log(req.header);
   console.log(req.body, "body");
@@ -190,6 +191,7 @@ app.get("/profile", (req, res) => {
       res.send("error: " + err);
     });
 });
+
 app.get("/profilee", (req, res) => {
   User.find({ email: "a@a.a" }, function (err, user) {
     if (err) {
@@ -200,6 +202,17 @@ app.get("/profilee", (req, res) => {
     }
   });
 });
+app.post("/api/doPayment/", (req, res) => {
+  return stripe.charges
+    .create({
+      amount: req.body.amount, // Unit: cents
+      currency: "eur",
+      source: req.body.tokenId,
+      description: "Test payment",
+    })
+    .then((result) => res.status(200).json(result));
+});
+
 const mongoURI = process.env.ATLAS_URI;
 mongoose
   .connect(mongoURI, { useNewUrlParser: true })

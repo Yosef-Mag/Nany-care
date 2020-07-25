@@ -28,7 +28,7 @@ export default function AllNany() { // function to render results based on selec
     fetch(`http://192.168.127.74:5000/ret`)
       .then(res => res.json())
       .then(response => {
-        console.log("====== == ===  ");
+        console.log("====== == ===  ");
         console.log(response);
         setNanylist(response);
       })
