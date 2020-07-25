@@ -21,9 +21,12 @@ export default function Signup() {
           axios
             .post("http://192.168.127.34:5000/signup", values)
 
+            .post("http://192.168.127.43:5000/signup", values)
+
             .then(function (response) {
+              console.log(values);
               console.log(response);
-              Actions.home()
+              Actions.home();
             })
             .catch(function (error) {
               console.log(error);
@@ -36,7 +39,6 @@ export default function Signup() {
             <TextInput
               placeholder="Please enter name "
               onChangeText={props.handleChange("Name")}
-              
               value={props.values.Name}
             ></TextInput>
             {/* Email input */}
