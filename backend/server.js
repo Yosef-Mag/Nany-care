@@ -1,4 +1,3 @@
-
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
@@ -16,13 +15,12 @@ var app = express();
 app.use(cors({ origin: true, credentials: true }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 var saltRounds = 10;
 var Nany = items.Nany;
 var User = items.User;
 var port = process.env.PORT || 5000;
 
-var items = require("./models/user");
 require("dotenv").config(); // to read .env file
 
 // test get req
@@ -80,7 +78,7 @@ app.post("/select", function (req, res) {
 });
 
 app.post("/signup", function (req, res) {
-  console.log(req.body);
+  console.log(req);
   var newUser = new User({
     email: req.body.Email,
     password: req.body.password,
@@ -194,7 +192,6 @@ app.get("/profile", (req, res) => {
     });
 });
 
-
 app.get("/profilee", (req, res) => {
   User.find({ email: "a@a.a" }, function (err, user) {
     if (err) {
@@ -205,22 +202,16 @@ app.get("/profilee", (req, res) => {
     }
   });
 });
-app.post('/api/doPayment/', (req, res) => {
+app.post("/api/doPayment/", (req, res) => {
   return stripe.charges
     .create({
       amount: req.body.amount, // Unit: cents
-      currency: 'eur',
+      currency: "eur",
       source: req.body.tokenId,
-      description: 'Test payment',
+      description: "Test payment",
     })
-    .then(result => res.status(200).json(result));
+    .then((result) => res.status(200).json(result));
 });
-
-
-
-
-
-
 
 const mongoURI = process.env.ATLAS_URI;
 mongoose
