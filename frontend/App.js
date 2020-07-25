@@ -13,7 +13,7 @@ import Routes from './Routes.js'
 class App extends Component {
    render() {
       return (
-         <Routes />
+         <Routes/>
       )
    }
 }
