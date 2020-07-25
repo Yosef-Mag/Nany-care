@@ -4,6 +4,8 @@ import { View } from "react-native-animatable";
 import { TextInput, Button } from "react-native-paper";
 import axios from "axios";
 
+import { Actions } from "react-native-router-flux";
+
 export default function Signup() {
   return (
     <View>
@@ -16,14 +18,15 @@ export default function Signup() {
         }}
         onSubmit={(values) => {
           console.log(values);
-
           axios
+            .post("http://192.168.127.34:5000/signup", values)
 
             .post("http://192.168.127.43:5000/signup", values)
 
             .then(function (response) {
               console.log(values);
               console.log(response);
+              Actions.home();
             })
             .catch(function (error) {
               console.log(error);
@@ -42,6 +45,7 @@ export default function Signup() {
             <TextInput
               placeholder="Please enter email "
               onChangeText={props.handleChange("Email")}
+              type="email-address"
               value={props.values.Email}
             ></TextInput>
             {/* PhoneNumber input */}
