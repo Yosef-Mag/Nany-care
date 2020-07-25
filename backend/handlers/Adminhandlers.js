@@ -129,4 +129,24 @@ module.exports = {
     req.session.destroy();
     return res.status(200).send("logout");
   },
+  retriveAllNanies: function (req, res) {
+    Nany.find(function (err, nannies) {
+      if (err) {
+        throw err;
+      }
+      res.json(nannies);
+    });
+  },
+  deleteSpecificNany: function (req, res) {
+    Nany.findById(req.params.id)
+      .then((item) => item.remove().then(() => res.json({ success: true })))
+      .catch((err) => res.status(404).json({ success: false }));
+  },
+  updateNanyInformation: function (req, res) {
+    Nany.findById(req.params.id).then((item) =>
+      item
+        .update({ content: req.body.content })
+        .then(() => res.json({ success: true }))
+    );
+  },
 };
