@@ -49,12 +49,12 @@ app.post("/adminLogIn", Adminhandlers.adminLogIn);
 app.post("/sendSMS", function(req, res) {
   console.log("hi from sura")
   const client = require('twilio')(
-"AC7bd5ddabba2cc316f6209924ed1ec827", "8f77c728703a20730290e2980e3b2295"
+"*******************", "***********************"
   );
   
   client.messages.create({
-    from:"+12673674905" ,
-    to: "+962775177215",
+    from:"+*********" ,
+    to: "+*****",
     body: "I am sura !"
   }).then((messsage) => console.log(messsage)).catch((err) => {
    console.log("error: " + err);
