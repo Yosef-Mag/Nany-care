@@ -44,7 +44,7 @@ app.post("/api/doPayment/", userhandlers.payment);
 app.post("/insert", Adminhandlers.insert);
 
 app.post("/adminSignUp", Adminhandlers.adminSignUp);
-
+app.post("/reserve", Nannyhandlers.reserve);
 app.post("/adminLogIn", Adminhandlers.adminLogIn);
 app.get("/retrieveAllNanies", Adminhandlers.retriveAllNanies);
 app.delete("/deleteSpecificNany", Adminhandlers.deleteSpecificNany);
