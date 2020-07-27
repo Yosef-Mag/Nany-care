@@ -74,4 +74,15 @@ module.exports = {
       }
     });
   },
+
+  reserve: function (req, res){
+    // if (err) {
+    //   console.log(err)
+    // } else {
+      var reserveData = req.body;
+      console.log(reserveData) 
+      res.json(reserveData)
+    
+   
+  } 
 };

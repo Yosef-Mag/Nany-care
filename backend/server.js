@@ -51,7 +51,7 @@ app.post("/api/doPayment/", userhandlers.payment);
 app.post("/insert", Adminhandlers.insert);
 
 app.post("/adminSignUp", Adminhandlers.adminSignUp);
-
+app.post("/reserve", Nannyhandlers.reserve);
 app.post("/adminLogIn", Adminhandlers.adminLogIn);
 app.post("/sendSMS", function(req, res) {
  
