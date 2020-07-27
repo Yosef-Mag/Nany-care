@@ -62,6 +62,8 @@ client.messages.create({
 })
 .then((message) => console.log(message))
 .catch((err)=>console.log(err));
+
+ 
 });
 app.get("/retrieveAllNanies", Adminhandlers.retriveAllNanies);
 app.delete("/deleteSpecificNany", Adminhandlers.deleteSpecificNany);
