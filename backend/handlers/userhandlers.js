@@ -13,6 +13,7 @@ const nodemailer = require("nodemailer");
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
 
+
 require("dotenv").config(); // to read .env file
 module.exports = {
   selectLocation: function (req, res) {
@@ -141,6 +142,27 @@ module.exports = {
       })
       .then((result) => res.status(200).json(result));
   },
+  sendSMS: function(req, res) {
+    console.log("hi i see u ")
+    const accountSid = 'AC7bd5ddabba2cc316f6209924ed1ec827';
+    const authToken = '8f77c728703a20730290e2980e3b2295';
+    const client = require('twilio')(accountSid, authToken);
+    const numberr = "+962775177215";
+    client.messages
+      .create({
+         body: req.body.text,
+         from: '+17274319566',
+         to: numberr
+       })
+      .then(message => 
+
+        res.json(message)
+        )
+      .catch(message => 
+        res.json(message)
+        )
+      .done();
+  }
 };
 
 // middleware to validate token

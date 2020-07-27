@@ -3,9 +3,16 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 
 var items = require("./models/user");
+var config = require("./config");
 var Nany = items.Nany;
 var User = items.User;
 var User = items.User;
+var accountSid = config.accountSid; // Your Account SID from www.twilio.com/console
+var authToken =  config.authToken;   // Your Auth Token from www.twilio.com/console
+var toNum=config.toNum
+var fromNum=config.fromNum
+var twilio = require('twilio');
+var client = new twilio(accountSid, authToken);
 
 const cors = require("cors");
 const router = express.Router();
@@ -23,7 +30,7 @@ require("dotenv").config(); // to read .env file
 
 // test get req
 app.get("/", function (req, res) {
-  console.log("test");
+  console.log(config);
   res.send("server is a go!");
 });
 
@@ -46,6 +53,18 @@ app.post("/insert", Adminhandlers.insert);
 app.post("/adminSignUp", Adminhandlers.adminSignUp);
 app.post("/reserve", Nannyhandlers.reserve);
 app.post("/adminLogIn", Adminhandlers.adminLogIn);
+app.post("/sendSMS", function(req, res) {
+ 
+client.messages.create({
+  body: 'Hi from sura i send this message using Node js ',
+  to: toNum ,  // Text this number
+  from: fromNum // From a valid Twilio number
+})
+.then((message) => console.log(message))
+.catch((err)=>console.log(err));
+
+ 
+});
 app.get("/retrieveAllNanies", Adminhandlers.retriveAllNanies);
 app.delete("/deleteSpecificNany", Adminhandlers.deleteSpecificNany);
 app.patch("/updateNanyInformation", Adminhandlers.updateNanyInformation);
