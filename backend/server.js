@@ -30,7 +30,10 @@ app.get("/", function (req, res) {
   res.send(req);
 });
 app.post("/HiringForm", Nannyhandlers.HiringForm);
+<<<<<<< HEAD
+=======
 // app.post("/select", userhandlers.selectLocation);
+>>>>>>> 894e1b05e2bc24a7d99fc122d9a03519498951cb
 app.post("/signup", userhandlers.userSignUp);
 app.get("/logout", userhandlers.userLogOut);
 app.post("/login", userhandlers.userLogIn);
@@ -42,6 +45,9 @@ app.post("/insert", Adminhandlers.insert);
 app.post("/adminSignUp", Adminhandlers.adminSignUp);
 app.post("/reserve", Nannyhandlers.reserve);
 app.post("/adminLogIn", Adminhandlers.adminLogIn);
+<<<<<<< HEAD
+app.post("/sendSMS", userhandlers.sendSMS);
+=======
 app.post("/sendSMS", function (req, res) {
   console.log("hi from send sms");
   var location = req.body;
@@ -58,6 +64,7 @@ app.post("/sendSMS", function (req, res) {
     .then((message) => console.log(message))
     .catch((err) => console.log(err));
 });
+>>>>>>> 894e1b05e2bc24a7d99fc122d9a03519498951cb
 app.get("/retrieveAllNanies", Adminhandlers.retriveAllNanies);
 app.delete("/deleteSpecificNany", Adminhandlers.deleteSpecificNany);
 app.patch("/updateNanyInformation", Adminhandlers.updateNanyInformation);
