@@ -24,8 +24,6 @@ export default function AllNany() { // function to render results based on selec
       .catch(error => console.log(error));
   }, []);
 
-  
-
 // filtering the list data 
   function listFilter () { 
     if(selectedCity === "allNany"){
@@ -126,7 +124,7 @@ function nannyReserved(nany) {// function to reserve the nany called once the re
                 </View>
               </View>
             </View> 
-            
+
         </ScrollView>
       </>
        ))}
