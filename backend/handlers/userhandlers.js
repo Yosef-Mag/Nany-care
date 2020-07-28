@@ -16,8 +16,21 @@ var saltRounds = 10;
 
 require("dotenv").config(); // to read .env file
 module.exports = {
-  selectLocation: function (req, res) {
-    console.log("user location is ", req.body);
+  sendSMS: function (req, res) {
+    console.log("hi from send sms");
+    var location = req.body;
+    client.messages
+      .create({
+        body:
+          "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://maps.google.com/?ll=" +
+          location.latitude +
+          "," +
+          location.longitude,
+        to: toNum, // Text this number
+        from: fromNum, // From a valid Twilio number
+      })
+      .then((message) => console.log(message))
+      .catch((err) => console.log(err));
   },
   userSignUp: function (req, res) {
     console.log(req.body);
