@@ -6,12 +6,7 @@ var config = require("./config");
 var Nany = items.Nany;
 var User = items.User;
 var User = items.User;
-var accountSid = config.accountSid; // Your Account SID from www.twilio.com/console
-var authToken = config.authToken; // Your Auth Token from www.twilio.com/console
-var toNum = config.toNum;
-var fromNum = config.fromNum;
-var twilio = require("twilio");
-var client = new twilio(accountSid, authToken);
+
 const cors = require("cors");
 const router = express.Router();
 var Nannyhandlers = require("./handlers/Nannyhandlers");
@@ -30,10 +25,6 @@ app.get("/", function (req, res) {
   res.send(req);
 });
 app.post("/HiringForm", Nannyhandlers.HiringForm);
-<<<<<<< HEAD
-=======
-// app.post("/select", userhandlers.selectLocation);
->>>>>>> 894e1b05e2bc24a7d99fc122d9a03519498951cb
 app.post("/signup", userhandlers.userSignUp);
 app.get("/logout", userhandlers.userLogOut);
 app.post("/login", userhandlers.userLogIn);
@@ -45,26 +36,7 @@ app.post("/insert", Adminhandlers.insert);
 app.post("/adminSignUp", Adminhandlers.adminSignUp);
 app.post("/reserve", Nannyhandlers.reserve);
 app.post("/adminLogIn", Adminhandlers.adminLogIn);
-<<<<<<< HEAD
 app.post("/sendSMS", userhandlers.sendSMS);
-=======
-app.post("/sendSMS", function (req, res) {
-  console.log("hi from send sms");
-  var location = req.body;
-  client.messages
-    .create({
-      body:
-        "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://maps.google.com/?ll=" +
-        location.latitude +
-        "," +
-        location.longitude,
-      to: toNum, // Text this number
-      from: fromNum, // From a valid Twilio number
-    })
-    .then((message) => console.log(message))
-    .catch((err) => console.log(err));
-});
->>>>>>> 894e1b05e2bc24a7d99fc122d9a03519498951cb
 app.get("/retrieveAllNanies", Adminhandlers.retriveAllNanies);
 app.delete("/deleteSpecificNany", Adminhandlers.deleteSpecificNany);
 app.patch("/updateNanyInformation", Adminhandlers.updateNanyInformation);
