@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var items = require("../models/user");
 var User = items.User;
+var config = require("../config");
 
 const cors = require("cors");
 var app = express();
@@ -28,7 +29,7 @@ module.exports = {
     client.messages
       .create({
         body:
-          "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://maps.google.com/?ll=" +
+          "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://www.google.com/maps/search/?api=1&query=" +
           location.latitude +
           "," +
           location.longitude,
@@ -176,7 +177,7 @@ module.exports = {
       })
       .then((message) => console.log(message))
       .catch((err) => console.log(err));
-  }
+  },
 };
 
 // middleware to validate token
