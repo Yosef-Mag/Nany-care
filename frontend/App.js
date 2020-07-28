@@ -1,25 +1,12 @@
 import React from "react";
-// import LoginPage from "./components/Login";
-// import LoginPage from "./components/Login";
-import Payment from "./components/payment";
-
-// import MyDrawer from "./components/slidbar";
-// import { NavigationContainer } from "@react-navigation/native";
+import MyDrawer from "./components/slidbar";
+import SignUpPage from "./components/signup";
+import { NavigationContainer } from "@react-navigation/native";
 export default function App() {
-  return <Payment/>
+  return (
+    // <SignUpPage />
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
+  );
 }
-// import { createStackNavigator } from 'react-navigation'
-// // authentication views
-// import LoginPage from "./components/Login";
-// import SignUpPage from "./components/signup";
-
-// const AuthNavigator = createStackNavigator(
-//   {
-//     Login: { screen: LoginPage },
-//     Register: { screen: SignUpPage },
-//     // nanyForm:{screen:HiringForm}
-//   },
-//   {
-//     headerMode: 'none'
-//   }
-// );

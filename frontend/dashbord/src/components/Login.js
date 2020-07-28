@@ -1,65 +1,61 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { adminlogin } from './AdminMethods'
 
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 
 
 
-class SignInForm extends Component {
-        this.state = {
-            email: '',
-            password: ''
-        };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    
+export default function LoginAdmin(props) { 
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-    handleChange(e) {
-        this.setState({[e.target.name]: e.target.value});
+  function validateForm() {
+    return username.length > 0 && password.length > 0;
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const admin = {
+        username : username,
+        password : password
       }
-
-    handleSubmit(e) {
-        e.preventDefault();
-
-        const user = {
-          email: this.state.email,
-          password: this.state.password
+  
+      adminlogin(admin).then(res => {
+        if (res) {
+        props.history.push('/Admin')
         }
-    
-        
-    }
+      })
+  }
 
-    render() {
         return (
           <>
-        <div className="form">
-            <form onSubmit={this.handleSubmit}  onSubmit={this.handleSubmit}>
+        <div className="logForm" style={{marginLeft : "210px"}}>
+            <form onSubmit={handleSubmit}>
             <div>
-                <InputLabel id='emLog'>E-Mail Address</InputLabel>
+                <InputLabel id='usLog'> Admin Username </InputLabel>
 <br></br>
-                <Input type="email" id="emailLog"placeholder="Enter your email" name="email" value={this.state.email} onChange={this.handleChange} />
+                <Input type="text" id="usernLog"placeholder="Enter the Admin username" name="username"  value={username} onChange={e => setUsername(e.target.value)} > 
+                    
+                </Input>
+                
               </div>
 <br></br>
               <div>
                 <InputLabel id='pLog'>Password</InputLabel>
 <br></br>
-                <Input type="password" id="passwordLog" placeholder="Enter your password" autoComplete="off" name="password" value={this.state.password} onChange={this.handleChange} />
+                <Input type="password" id="passwordLog" placeholder="Enter your password" autoComplete="off" name="password"  value={password} onChange={e => setPassword(e.target.value)} />
               </div>
 <br></br>
               <div>
-                <Button variant="contained" color="primary"> LogIn </Button>
-                    <Button href="AddAdmin" color="primary"> Add Admin </Button>
-
+                <Button color="primary" disabled={!validateForm()} type="submit"> Login </Button>
+                    <Button href="AddAdmin" color="primary"> Add new admin </Button>
               </div>
             </form>
           </div>
           </>
         );
-    }
 }
 
-export default SignInForm;
