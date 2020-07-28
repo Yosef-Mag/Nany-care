@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var items = require("../models/user");
 var User = items.User;
+var config = require("../config");
 
 const cors = require("cors");
 var app = express();
@@ -22,8 +23,21 @@ var client = new twilio(accountSid, authToken);
 
 require("dotenv").config(); // to read .env file
 module.exports = {
-  selectLocation: function (req, res) {
-    console.log("user location is ", req.body);
+  sendSMS: function (req, res) {
+    console.log("hi from send sms");
+    var location = req.body;
+    client.messages
+      .create({
+        body:
+          "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://www.google.com/maps/search/?api=1&query=" +
+          location.latitude +
+          "," +
+          location.longitude,
+        to: toNum, // Text this number
+        from: fromNum, // From a valid Twilio number
+      })
+      .then((message) => console.log(message))
+      .catch((err) => console.log(err));
   },
   userSignUp: function (req, res) {
     console.log(req.body);
@@ -163,7 +177,7 @@ module.exports = {
       })
       .then((message) => console.log(message))
       .catch((err) => console.log(err));
-  }
+  },
 };
 
 // middleware to validate token

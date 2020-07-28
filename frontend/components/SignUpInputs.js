@@ -58,6 +58,7 @@ export default function Signup() {
             {/* password input  */}
             <TextInput
               placeholder="password"
+              secureTextEntry={true}
               onChangeText={props.handleChange("password")}
               value={props.values.password}
             ></TextInput>
