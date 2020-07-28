@@ -1,49 +1,70 @@
 import React from "react";
 import { Router, Scene } from "react-native-router-flux";
-import  AllNany, {EducationLevel,HowManyKidsCanHandle, Place} from "./Home"
-import SignUp from "./signup.js";
-import Login from "./Login.js";
+import  AllNany from "./Home"
+import SignUp from "./SignUpInputs";
+import Login from "./LoginInputs";
 import payment from "./payment"
-import { HiringForm } from "./hiringForm"
+import  HiringForm  from "./hiringForm"
 
 
-const Routes = () => (
-  <Router>
-    <Scene key="root">
-      <Scene key="home" component={EducationLevel} title="EducationLevel" initial={true} />
-      <Scene key="home" component={HowManyKidsCanHandle} title="HowManyKidsCanHandle" initial={true} />
-      <Scene key="home" component={AllNany} title="HowManyKidsCanHandle" initial={true} />
-      <Scene key="home" component={Place} title="Place" initial={true} />
-      <Scene key="SignUp" component={SignUp} title="SignUp" />
-      <Scene key="Login" component={Login} title="Login" />
-      <Scene key="payment" component={payment} title="payment" />
-      <Scene key="HiringForm" component={HiringForm} title="HiringForm" />
-    </Scene>
-  </Router>
-);
-export default Routes;
-// if (state.isLoading) {
-//   // We haven't finished checking for the token yet
-//   return <SplashScreen />;
-// }
-
-// return (
-//   <Stack.Navigator>
-//     {state.userToken == null ? (
-//       // No token found, user isn't signed in
-//       <Stack.Screen
-//         name="SignIn"
-//         component={SignInScreen}
-//         options={{
-//           title: 'Sign in',
-//           // When logging out, a pop animation feels intuitive
-//           // You can remove this if you want the default 'push' animation
-//           animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-//         }}
-//       />
-//     ) : (
-//       // User is signed in
-//       <Stack.Screen name="Home" component={HomeScreen} />
-//     )}
-//   </Stack.Navigator>
+// const Routes = () => (
+//   <Router>
+//     <Scene key="root">
+//       <Scene key="home" component={AllNany} title="all Nany"  />
+//       {/* <Scene key="home" component={HowManyKidsCanHandle} title="HowManyKidsCanHandle" initial={true} />
+//       <Scene key="home" component={AllNany} title="HowManyKidsCanHandle" initial={true} />
+//       <Scene key="home" component={Place} title="Place" initial={true} /> */}
+//       <Scene key="SignUp" component={SignUp} title="SignUp" />
+//       <Scene key="Login" component={Login} title="Login" initial={true}/>
+//       <Scene key="payment" component={payment} title="payment" />
+//       <Scene key="HiringForm" component={HiringForm} title="HiringForm" />
+//     </Scene>
+//   </Router>
 // );
+// export default Routes;
+
+import { createNativeStackNavigator } from 'react-native-screens/native-stack';
+
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Login"
+      screenOptions={{
+        headerShown: false,
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: 'tomato' },
+      }}>
+      <Stack.Screen
+        name="login"
+        component={Login}
+        options={{
+          title: 'login page',
+        }}
+      />
+      <Stack.Screen
+        name="home"
+        component={AllNany}
+        options={{
+          title: 'home page',
+        }}
+      />
+      <Stack.Screen
+        name="payment"
+        component={payment}
+        options={{
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="sigup"
+        component={Signup}
+        options={{
+          gestureEnabled: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+export default MyStack;

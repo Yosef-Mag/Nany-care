@@ -1,14 +1,21 @@
 import React from "react";
-import SignUpPage from "./components/signup";
-import LoginPage from "./components/Login";
-import MyDrawer from "./components/slidbar";
-import { NavigationContainer } from "@react-navigation/native";
+import { AppRegistry} from 'react-native';
+import MyStack from "./components/Routes";
 
 
 export default function App() {
-  return (
-    <NavigationContainer> 
-     <MyDrawer />
-  </NavigationContainer>
-  ) 
+  return <MyStack />
 }
+
+AppRegistry.registerComponent('Nany App', () => App)
+
+// const AuthNavigator = createStackNavigator(
+//   {
+//     Login: { screen: LoginPage },
+//     Register: { screen: SignUpPage },
+//     // nanyForm:{screen:HiringForm}
+//   },
+//   {
+//     headerMode: 'none'
+//   }
+// );

@@ -22,7 +22,7 @@ export default function MapScreen() {
   const [errorMsg, setErrorMsg] = useState(null);
   buttonClickListener = () => {
     axios
-      .post("http://192.168.127.43:5000/select", selectedLocation)
+      .post("http://192.168.43.32:5000/select", selectedLocation)
       .then(function (response) {
         console.log(response);
       })
@@ -57,6 +57,19 @@ export default function MapScreen() {
     longitudeDelta: 0,
   };
 
+  Geolocation.getCurrentPosition(
+    position => { 
+      setSelectedLocation({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+      coordinates: this.state.coordinates.concat({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+      })
+      })
+
+    }
+  )
   const selectLocationHandler = (event) => {
     event.preventDefault();
     setSelectedLocation({

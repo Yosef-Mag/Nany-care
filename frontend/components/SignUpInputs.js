@@ -3,6 +3,8 @@ import { Formik } from "formik";
 import { View } from "react-native-animatable";
 import { TextInput, Button } from "react-native-paper";
 import axios from "axios";
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
 
 export default function Signup() {
   return (
@@ -17,7 +19,11 @@ export default function Signup() {
         onSubmit={(values) => {
           axios
 
-            .post("http://192.168.127.34:5000/signup", values)
+            // <<<<<<< HEAD
+            .post("http://192.168.43.32:5000/signup", values)
+            // =======
+            //             // .post("http://localhost:5000/signup", values)
+            // >>>>>>> 388e08325efbc821f4f70d0ecb154e62cadc03b1
             .then(function (response) {
               console.log(response);
             })

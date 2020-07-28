@@ -11,12 +11,14 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 
-// import { requireNativeViewManager } from "expo-core";
+import { requireNativeViewManager } from "expo-core";
 
 
 // components import
-
+import FbLogin from "./FbLogin";
+import GoogleLogin from "./GoogleLogin";
 import SignUpInputs from "./SignUpInputs";
+
 
 export default class SignUpPage extends React.Component {
   constructor(props) {
