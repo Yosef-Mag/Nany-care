@@ -21,6 +21,8 @@ export default function Signup() {
           axios
             .post("http://192.168.127.34:5000/signup", values)
 
+          
+
             .then(function (response) {
               console.log(values);
               console.log(response);
@@ -56,6 +58,7 @@ export default function Signup() {
             {/* password input  */}
             <TextInput
               placeholder="password"
+              secureTextEntry={true}
               onChangeText={props.handleChange("password")}
               value={props.values.password}
             ></TextInput>

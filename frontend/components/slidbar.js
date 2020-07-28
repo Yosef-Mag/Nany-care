@@ -6,14 +6,13 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 
-import AboutUS from "./AboutsUS";
+import Payment from "./payment";
 import ContactUS from "./ContactUS";
 import SignUpPage from "./signup";
 import LoginPage from "./Login";
 import AllNany from "./Home";
 
 import Profile from "./profile";
-import Signup from "./SignUpInputs";
 
 import HiringForm from "./hiringForm";
 import MapScreen from "./map";
@@ -23,6 +22,9 @@ function Profile1() {
 
 function Login() {
   return <LoginPage />;
+}
+function payment() {
+  return <Payment />;
 }
 function SignUp() {
   return <SignUpPage />;
@@ -73,7 +75,7 @@ function MyDrawer() {
 
       <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="Contact Us" component={ContactUs} />
-      <Drawer.Screen name="LogOut" component={LogOut} />
+      <Drawer.Screen name="payment screen" component={Payment} />
       <Drawer.Screen name="Hiring Form" component={HiringForm} />
     </Drawer.Navigator>
   );

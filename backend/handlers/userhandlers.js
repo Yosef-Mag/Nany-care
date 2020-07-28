@@ -20,11 +20,12 @@ module.exports = {
   },
   userSignUp: function (req, res) {
     console.log(req.body);
+    var x = req.body;
     var newUser = new User({
-      email: req.body.Email,
-      password: req.body.password,
-      name: req.body.Name,
-      phoneNumber: req.body.PhoneNumber,
+      email: x.Email,
+      password: x.password,
+      name: x.Name,
+      phoneNumber: x.PhoneNumber,
     });
     User.findOne({ email: newUser.email })
       .then((profile) => {
@@ -32,6 +33,7 @@ module.exports = {
           bcrypt.hash(newUser.password, saltRounds, function (err, hash) {
             if (err) {
               console.log("Error is", err.message);
+              res.send("Error");
             } else {
               newUser.password = hash;
               newUser
@@ -131,27 +133,27 @@ module.exports = {
       }
     });
   },
-  payment: function (req, res) {
-    return stripe.charges
-      .create({
-        amount: req.body.amount, // Unit: cents
-        currency: "eur",
-        source: req.body.tokenId,
-        description: "Test payment",
-      })
-      .then((result) => res.status(200).json(result));
-  },
-};
+  //   payment: function (req, res) {
+  //     return stripe.charges
+  //       .create({
+  //         amount: req.body.amount, // Unit: cents
+  //         currency: "eur",
+  //         source: req.body.tokenId,
+  //         description: "Test payment",
+  //       })
+  //       .then((result) => res.status(200).json(result));
+  //   },
+  // };
 
-// middleware to validate token
-const verifyToken = (req, res, next) => {
-  const token = req.header("auth-token");
-  if (!token) return res.status(401).json({ error: "Access denied" });
-  try {
-    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-    req.user = verified;
-    next(); // to continue the flow
-  } catch (err) {
-    res.status(400).json({ error: "Token is not valid" });
-  }
+  // // middleware to validate token
+  // const verifyToken = (req, res, next) => {
+  //   const token = req.header("auth-token");
+  //   if (!token) return res.status(401).json({ error: "Access denied" });
+  //   try {
+  //     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+  //     req.user = verified;
+  //     next(); // to continue the flow
+  //   } catch (err) {
+  //     res.status(400).json({ error: "Token is not valid" });
+  //   }
 };
