@@ -1,10 +1,9 @@
 import React from "react";
 import MyDrawer from "./components/slidbar";
-import SignUpPage from "./components/signup";
 import { NavigationContainer } from "@react-navigation/native";
+import LoginPage from "./components/Login";
 export default function App() {
   return (
-    // <SignUpPage />
     <NavigationContainer>
       <MyDrawer />
     </NavigationContainer>

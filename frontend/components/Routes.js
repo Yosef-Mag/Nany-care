@@ -4,7 +4,6 @@ import  AllNany, {EducationLevel,HowManyKidsCanHandle, Place} from "./Home"
 import SignUpPage from "./signup.js";
 import LoginPage from "./Login.js";
 // import { HiringForm } from "./hiringForm"
-4
 
 
 

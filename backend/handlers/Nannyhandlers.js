@@ -74,4 +74,12 @@ module.exports = {
       }
     });
   },
+
+  reserve: function (req, res){
+  
+      var reserveData = req.body;
+      res.json(reserveData)
+  } 
 };
+
+
