@@ -16,14 +16,23 @@ var app = express();
 app.use(cors({ origin: true, credentials: true }));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json())
+var session = require("express-session");
+var cookieParser = require("cookie-parser");
+
+app.use(cookieParser("NannyApp"));
+
+app.use(
+  session({
+    name: "session-id",
+    secret: "SuraSession",
+  })
+);
 var port = process.env.PORT || 5000;
 require("dotenv").config(); // to read .env file
 // test get req
-app.get("/", function (req, res) {
-  console.log(req);
-  res.send(req);
-});
+
+
 app.post("/HiringForm", Nannyhandlers.HiringForm);
 app.post("/signup", userhandlers.userSignUp);
 app.get("/logout", userhandlers.userLogOut);
@@ -33,13 +42,13 @@ app.get("/profile", userhandlers.retriveUserByEmail);
 app.get("/profilee", userhandlers.retriveUserByToken);
 app.post("/api/doPayment/", userhandlers.payment);
 app.post("/insert", Adminhandlers.insert);
-app.post("/adminSignUp", Adminhandlers.adminSignUp);
-app.post("/reserve", Nannyhandlers.reserve);
-app.post("/adminLogIn", Adminhandlers.adminLogIn);
-app.post("/sendSMS", userhandlers.sendSMS);
+
+app.post("/AddAdmin", Adminhandlers.adminSignUp);
+app.post("/adminLogin", Adminhandlers.adminLogIn);
 app.get("/retrieveAllNanies", Adminhandlers.retriveAllNanies);
 app.delete("/deleteSpecificNany", Adminhandlers.deleteSpecificNany);
 app.patch("/updateNanyInformation", Adminhandlers.updateNanyInformation);
+
 const mongoURI = process.env.ATLAS_URI;
 mongoose
   .connect(mongoURI, { useNewUrlParser: true })
