@@ -1,10 +1,21 @@
 import React from "react";
 import { Router, Scene } from "react-native-router-flux";
+<<<<<<< HEAD
 import AllNany from "./Home";
 import SignUp from "./signup.js";
 import Login from "./Login.js";
 import payment from "./payment";
 import HiringForm from "./hiringForm";
+=======
+import  AllNany, {EducationLevel,HowManyKidsCanHandle, Place} from "./Home"
+import SignUpPage from "./signup.js";
+import LoginPage from "./Login.js";
+// import { HiringForm } from "./hiringForm"
+
+
+
+
+>>>>>>> 46fd35566cea25b3ebf88b43f933d890f36a10d1
 const Routes = () => (
   <Router>
     <Scene key="root">

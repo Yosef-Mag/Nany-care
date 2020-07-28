@@ -1,36 +1,21 @@
-import logo from "./logo.svg";
 import React from "react";
+import AddAdmin from "./components/AddAdmin";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Admin from "./components/Admin";
+import LoginAdmin from "./components/Login";
+import Drawer from "./components/NavBar.js";
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="base-container" ref={this.props.containerRef}>
-        <div className="header">Login</div>
-        <div className="content">
-          <div className="image">
-            <img src={logo} />
-          </div>
-          <div className="form">
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <input type="text" name="username" placeholder="username" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input type="password" name="password" placeholder="password" />
-            </div>
-          </div>
-        </div>
-        <div className="footer">
-          <button type="button" className="btn">
-            Login
-          </button>
-        </div>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div className="App">
+      <Router>
+        <Drawer />
+        <Route exact path="/AdminLogin" component={LoginAdmin} />
+        <Route exact path="/AddAdmin" component={AddAdmin} />
+        <Route exact path="/Admin" component={Admin} />
+      </Router>
+    </div>
+  );
 }
+
+export default App;

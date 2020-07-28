@@ -38,6 +38,7 @@ export default function LoginInputs() {
             {/* password input  */}
             <TextInput
               placeholder="password"
+              secureTextEntry={true}
               onChangeText={props.handleChange("password")}
               value={props.values.password}
             ></TextInput>

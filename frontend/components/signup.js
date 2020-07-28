@@ -83,4 +83,8 @@ const style = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "#E88877",
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 46fd35566cea25b3ebf88b43f933d890f36a10d1

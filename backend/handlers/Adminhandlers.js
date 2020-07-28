@@ -2,23 +2,22 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var jwt = require("jsonwebtoken");
-
+const app = express();
 const cors = require("cors");
-const nodemailer = require("nodemailer");
-
 var bcrypt = require("bcrypt");
 var items = require("../models/user");
-
-var app = express();
+var session = require("express-session");
+var cookieParser = require("cookie-parser");
 
 app.use(cors({ origin: true, credentials: true }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(session({ name: "session-id", secret: "SuraSession" }));
 var saltRounds = 10;
+var Admin = items.Admin;
 var Nany = items.Nany;
 var User = items.User;
-var port = process.env.PORT || 5000;
 
 require("dotenv").config(); // to read .env file
 module.exports = {
@@ -55,6 +54,8 @@ module.exports = {
   },
 
   adminSignUp: function (req, res) {
+    console.log(req.body, "body");
+    console.log(req.query, "query");
     var newAdmin = new Admin({
       userName: req.body.userName,
       password: req.body.password,
@@ -62,12 +63,12 @@ module.exports = {
     Admin.findOne({ userName: newAdmin.userName })
       .then((profile) => {
         if (!profile) {
-          bcrypt.hash(newUser.password, saltRounds, function (err, hash) {
+          bcrypt.hash(newAdmin.password, saltRounds, function (err, hash) {
             if (err) {
               console.log("Error is", err.message);
             } else {
-              newUser.password = hash;
-              newUser
+              newAdmin.password = hash;
+              newAdmin
                 .save()
                 .then(() => {
                   res.send("Admin authenticated");
@@ -86,23 +87,24 @@ module.exports = {
       });
   },
   adminLogIn: function (req, res) {
-    var newAdmin = new Admin({
+    var admin = new Admin({
       userName: req.body.userName,
       password: req.body.password,
     });
 
-    Admin.findOne({ userName: newUser.userName })
+    Admin.findOne({ userName: admin.userName })
       .then((profile) => {
         if (!profile) {
           res.send("Admin not exist");
         } else {
-          bcrypt.compare(newAdmin.password, profile.password, function (
+          bcrypt.compare(admin.password, profile.password, function (
             err,
             result
           ) {
             if (err) {
               console.log("Error is", err.message);
             } else if (result == true) {
+              console.log(req);
               req.session.user = profile;
 
               res.cookie("user", "user", {
