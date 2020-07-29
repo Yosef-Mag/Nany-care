@@ -1,11 +1,14 @@
 import React from "react";
 import MyDrawer from "./components/slidbar";
 import { NavigationContainer } from "@react-navigation/native";
-import LoginPage from "./components/Login";
+//import Home from "./components/Home";
+import Confirmation from "./components/Confirmation";
+//import Confirmation from "./components/Confirmation";
 export default function App() {
   return (
-    <NavigationContainer>
-      <MyDrawer />
-    </NavigationContainer>
+    <Confirmation />
+    // <NavigationContainer>
+    //   <MyDrawer />
+    // </NavigationContainer>
   );
 }
