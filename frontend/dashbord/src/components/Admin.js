@@ -1,9 +1,14 @@
-import React from 'react'; 
+import React, { useState, useEffect } from "react";
 
-export default function Admin() {
+
+
+export default function AllNany(prpos) {
+
     return (
-        <div>
-            <h1>Welcom to admin dashbord</h1>
-        </div>
-    );
-  }
+        <>
+       <div>
+        <h1>Hi</h1>
+       </div>
+        </>
+    )
+}
