@@ -18,8 +18,8 @@ var saltRounds = 10;
 // var authToken = config.authToken; // Your Auth Token from www.twilio.com/console
 // var toNum = config.toNum;
 // var fromNum = config.fromNum;
-// var twilio = require("twilio");
-// var client = new twilio(accountSid, authToken);
+ var twilio = require("twilio");
+ //var client = new twilio(accountSid, authToken);
 
 require("dotenv").config(); // to read .env file
 module.exports = {

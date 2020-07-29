@@ -71,7 +71,7 @@ module.exports = {
       } else {
         console.log(req);
         res.json(nany);
-      }
+      } 
     });
   },
 

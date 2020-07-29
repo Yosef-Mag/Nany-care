@@ -32,7 +32,9 @@ export default function AllNany() { // function to render results based on selec
     else{
     var selected1;
      selected1 = nanylist.filter(op => { 
-              return ((op["place"] === selectedCity) && (op["educationLevel"] ===  selectedEdu) && ( op["kidsNumber"] === selectedKids)) 
+              return ((op["place"] === selectedCity) 
+              && (op["educationLevel"] ===  selectedEdu) 
+              && ( op["kidsNumber"] === selectedKids)) 
             }
              )
       setSelected(selected1)
@@ -133,9 +135,6 @@ function nannyReserved(nany) {// function to reserve the nany called once the re
    </View>
     )  
 } 
-
-
-
 
 /*******************************Styling********************************/
 const styles = StyleSheet.create({

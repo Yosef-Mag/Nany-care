@@ -24,23 +24,15 @@ export default App;
 import React from "react";
 import MyDrawer from "./components/slidbar";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-// import { NavigationContainer } from "@react-navigation/native";
-import SignUpPage from "./components/signup";
-import LoginPage from "./components/Login";
-import AllNany from "./components/Home";
-
-function App() {
-const StackNavigator = createStackNavigator();
-
+//import Home from "./components/Home";
+import Confirmation from "./components/Confirmation";
+//import Confirmation from "./components/Confirmation";
+export default function App() {
   return (
-    <NavigationContainer>
-      <StackNavigator.Navigator>
-        <StackNavigator.Screen name="SignUpPage" component={SignUpPage} />
-        <StackNavigator.Screen name="LoginPage " component={LoginPage} />
-        <StackNavigator.Screen name="AllNany" component={AllNany} />
-      </StackNavigator.Navigator>
-    </NavigationContainer>
+    <Confirmation />
+    // <NavigationContainer>
+    //   <MyDrawer />
+    // </NavigationContainer>
   );
 }
 
