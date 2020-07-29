@@ -16,7 +16,7 @@ export default function AllNany() { // function to render results based on selec
 
 //fetching data from the db 
   useEffect(() => {
-    fetch(`http://192.168.127.74:5000/ret`)
+    fetch(`http://192.168.1.115:5000/ret`)
       .then(res => res.json())
       .then(response => {
         setNanylist(response);
@@ -32,7 +32,9 @@ export default function AllNany() { // function to render results based on selec
     else{
     var selected1;
      selected1 = nanylist.filter(op => { 
-              return ((op["place"] === selectedCity) && (op["educationLevel"] ===  selectedEdu) && ( op["kidsNumber"] === selectedKids)) 
+              return ((op["place"] === selectedCity) 
+              && (op["educationLevel"] ===  selectedEdu) 
+              && ( op["kidsNumber"] === selectedKids)) 
             }
              )
       setSelected(selected1)
@@ -42,7 +44,7 @@ export default function AllNany() { // function to render results based on selec
 
 
 function nannyReserved(nany) {// function to reserve the nany called once the reserve button selected
-  axios.post(`http://192.168.127.74:5000/reserve`,nany)
+  axios.post(`http://192.168.1.115:5000/reserve`,nany)
     .then((res) => res)
     .then((res) => {
       console.log(nany)
@@ -106,7 +108,7 @@ function nannyReserved(nany) {// function to reserve the nany called once the re
       <ScrollView style={{ width: '100%' }}>
 
             <View style={styles.box}>
-              <Image style={styles.image} source={{uri:nany.image}}/>
+              <Image style={styles.image} source={{uri:nany.image} }/>
               <View style={styles.boxContent}>
                 <Text style={styles.title}>Name: {nany.name}</Text>
                 <Text style={styles.title}>Place: {nany.place}</Text>
@@ -133,9 +135,6 @@ function nannyReserved(nany) {// function to reserve the nany called once the re
    </View>
     )  
 } 
-
-
-
 
 /*******************************Styling********************************/
 const styles = StyleSheet.create({
