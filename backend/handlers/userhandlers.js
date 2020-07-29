@@ -14,12 +14,12 @@ var jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
-var accountSid = config.accountSid; // Your Account SID from www.twilio.com/console
-var authToken = config.authToken; // Your Auth Token from www.twilio.com/console
-var toNum = config.toNum;
-var fromNum = config.fromNum;
-var twilio = require("twilio");
-var client = new twilio(accountSid, authToken);
+// var accountSid = config.accountSid; // Your Account SID from www.twilio.com/console
+// var authToken = config.authToken; // Your Auth Token from www.twilio.com/console
+// var toNum = config.toNum;
+// var fromNum = config.fromNum;
+// var twilio = require("twilio");
+// var client = new twilio(accountSid, authToken);
 
 require("dotenv").config(); // to read .env file
 module.exports = {
@@ -154,34 +154,32 @@ module.exports = {
       }
     });
   },
-  //   payment: function (req, res) {
-  //     return stripe.charges
-  //       .create({
-  //         amount: req.body.amount, // Unit: cents
-  //         currency: "eur",
-  //         source: req.body.tokenId,
-  //         description: "Test payment",
-  //       })
-  //       .then((result) => res.status(200).json(result));
-  //   },
-  // };
- 
-  sendSMS: function (req, res) {
-    console.log("hi from send sms");
-    var location = req.body;
-    client.messages
+  payment: function (req, res) {
+    return stripe.charges
       .create({
-        body:
-          "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://www.google.com/maps/search/?api=1&query=" +
-          location.latitude +
-          "," +
-          location.longitude,
-        to: toNum, // Text this number
-        from: fromNum, // From a valid Twilio number
+        amount: req.body.amount, // Unit: cents
+        currency: "eur",
+        source: req.body.tokenId,
+        description: "Test payment",
       })
-      .then((message) => console.log(message))
-      .catch((err) => console.log(err));
+      .then((result) => res.status(200).json(result));
   },
+  // sendSMS: function (req, res) {
+  //   console.log("hi from send sms");
+  //   var location = req.body;
+  //   client.messages
+  //     .create({
+  //       body:
+  //         "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://www.google.com/maps/search/?api=1&query=" +
+  //         location.latitude +
+  //         "," +
+  //         location.longitude,
+  //       to: toNum, // Text this number
+  //       from: fromNum, // From a valid Twilio number
+  //     })
+  //     .then((message) => console.log(message))
+  //     .catch((err) => console.log(err));
+  // }
 };
 
   // // middleware to validate token
