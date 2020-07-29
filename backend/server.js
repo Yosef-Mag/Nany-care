@@ -2,7 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var items = require("./models/user");
-var config = require("./config");
+// var checkAuth = require('./handlers/check-auth-middleware')
+// var config = require("./config");
 var Nany = items.Nany;
 var User = items.User;
 var User = items.User;
@@ -45,7 +46,9 @@ app.post("/insert", Adminhandlers.insert);
 
 app.post("/AddAdmin", Adminhandlers.adminSignUp);
 app.post("/adminLogin", Adminhandlers.adminLogIn);
-app.get("/retrieveAllNanies", Adminhandlers.retriveAllNanies);
+app.post("/reserve", Nannyhandlers.reserve);
+// app.post("/sendSMS", userhandlers.sendSMS);
+app.get("/Admin", Adminhandlers.retriveAllNanies);
 app.delete("/deleteSpecificNany", Adminhandlers.deleteSpecificNany);
 app.patch("/updateNanyInformation", Adminhandlers.updateNanyInformation);
 
