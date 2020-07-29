@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var items = require("../models/user");
 var User = items.User;
+var config = require("../config");
 
 const cors = require("cors");
 var app = express();
@@ -22,16 +23,30 @@ var saltRounds = 10;
 
 require("dotenv").config(); // to read .env file
 module.exports = {
-  selectLocation: function (req, res) {
-    console.log("user location is ", req.body);
+  sendSMS: function (req, res) {
+    console.log("hi from send sms");
+    var location = req.body;
+    client.messages
+      .create({
+        body:
+          "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://www.google.com/maps/search/?api=1&query=" +
+          location.latitude +
+          "," +
+          location.longitude,
+        to: toNum, // Text this number
+        from: fromNum, // From a valid Twilio number
+      })
+      .then((message) => console.log(message))
+      .catch((err) => console.log(err));
   },
   userSignUp: function (req, res) {
     console.log(req.body);
+    var x = req.body;
     var newUser = new User({
-      email: req.body.Email,
-      password: req.body.password,
-      name: req.body.Name,
-      phoneNumber: req.body.PhoneNumber,
+      email: x.Email,
+      password: x.password,
+      name: x.Name,
+      phoneNumber: x.PhoneNumber,
     });
     User.findOne({ email: newUser.email })
       .then((profile) => {
@@ -39,6 +54,7 @@ module.exports = {
           bcrypt.hash(newUser.password, saltRounds, function (err, hash) {
             if (err) {
               console.log("Error is", err.message);
+              res.send("Error");
             } else {
               newUser.password = hash;
               newUser
@@ -166,15 +182,15 @@ module.exports = {
   // }
 };
 
-// middleware to validate token
-const verifyToken = (req, res, next) => {
-  const token = req.header("auth-token");
-  if (!token) return res.status(401).json({ error: "Access denied" });
-  try {
-    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-    req.user = verified;
-    next(); // to continue the flow
-  } catch (err) {
-    res.status(400).json({ error: "Token is not valid" });
-  }
-};
+  // // middleware to validate token
+  // const verifyToken = (req, res, next) => {
+  //   const token = req.header("auth-token");
+  //   if (!token) return res.status(401).json({ error: "Access denied" });
+  //   try {
+  //     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+  //     req.user = verified;
+  //     next(); // to continue the flow
+  //   } catch (err) {
+  //     res.status(400).json({ error: "Token is not valid" });
+  //   }
+

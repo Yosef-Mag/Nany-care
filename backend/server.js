@@ -13,11 +13,12 @@ const router = express.Router();
 var Nannyhandlers = require("./handlers/Nannyhandlers");
 var Adminhandlers = require("./handlers/Adminhandlers");
 var userhandlers = require("./handlers/userhandlers");
+
 var app = express();
 app.use(cors({ origin: true, credentials: true }));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 var session = require("express-session");
 var cookieParser = require("cookie-parser");
 
@@ -33,7 +34,6 @@ var port = process.env.PORT || 5000;
 require("dotenv").config(); // to read .env file
 // test get req
 
-
 app.post("/HiringForm", Nannyhandlers.HiringForm);
 app.post("/signup", userhandlers.userSignUp);
 app.get("/logout", userhandlers.userLogOut);
@@ -41,8 +41,7 @@ app.post("/login", userhandlers.userLogIn);
 app.get("/ret", Nannyhandlers.retrieve);
 app.get("/profile", userhandlers.retriveUserByEmail);
 app.get("/profilee", userhandlers.retriveUserByToken);
-app.post("/api/doPayment/", userhandlers.payment);
-app.post("/insert", Adminhandlers.insert);
+// app.post("/api/doPayment/", userhandlers.payment);
 
 app.post("/AddAdmin", Adminhandlers.adminSignUp);
 app.post("/adminLogin", Adminhandlers.adminLogIn);
@@ -51,7 +50,11 @@ app.post("/reserve", Nannyhandlers.reserve);
 app.get("/Admin", Adminhandlers.retriveAllNanies);
 app.delete("/deleteSpecificNany", Adminhandlers.deleteSpecificNany);
 app.patch("/updateNanyInformation", Adminhandlers.updateNanyInformation);
-
+// app.post("/checkout", payment.checkout);
+// app.get('/web/checkout/redirect',payment.redirect);
+// app.get('/payment/success',payment.success);
+// app.get('/payment/cancel',payment.cancel);
+// app.post('/stripe/webhook',payment.webhook)
 const mongoURI = process.env.ATLAS_URI;
 mongoose
   .connect(mongoURI, { useNewUrlParser: true })

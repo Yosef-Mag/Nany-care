@@ -4,26 +4,21 @@ import {
   View,
   Text,
   StyleSheet,
-
   TouchableOpacity,
-
-
   KeyboardAvoidingView,
 } from "react-native";
 
 import { requireNativeViewManager } from "expo-core";
 
-
 // components import
-import FbLogin from "./FbLogin";
+import LoginPage from "./Login";
 import GoogleLogin from "./GoogleLogin";
 import SignUpInputs from "./SignUpInputs";
-
 
 export default class SignUpPage extends React.Component {
   constructor(props) {
     super(props);
-    this.onPressLearnMore = this.onPressLearnMore.bind(this);
+   
   }
   onPressLearnMore() {}
   render() {
@@ -47,15 +42,17 @@ export default class SignUpPage extends React.Component {
 
           <SignUpInputs />
 
-          <View></View>
 
           {/* own buttons design */}
 
-
           <TouchableOpacity>
-            <Text style={style.textButton}>Sign Up </Text>
+            <Text
+              style={style.textButton}
+              onPress={() => navigation.navigate("LoginPage")}
+            >
+              Sign Up{" "}
+            </Text>
           </TouchableOpacity>
-
         </KeyboardAvoidingView>
       </View>
     );
@@ -72,7 +69,6 @@ const style = StyleSheet.create({
   center: {
     marginLeft: "auto",
     marginRight: "auto",
-
   },
   textButton: {
     width: 140,
@@ -86,7 +82,9 @@ const style = StyleSheet.create({
     color: "white",
     textAlign: "center",
     backgroundColor: "#E88877",
-
   },
- 
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 46fd35566cea25b3ebf88b43f933d890f36a10d1
