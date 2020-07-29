@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var items = require("../models/user");
 var User = items.User;
-var config = require("../config");
+// var config = require("../config");
 
 const cors = require("cors");
 var app = express();

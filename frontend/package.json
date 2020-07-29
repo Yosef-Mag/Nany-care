@@ -34,7 +34,6 @@
     "firebase": "^7.16.1",
     "formik": "^2.1.5",
     "formik-yup": "0.0.5",
-    "galio-framework": "^0.7.1",
     "react": "^16.11.0",
     "react-bootstrap": "^1.2.2",
     "react-dom": "~16.11.0",

@@ -34,13 +34,15 @@ function App() {
 const StackNavigator = createStackNavigator();
 
   return (
-    <NavigationContainer>
-      <StackNavigator.Navigator>
-        <StackNavigator.Screen name="SignUpPage" component={SignUpPage} />
-        <StackNavigator.Screen name="LoginPage " component={LoginPage} />
-        <StackNavigator.Screen name="AllNany" component={AllNany} />
-      </StackNavigator.Navigator>
-    </NavigationContainer>
+    // <NavigationContainer>
+    //   <StackNavigator.Navigator>
+    //     <StackNavigator.Screen name="SignUpPage" component={SignUpPage} />
+    //     <StackNavigator.Screen name="LoginPage " component={LoginPage} />
+    //     <StackNavigator.Screen name="AllNany" component={AllNany} />
+
+    //   </StackNavigator.Navigator>
+    // </NavigationContainer>
+    <AllNany />
   );
 }
 

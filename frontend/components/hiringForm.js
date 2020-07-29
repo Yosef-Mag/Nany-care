@@ -2,10 +2,9 @@ import React from 'react';
 import  {ScrollView} from 'react-native'
 import { Formik } from 'formik';
 import { View } from 'react-native-animatable';
-import { TextInput } from 'react-native-paper';
+import { TextInput, Text, Button } from 'react-native-paper';
 import axios from 'axios'
 import * as yup from 'yup'
-import { Block, Button, Card, Icon, Input, NavBar, Text } from 'galio-framework';
 
 const reviewSchema = yup.object({
   Name: yup.string().strict().required(),
