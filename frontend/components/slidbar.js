@@ -8,7 +8,7 @@ import {
 
 import Payment from "./payment";
 import ContactUS from "./ContactUS";
-import SignUpPage from "./signup";
+// import SignUpPage from "./signup";
 import LoginPage from "./Login";
 import AllNany from "./Home";
 
@@ -26,9 +26,9 @@ function Login() {
 function payment() {
   return <Payment />;
 }
-function SignUp() {
-  return <SignUpPage />;
-}
+// function SignUp() {
+//   return <SignUpPage />;
+// }
 
 function Home1() {
   return <AllNany />;
