@@ -3,10 +3,8 @@ import { Formik } from "formik";
 import { View } from "react-native-animatable";
 import { TextInput, Button } from "react-native-paper";
 import axios from "axios";
-import allNany from './Home'
-import { Actions } from 'react-native-router-flux';
-
-
+import MyDrawer from "./slidbar";
+import { NavigationContainer } from "@react-navigation/native";
 export default function LoginInputs() {
   return (
     <View>
@@ -18,11 +16,17 @@ export default function LoginInputs() {
         onSubmit={(values) => {
           axios
 
-            .post("http://192.168.43.32:5000/login", values)
+            .post("http://192.168.127.105:5000/login", values)
             .then(function (response) {
               console.log(response);
-                Actions.allNany()
-             
+              if(response.status === 200){
+                  return (
+                    <NavigationContainer>
+                      <MyDrawer />
+                    </NavigationContainer>
+                  );
+                }
+              
             })
             .catch(function (error) {
               console.log(error);
@@ -48,12 +52,7 @@ export default function LoginInputs() {
             <Button
               title="login"
               mode="contained"
-              onPress={ () => {
-                props.handleSubmit ;
-                Actions.allNany()
-              }
-              } 
-
+              onPress={props.handleSubmit}
             />
           </View>
         )}
@@ -61,3 +60,5 @@ export default function LoginInputs() {
     </View>
   );
 }
+
+

@@ -3,8 +3,8 @@ import { Formik } from "formik";
 import { View } from "react-native-animatable";
 import { TextInput, Button } from "react-native-paper";
 import axios from "axios";
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createStackNavigator } from '@react-navigation/stack';
+
+import { Actions } from "react-native-router-flux";
 
 export default function Signup() {
   return (
@@ -17,15 +17,16 @@ export default function Signup() {
           password: "",
         }}
         onSubmit={(values) => {
+          console.log(values);
           axios
+            .post("http://192.168.127.105:5000/signup", values)
 
-            // <<<<<<< HEAD
-            .post("http://192.168.43.32:5000/signup", values)
-            // =======
-            //             // .post("http://localhost:5000/signup", values)
-            // >>>>>>> 388e08325efbc821f4f70d0ecb154e62cadc03b1
+            .post("http://192.168.127.105:5000/signup", values)
+
             .then(function (response) {
+              console.log(values);
               console.log(response);
+              () => navigation.AllNany()
             })
             .catch(function (error) {
               console.log(error);
@@ -44,6 +45,7 @@ export default function Signup() {
             <TextInput
               placeholder="Please enter email "
               onChangeText={props.handleChange("Email")}
+              type="email-address"
               value={props.values.Email}
             ></TextInput>
             {/* PhoneNumber input */}
