@@ -1,147 +1,203 @@
-// import React from "react";
-// import { View, Text, PermissionsAndroid, Alert, Platform } from "react-native";
-// import Geolocation from "react-native-geolocation-service";
-// import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from "react-native-maps";
-// import { mapStyle } from "./mapStyle";
-// export default class Map extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       latitude: 0,
-//       longitude: 0,
-//       coordinates: [],
+// import React, { useState, useEffect } from "react";
+// import {
+//   Keyboard,
+//   Platform,
+//   StyleSheet,
+//   View,
+//   Text,
+//   Button,
+// } from "react-native";
+
+// import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+// import Constants from "expo-constants";
+// import * as Location from "expo-location";
+// import axios from "axios";
+
+// import { Notifications } from "expo";
+// import * as Permissions from "expo-permissions";
+
+// const localNotification = {
+//   title: "Nany APP",
+//   body: "You send yor location successfully!!",
+// };
+
+// const handleNotification = () => {
+//   console.warn("ok! got your notif");
+// };
+
+// const askNotification = async () => {
+//   // We need to ask for Notification permissions for ios devices
+//   const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+//   if (Constants.isDevice && status === "granted")
+//     console.log("Notification permissions granted.");
+// };
+// export default function MapScreen() {
+//   const [selectedLocation, setSelectedLocation] = useState();
+//   const [location, setLocation] = useState({
+//     coords: {
+//       accuracy: 20,
+//       altitude: 5,
+//       heading: 0,
+//       latitude: 37.4219983,
+//       longitude: -122.084,
+//       speed: 0,
+//     },
+//     mocked: false,
+//     timestamp: 1577294172000,
+//   });
+//   const [errorMsg, setErrorMsg] = useState(null);
+
+//   const onSubmit = (text) => {
+//     axios
+//       .post("http://192.168.127.43:5000/sendSMS", selectedLocation)
+//       .then(function (response) {
+//         console.log(response);
+//       })
+//       .catch(function (error) {
+//         console.log(error);
+//       });
+//     Keyboard.dismiss();
+//     const schedulingOptions = {
+//       time: new Date().getTime() + 1000,
+//     };
+//     // Notifications show only when app is not active.
+//     // (ie. another app being used or device's screen is locked)
+//     Notifications.scheduleLocalNotificationAsync(
+//       localNotification,
+//       schedulingOptions
+//     );
+//   };
+//   useEffect(() => {
+//     if (Platform.OS === "android" && !Constants.isDevice) {
+//       setErrorMsg(
+//         "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
+//       );
+//     } else {
+//       (async () => {
+//         let { status } = await Location.requestPermissionsAsync();
+//         if (status !== "granted") {
+//           setErrorMsg("Permission to access location was denied");
+//         }
+
+//         let userLocation = await Location.getCurrentPositionAsync({});
+
+//         console.log(JSON.stringify(userLocation));
+//         setLocation(userLocation);
+//       })();
+//     }
+//   }, []);
+//   var mapRegion = {
+//     latitude: location.coords.latitude,
+//     longitude: location.coords.longitude,
+//     latitudeDelta: 0.005,
+//     longitudeDelta: 0.005,
+//   };
+
+//   const selectLocationHandler = (event) => {
+//     event.preventDefault();
+//     setSelectedLocation({
+//       latitude: event.nativeEvent.coordinate.latitude,
+//       longitude: event.nativeEvent.coordinate.longitude,
+//     });
+//   };
+
+//   let markerCoordinates;
+
+//   if (selectedLocation) {
+//     markerCoordinates = {
+//       latitude: selectedLocation.latitude,
+//       longitude: selectedLocation.longitude,
+//       latitudeDelta: 0.005,
+//       longitudeDelta: 0.005,
 //     };
 //   }
-
-//   async componentDidMount() {
-//     Geolocation.getCurrentPosition(
-//       (position) => {
-//         this.setState({
-//           latitude: position.coords.latitude,
-//           longitude: position.coords.longitude,
-//           coordinates: this.state.coordinates.concat({
-//             latitude: position.coords.latitude,
-//             longitude: position.coords.longitude,
-//           }),
-//         });
-//       },
-//       (error) => {
-//         Alert.alert(error.message.toString());
-//       },
-//       {
-//         showLocationDialog: true,
-//         enableHighAccuracy: true,
-//         timeout: 20000,
-//         maximumAge: 0,
-//       }
-//     );
-
-//     Geolocation.watchPosition(
-//       (position) => {
-//         this.setState({
-//           latitude: position.coords.latitude,
-//           longitude: position.coords.longitude,
-//           coordinates: this.state.coordinates.concat({
-//             latitude: position.coords.latitude,
-//             longitude: position.coords.longitude,
-//           }),
-//         });
-//       },
-//       (error) => {
-//         console.log(error);
-//       },
-//       {
-//         showLocationDialog: true,
-//         enableHighAccuracy: true,
-//         timeout: 20000,
-//         maximumAge: 0,
-//         distanceFilter: 0,
-//       }
-//     );
+//   if (selectedLocation) {
+//     mapRegion = {
+//       latitude: selectedLocation.latitude,
+//       longitude: selectedLocation.longitude,
+//       latitudeDelta: 0.005,
+//       longitudeDelta: 0.005,
+//     };
 //   }
-//   render() {
-//     return (
-//       <View style={{ flex: 1 }}>
-//         <MapView
-//           provider={PROVIDER_GOOGLE}
-//           customMapStyle={mapStyle}
-//           style={{ flex: 1 }}
-//           region={{
-//             latitude: this.state.latitude,
-//             longitude: this.state.longitude,
-//             latitudeDelta: 0.0922,
-//             longitudeDelta: 0.0421,
-//           }}
-//         >
-//           <Marker
-//             coordinate={{
-//               latitude: this.state.latitude,
-//               longitude: this.state.longitude,
-//             }}
-//           ></Marker>
-//           <Polyline
-//             coordinates={this.state.coordinates}
-//             strokeColor="#bf8221"
-//             strokeColors={[
-//               "#bf8221",
-//               "#ffe066",
-//               "#ffe066",
-//               "#ffe066",
-//               "#ffe066",
-//             ]}
-//             strokeWidth={3}
-//           />
-//         </MapView>
+//   useEffect(() => {
+//     askNotification();
+//     // If we want to do something with the notification when the app
+//     // is active, we need to listen to notification events and
+//     // handle them in a callback
+//     const listener = Notifications.addListener(handleNotification);
+//     return () => listener.remove();
+//   }, []);
+
+//   return (
+//     <View style={styles.mapContainer}>
+//       <Text
+//         style={{
+//           fontWeight: "200",
+//           fontSize: 20,
+//           marginTop: 40,
+//           marginRight: 50,
+//         }}
+//       >
+//         select your location
+//       </Text>
+//       <MapView
+//         provider={PROVIDER_GOOGLE}
+//         style={styles.map}
+//         region={mapRegion}
+//         onPress={selectLocationHandler}
+//       >
+//         {markerCoordinates && (
+//           <Marker title="Picked Location" coordinate={markerCoordinates} />
+//         )}
+//       </MapView>
+//       <View style={styles.button}>
+//         <Button onPress={onSubmit} title="NEXT!" color="blue" />
 //       </View>
-//     );
-//   }
+//     </View>
+//   );
 // }
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE, Callout } from "react-native-maps";
 
-export default function MapScreen() {
-  const [selectedLocation, setSelectedLocation] = useState();
+// const styles = StyleSheet.create({
+//   button: {
+//     top: 60 + "%",
+//   },
+//   map: {
+//     marginTop: 30 + "%",
+//     flex: 0.9,
+//   },
 
-  const mapRegion = {
-    latitude: 31.963158,
-    longitude: 35.930359,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  };
-
-  const selectLocationHandler = (event) => {
-    setSelectedLocation({
-      lat: event.nativeEvent.coordinate.latitude,
-      lng: event.nativeEvent.coordinate.longitude,
-    });
-  };
-
-  let markerCoordinates;
-
-  if (selectedLocation) {
-    markerCoordinates = {
-      latitude: selectedLocation.lat,
-      longitude: selectedLocation.lng,
-    };
-  }
-
-  return (
-    <MapView
-      provider={PROVIDER_GOOGLE}
-      style={styles.map}
-      region={mapRegion}
-      onPress={selectLocationHandler}
-    >
-      {markerCoordinates && (
-        <Marker title="Picked Location" coordinate={markerCoordinates} />
-      )}
-    </MapView>
-  );
-}
-
-const styles = StyleSheet.create({
-  map: {
-    flex: 1,
-  },
-});
+//   mapContainer: {
+//     position: "absolute",
+//     top: 0,
+//     left: 0,
+//     right: 0,
+//     bottom: 0,
+//   },
+//   map: {
+//     position: "absolute",
+//     top: 100,
+//     left: 0,
+//     right: 0,
+//     bottom: 200,
+//   },
+//   rad: {
+//     height: 50,
+//     width: 50,
+//     borderRadius: 50 / 2,
+//     overflow: "hidden",
+//     backgroundColor: "rgba(0,122,255,0.1)",
+//     borderWidth: 1,
+//     borderColor: "rgba(0,122,255,0.3)",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+//   mark: {
+//     height: 20,
+//     width: 20,
+//     borderWidth: 3,
+//     borderColor: "white",
+//     borderRadius: 20 / 2,
+//     overflow: "hidden",
+//     backgroundColor: "#007AFF",
+//   },
+// });
