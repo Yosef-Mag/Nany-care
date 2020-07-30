@@ -6,7 +6,7 @@ import {Button} from "react-native-paper";
 
 
 
-export default function AllNany({ navigation }) { // function to render results based on selected category
+export default function AllNany() { // function to render results based on selected category
 // states to use 
   const [nanylist, setNanylist] = useState([]); // state to hold all nanny records data
   const [selectedCity, setSelectedCity] = useState([]); // state to change the selected place based on picker selection

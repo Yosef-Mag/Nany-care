@@ -51,7 +51,7 @@ export default function Signup({ navigation }) {
                   // console.log("hi Afnannnnnnnnnmmmm", res);
                 })
                 .then(function (res) {
-                  navigation.navigate("Home");
+                  navigation.navigate("All");
                   
                 })
                 .catch(function (error) {

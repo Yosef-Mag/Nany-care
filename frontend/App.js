@@ -19,7 +19,7 @@
 //   </NavigationContainer>;
 // }
 
-export default App;
+
 
 import React, { useState } from "react";
 import MyDrawer from "./components/slidbar";
@@ -33,16 +33,16 @@ import { auth } from "firebase";
 
 const Stack = createStackNavigator();
 
-function App() {
+export default function App() {
   // const ( auth , setAuth) =useState(false)
-  const [auth, setAuth] = useState(false);
+  // const [auth, setAuth] = useState(false);
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="SignUp" component={SignUp} />
 
-        <Stack.Screen name="Home" component={AllNany} />
+        <Stack.Screen name="ِAll" component={AllNany} />
       </Stack.Navigator>
     </NavigationContainer>
   );
