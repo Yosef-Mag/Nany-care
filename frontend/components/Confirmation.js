@@ -1,63 +1,68 @@
-import React, { Component, PropTypes } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-//import { defaultStyles } from './styles';
+// import React from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Popover from '@material-ui/core/Popover';
+// import Typography from '@material-ui/core/Typography';
+// import Button from '@material-ui/core/Button';
 
-export default class Confirmation extends Component {
+// const useStyles = makeStyles((theme) => ({
+//   typography: {
+//     padding: theme.spacing(2),
+//   },
+// }));
 
-  static propTypes = {
-    code: PropTypes.string.isRequired,
-  }
+// export default function SimplePopover() {
+//   const classes = useStyles();
+//   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  render() {
-    const { code } = this.props;
-    return (
-      <View style={styles.container}>
-        <Text style={styles.header}>Your confirmation code</Text>
-        <Text style={styles.code}>{code}</Text>
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          // Go back when pressed
-          onPress={() => this.props.navigator.pop() }
-        >
-          <Text style={styles.button}>Done</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  header: {
-    ...defaultStyles.text,
-    color: '#333',
-    fontSize: 20,
-  },
-  code: {
-    ...defaultStyles.text,
-    color: '#333',
-    fontSize: 36,
-  },
-  buttonContainer: {
-    alignItems: 'center',
-    backgroundColor: '#673AB7',
-    borderRadius: 100,
-    margin: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-  },
-  button: {
-    ...defaultStyles.text,
-    color: '#FFFFFF',
-    fontSize: 18,
-  },
-});
+//   // //fetching data from the db 
+//   // useEffect(() => {
+//   //   fetch(`http://192.168.127.74:5000/ret`)
+//   //     .then(res => res.json())
+//   //     .then(response => {
+//   //       setNanylist(response);
+//   //     })
+//   //     .catch(error => console.log(error));
+//   // }, []);
+
+
+//   const handleClick = (event) => {
+//     setAnchorEl(event.currentTarget);
+//   };
+
+//   const handleClose = () => {
+//     setAnchorEl(null);
+//   };
+
+//   const open = Boolean(anchorEl);
+//   const id = open ? 'simple-popover' : undefined;
+
+//   return (
+//     <div>
+//       <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
+//         Confirm
+//       </Button>
+//       <Popover
+//         id={id}
+//         open={open}
+//         anchorEl={anchorEl}
+//         onClose={handleClose}
+//         anchorOrigin={{
+//           vertical: 'bottom',
+//           horizontal: 'center',
+//         }}
+//         transformOrigin={{
+//           vertical: 'top',
+//           horizontal: 'left',
+//         }}
+//       >
+//         <Typography className={classes.typography}>nanny name: </Typography>
+//         <Typography className={classes.typography}>nanny education: </Typography>
+//         <Typography className={classes.typography}>nanny place:  </Typography>
+//         <Typography className={classes.typography}> nanny cost: </Typography>
+//         <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}> Done </Button>
+//         <Button aria-describedby={id} variant="contained" color="primary" onClick= {handleClose}> Cancel </Button>
+//       </Popover>
+//     </div>
+//   );
+// }

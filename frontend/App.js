@@ -23,11 +23,10 @@ import React, { useState } from "react";
 // import MyDrawer from "./components/slidbar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-// import { NavigationContainer } from "@react-navigation/native";
 import SignUp from "./components/SignUpInputs";
-import LoginPage from "./components/Login";
+import LoginInputs from "./components/LoginInputs";
 import AllNany from "./components/Home";
-// import { auth } from "firebase";
+
 
 const Stack = createStackNavigator();
 
@@ -39,7 +38,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="ِAll" component={AllNany} />
+        <Stack.Screen name="AllNany" component={AllNany} />
+        <Stack.Screen name="LoginPage" component={LoginInputs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
