@@ -19,7 +19,7 @@
 //   </NavigationContainer>;
 // }
 
-export default App;
+//export default App;
 
 import React from "react";
 import MyDrawer from "./components/slidbar";
