@@ -72,6 +72,14 @@ export default function Signup({ navigation }) {
                   placeholder="Please enter email "
                   onChangeText={props.handleChange("Email")}
                   type="email-address"
+                //   onBlur={() => {
+                // var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                // if (state.email.length === 0) {
+                //   alert("should enter email");
+                // } else if (!reg.test(state.email)) {
+                //   alert("not valid email");
+                // }
+              // }}
                   value={props.values.Email}
                 ></TextInput>
                 {/* PhoneNumber input */}
