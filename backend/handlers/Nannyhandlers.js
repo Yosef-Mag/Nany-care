@@ -76,8 +76,8 @@ module.exports = {
   },
 
   reserve: function (req, res){
-  
-      var reserveData = req.body;
+   var reserveData = req.body;
+      console.log('fnh',req.body )
       res.json(reserveData)
   } 
 };

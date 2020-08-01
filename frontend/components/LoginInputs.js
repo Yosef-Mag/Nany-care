@@ -79,7 +79,7 @@ export default function LoginInputs({ navigation }) {
                   mode="contained"
                   onPress={props.handleSubmit}
                   Text="Login"
-                  >
+                >
                   <Text style={{ color: "pink" }}>Login</Text>
                 </Button>
                 <Button
@@ -89,6 +89,14 @@ export default function LoginInputs({ navigation }) {
                   onPress={() => navigation.navigate("SignUp")}
                 >
                   <Text style={{ color: "pink" }}>SignUp</Text>
+                </Button>
+                <Button
+                  title="HiringForm"
+                  mode="contained"
+                  Text="HiringForm"
+                  onPress={() => navigation.navigate("HiringForm")}
+                >
+                  <Text style={{ color: "pink" }}>HiringForm</Text>
                 </Button>
               </View>
             )}
