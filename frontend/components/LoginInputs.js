@@ -71,7 +71,6 @@ export default function LoginInputs({ navigation }) {
                   secureTextEntry={true}
                   onChangeText={props.handleChange("password")}
                   value={props.values.password}
-                 
                 ></TextInput>
 
                 {/* submit bttn  */}
@@ -80,7 +79,17 @@ export default function LoginInputs({ navigation }) {
                   mode="contained"
                   onPress={props.handleSubmit}
                   Text="Login"
-                />
+                  >
+                  <Text style={{ color: "pink" }}>Login</Text>
+                </Button>
+                <Button
+                  title="SignUp"
+                  mode="contained"
+                  Text="SignUp"
+                  onPress={() => navigation.navigate("SignUp")}
+                >
+                  <Text style={{ color: "pink" }}>SignUp</Text>
+                </Button>
               </View>
             )}
           </Formik>

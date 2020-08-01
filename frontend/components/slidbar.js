@@ -19,17 +19,9 @@ import MapScreen from "./map";
 function Profile1() {
   return <Profile />;
 }
-
-function Login() {
-  return <LoginPage />;
-}
 function payment() {
   return <Payment />;
 }
-// function SignUp() {
-//   return <SignUpPage />;
-// }
-
 function Home1() {
   return <AllNany />;
 }

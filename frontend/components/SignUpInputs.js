@@ -135,24 +135,8 @@ export default function Signup({ navigation }) {
                 >
                   <Text style={{ color: "pink" }}>Signup</Text>
                 </Button>
-                <Button
-                  title="Login"
-                  mode="contained"
-                  Text="Login"
-                  onPress={() => navigation.navigate("LoginPage")}
-                >
-                  <Text style={{ color: "pink" }}>Login</Text>
-                </Button>
-
-                {/* <Button
-                  color="blue"
-                  dark={true}
-                  compact={true}
-                  mode="contained"
-                  onPress={navigation.navigate("LoginPage")}
-                >
-                  <Text style={{ color: "pink" }}>login</Text>
-                </Button> */}
+                
+                
               </View>
             )}
           </Formik>
