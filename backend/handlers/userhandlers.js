@@ -3,7 +3,6 @@ var bodyParser = require("body-parser");
 var items = require("../models/user");
 var User = items.User;
 var config = require("../config");
-
 const cors = require("cors");
 var app = express();
 app.use(cors({ origin: true, credentials: true }));
@@ -58,6 +57,7 @@ module.exports = {
               newUser
                 .save()
                 .then(() => {
+                  console.log("user saved");
                   res.send("User authenticated");
                 })
                 .catch((err) => {

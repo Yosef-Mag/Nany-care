@@ -11,8 +11,7 @@ import {
 import { requireNativeViewManager } from "expo-core";
 
 // components import
-import LoginPage from "./Login";
-import GoogleLogin from "./GoogleLogin";
+
 import SignUpInputs from "./SignUpInputs";
 
 export default class SignUpPage extends React.Component {
@@ -41,19 +40,9 @@ export default class SignUpPage extends React.Component {
           </View>
 
           <SignUpInputs />
-
           <View></View>
 
           {/* own buttons design */}
-
-          <TouchableOpacity>
-            <Text
-              style={style.textButton}
-              onPress={() => navigation.navigate("LoginPage")}
-            >
-              Sign Up{" "}
-            </Text>
-          </TouchableOpacity>
         </KeyboardAvoidingView>
       </View>
     );

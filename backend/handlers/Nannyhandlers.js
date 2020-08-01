@@ -65,6 +65,7 @@ module.exports = {
     });
   },
   retrieve: function (req, res) {
+    console.log("Hi");
     Nany.find({}, function (err, nany) {
       if (err) {
         res.json(err);
@@ -75,11 +76,9 @@ module.exports = {
     });
   },
 
-  reserve: function (req, res){
-  
-      var reserveData = req.body;
-      res.json(reserveData)
-  } 
+  reserve: function (req, res) {
+    var reserveData = req.body;
+    console.log(reserveData);
+    res.json(reserveData);
+  },
 };
-
-

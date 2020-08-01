@@ -15,7 +15,7 @@ export default function LoginInputs() {
         onSubmit={(values) => {
           axios
 
-            .post("http://192.168.127.34:5000/login", values)
+            .post("http://192.168.127.43:5000/login", values)
             .then(function (response) {
               console.log(response);
               if (res.data === "User login") {

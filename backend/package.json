@@ -23,7 +23,8 @@
     "nodemailer": "^6.4.10",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "stripe": "^8.78.0",
+    "react-native-quidpay-webview": "^1.0.0",
+    "stripe": "^8.79.0",
     "twilio": "^3.48.1"
   },
   "devDependencies": {

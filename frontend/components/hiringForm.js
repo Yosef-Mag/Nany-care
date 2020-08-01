@@ -1,11 +1,19 @@
-import React from 'react';
-import  {ScrollView} from 'react-native'
-import { Formik } from 'formik';
-import { View } from 'react-native-animatable';
-import { TextInput } from 'react-native-paper';
-import axios from 'axios'
-import * as yup from 'yup'
-import { Block, Button, Card, Icon, Input, NavBar, Text } from 'galio-framework';
+import React from "react";
+import { ScrollView } from "react-native";
+import { Formik } from "formik";
+import { View } from "react-native-animatable";
+import { TextInput } from "react-native-paper";
+import axios from "axios";
+import * as yup from "yup";
+import {
+  Block,
+  Button,
+  Card,
+  Icon,
+  Input,
+  NavBar,
+  Text,
+} from "galio-framework";
 
 const reviewSchema = yup.object({
   Name: yup.string().strict().required(),
@@ -60,7 +68,7 @@ export default function HiringForm() {
           initialValues={{
             Name: "",
             Age: "",
-            Email : '',
+            Email: "",
             PhoneNumber: "",
             NumberOfKidsYouCanHandel: "",
             Place: "",
@@ -104,14 +112,14 @@ export default function HiringForm() {
               <Text> {props.touched.Age /* && props.errors.Age */} </Text>
 
               {/* Email input  */}
-              <TextInput 
-                        placeholder = 'Please enter email '
-                        onChangeText = { props.handleChange('Email') }
-                        value = { props.values.Email}                     
-                        onBlur = {props.handleBlur('Email')} >
-                        </TextInput> 
+              <TextInput
+                placeholder="Please enter email "
+                onChangeText={props.handleChange("Email")}
+                value={props.values.Email}
+                onBlur={props.handleBlur("Email")}
+              ></TextInput>
               {/* Handling test for email */}
-              <Text> { props.touched.Email && props.errors.Email } </Text>  
+              <Text> {props.touched.Email && props.errors.Email} </Text>
 
               {/* PhoneNumber input */}
               <TextInput
