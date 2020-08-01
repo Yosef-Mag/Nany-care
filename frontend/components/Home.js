@@ -16,7 +16,7 @@ export default function AllNany() { // function to render results based on selec
 
 //fetching data from the db 
   useEffect(() => {
-    fetch(`http://192.168.127.74:5000/ret`)
+    fetch(`http://192.168.1.65:5000/ret`)
       .then(res => res.json())
       .then(response => {
         setNanylist(response);
@@ -43,7 +43,7 @@ export default function AllNany() { // function to render results based on selec
   }
 
 
-function nannyReserved(nany) {// function to reserve the nany called once the reserve button selected
+function nannyReserved(nany) {// function to reserve the nanny called once the reserve button clicked
   axios.post(`http://192.168.127.74:5000/reserve`,nany)
     .then((res) => res)
     .then((res) => {
