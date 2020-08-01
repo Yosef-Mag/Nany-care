@@ -32,8 +32,8 @@ export default function LoginInputs({ navigation }) {
               axios
                 .post("http://192.168.1.65:5000/login", values)
                 .then(function (res) {
-                  console.log(res);
-                  if (res.data === "User authenticated") {
+                  console.log(res.data.token);
+                  if (res.data.token) {
                     navigation.navigate("AllNany");
                   } else {
                     if (res.data === "User not exist") {
