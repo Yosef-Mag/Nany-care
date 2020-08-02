@@ -1,67 +1,28 @@
-// import React from "react";
-// import { createStackNavigator } from "@react-navigation/stack";
-// import { NavigationContainer } from "@react-navigation/native";
+import SignUp from "./components/SignUpInputs";
+import LoginInputs from "./components/LoginInputs";
+import AllNany from "./components/Home";
+import nannyReserved from "./components/Home";
 
-// import SignUpPage from "./components/signup";
-// import LoginPage from "./components/Login";
-// import AllNany from "./components/Home";
+import AuthLoadingScreen from "./components/loading";
+import HiringForm from "./components/hiringForm";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+const AppStack = createStackNavigator({ AllNany: AllNany ,nannyReserved:nannyReserved});
+const AuthStack = createStackNavigator({
+  LoginInputs: LoginInputs,
+  SignUp: SignUp,
+  HiringForm: HiringForm,
+});
 
-// // NAVIGATION
-// const StackNavigator = createStackNavigator();
-
-// function App() {
-//   <NavigationContainer>
-//     <StackNavigator.Navigator>
-//       <StackNavigator.Screen name="SignUpPage" component={SignUpPage} />
-//       <StackNavigator.Screen name="LoginPage " component={LoginPage} />
-//       <StackNavigator.Screen name="AllNany" component={AllNany} />
-//     </StackNavigator.Navigator>
-//   </NavigationContainer>;
-// }
-
-export default App;
-
-import React from "react";
-import MyDrawer from "./components/slidbar";
-import { NavigationContainer } from "@react-navigation/native";
-//import Home from "./components/Home";
-import Confirmation from "./components/Confirmation";
-//import Confirmation from "./components/Confirmation";
-export default function App() {
-  return (
-    // <NavigationContainer>
-    //   <StackNavigator.Navigator>
-    //     <StackNavigator.Screen name="SignUpPage" component={SignUpPage} />
-    //     <StackNavigator.Screen name="LoginPage " component={LoginPage} />
-    //     <StackNavigator.Screen name="AllNany" component={AllNany} />
-
-    //   </StackNavigator.Navigator>
-    // </NavigationContainer>
-    <AllNany />
-  );
-}
-
-// import React from "react";
-// import MyDrawer from "./components/slidbar";
-// // import OrderPlacedScreen from "./components/OrderDetailsScreen";
-// import { NavigationContainer } from "@react-navigation/native";
-// import SignUpPage from "./components/signup";
-
-// export default function App() {
-//   return <SignUpPage />;
-// }
-// // import React from "react";
-// // import LoginPage from "./components/Login";
-// // import Payment from "./components/payment";
-// // import { AppRegistry, View } from 'react-native';
-// // import Routes from './components/Routes'
-// // import MyDrawer from "./components/slidbar";
-// // import { NavigationContainer } from "@react-navigation/native";
-// // import { createStackNavigator } from 'react-navigation'
-// // import allNany from './components/Home'
-// // // authentication views
-// // // import LoginPage from "./components/Login";
-// // export default function App() {
-// //   return <Routes />
-// // }
-// // AppRegistry.registerComponent('App', () => App)
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoadingScreen: AuthLoadingScreen,
+      App: AppStack,
+      Auth: AuthStack,
+    },
+    {
+      initialRouteName: "AuthLoadingScreen",
+    }
+  )
+);

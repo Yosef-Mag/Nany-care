@@ -11,6 +11,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   root: {
@@ -55,18 +56,27 @@ export default function AllNanny(props) {
   console.log(nannylist);
   const useStyles = makeStyles((theme) => ({
     root: {
-      width: "100%",
-      maxWidth: "36ch",
-      backgroundColor: theme.palette.background.paper,
+      flexGrow: 1,
     },
-    inline: {
-      display: "inline",
+    paper: {
+      padding: theme.spacing(1),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
     },
   }));
   const classes = useStyles();
 
   return (
     <>
+    <Grid
+        container
+        item xs={4}
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "90vh" }}
+      >
       {nannylist.map((nany) => (
         <Card className={classes.root} variant="outlined">
           <ListItem alignItems="flex-start">
@@ -96,6 +106,7 @@ export default function AllNanny(props) {
         </Card>
       ))}
       <Button onClick={addNanny}> Add new nanny </Button>
+      </Grid>
     </>
   );
 }

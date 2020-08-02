@@ -43,6 +43,12 @@ const Drawer = (props) => {
         props.history.push("/AddAdmin")
     },
     {
+      text: "Login",
+      icon: <VpnKeyIcon />,
+      onClick: () => 
+        props.history.push("/AdminLogin")
+    },
+    {
       text: "Logout",
       icon: <ExitToAppIcon />,
       onClick: () => {
@@ -53,41 +59,8 @@ const Drawer = (props) => {
       },
     },
   ];
-  if (localStorage.usertoken) {
-    itemsList = [
-      {
-        text: "Home",
-        icon: <HomeIcon />,
-        onClick: () => 
-          props.history.push("/Admin")
-      },
-      {
-        text: "Add new admin",
-        icon: <PersonAddIcon />,
-        onClick: () => 
-          props.history.push("/AddAdmin")
-      },
-      {
-        text: "Logout",
-        icon: <ExitToAppIcon />,
-        onClick: () => {
-          console.log(props);
-          localStorage.removeItem("usertoken");
-          console.log("Admin loged out");
-          props.history.push("/");
-        },
-      },
-    ];
-  }
-  else  itemsList = [
-    {
-      text: "Login",
-      icon: <VpnKeyIcon />,
-      onClick: () => 
-        props.history.push("/AdminLogin")
-    },
-  ];
 
+  
   const [state, setState] = useState({
     right: false,
   });

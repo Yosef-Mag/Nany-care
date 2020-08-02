@@ -1,5 +1,5 @@
 import React from 'react';
-import  {ScrollView, Button, Text} from 'react-native'
+import  {ScrollView, Button, Text , KeyboardAvoidingView} from 'react-native'
 import { Formik } from 'formik';
 import { View } from 'react-native-animatable';
 import { TextInput, Text, Button } from 'react-native-paper';
@@ -15,16 +15,6 @@ const reviewSchema = yup.object({
     .test("is-age-<18", "you must be 18 or older", (val) => {
       return parseInt(val) > 18 && parseInt(val) < 100;
     }),
-
-  // Email : yup.string()
-  //             .email()
-  //             .required(),
-
-  // PhoneNumber : yup.number()
-  //                 .required()
-  //                 .test("is-phone<10", "phone number must have 10 nubers", (val) => {
-  //                     return parseInt(val) === 10
-  //                 }),
 
   NumberOfKidsYouCanHandel: yup
     .number()
@@ -54,6 +44,22 @@ const reviewSchema = yup.object({
 export default function HiringForm() {
   return (
     <ScrollView>
+     <View>
+      <KeyboardAvoidingView behavior="position" disabled>
+        <View
+          style={{ marginTop: 50, marginLeft: "auto", marginRight: "auto" }}
+        >
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              color: "#CC7575",
+              marginTop: 150,
+            }}
+          >
+            Welcome To Nany Family !
+          </Text>
+        </View>
       <View>
         <Formik
           initialValues={{
@@ -135,7 +141,7 @@ export default function HiringForm() {
                 }
                 onBlur={props.handleBlur("NumberOfKidsYouCanHandel")}
               ></TextInput>
-              {/* Handling test for numberOfKids */}
+              {/* Handling test for numberOfKids   */}
               <Text>
                 {" "}
                 {props.touched.NumberOfKidsYouCanHandel &&
@@ -203,6 +209,8 @@ export default function HiringForm() {
           )}
         </Formik>
       </View>
+      </KeyboardAvoidingView>
+    </View>
     </ScrollView>
   );
 }

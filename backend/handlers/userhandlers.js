@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
 // var accountSid = config.accountSid; // Your Account SID from www.twilio.com/console
@@ -39,7 +39,7 @@ module.exports = {
       .catch((err) => console.log(err));
   },
   userSignUp: function (req, res) {
-    console.log(req.body);
+    // console.log(req);
     var x = req.body;
     var newUser = new User({
       email: x.Email,
@@ -63,6 +63,7 @@ module.exports = {
                 })
                 .catch((err) => {
                   console.log("Error is ", err.message);
+                  res.send("Error is ", err.message);
                 });
             }
           });
@@ -110,14 +111,18 @@ module.exports = {
                   expiresIn: "1h",
                 }
               );
+              // console.log(res.message)
+
               res.status(200).json({
                 message: "Auth granted, welcome!",
                 token: token,
+
               });
               console.log(token);
-            } else {
-              res.send("User Unauthorized Access");
-            }
+            } 
+            // else {
+            //   res.send("User Unauthorized Access");
+            // }
           });
         }
       })
@@ -153,36 +158,7 @@ module.exports = {
       }
     });
   },
-  payment: function (req, res) {
-    return stripe.charges
-      .create({
-        amount: req.body.amount, // Unit: cents
-        currency: "eur",
-        source: req.body.tokenId,
-        description: "Test payment",
-      })
-      .then((result) => res.status(200).json(result));
-  },
-  // sendSMS: function (req, res) {
-  //   console.log("hi from send sms");
-  //   var location = req.body;
-  //   client.messages
-  //     .create({
-  //       body:
-  //         "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://www.google.com/maps/search/?api=1&query=" +
-  //         location.latitude +
-  //         "," +
-  //         location.longitude,
-  //       to: toNum, // Text this number
-  //       from: fromNum, // From a valid Twilio number
-  //     })
-  //     .then((message) => console.log(message))
-  //     .catch((err) => console.log(err));
-  // }
-};
-
-  // // middleware to validate token
-  // const verifyToken = (req, res, next) => {
+  // verifyToken: (req, res, next) => {
   //   const token = req.header("auth-token");
   //   if (!token) return res.status(401).json({ error: "Access denied" });
   //   try {
@@ -192,4 +168,33 @@ module.exports = {
   //   } catch (err) {
   //     res.status(400).json({ error: "Token is not valid" });
   //   }
+  // },
+};
+// payment: function (req, res) {
+//   return stripe.charges
+//     .create({
+//       amount: req.body.amount, // Unit: cents
+//       currency: "eur",
+//       source: req.body.tokenId,
+//       description: "Test payment",
+//     })
+//     .then((result) => res.status(200).json(result));
+// },
+// sendSMS: function (req, res) {
+//   console.log("hi from send sms");
+//   var location = req.body;
+//   client.messages
+//     .create({
+//       body:
+//         "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://www.google.com/maps/search/?api=1&query=" +
+//         location.latitude +
+//         "," +
+//         location.longitude,
+//       to: toNum, // Text this number
+//       from: fromNum, // From a valid Twilio number
+//     })
+//     .then((message) => console.log(message))
+//     .catch((err) => console.log(err));
+// }
 
+// middleware to validate token
