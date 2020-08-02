@@ -45,10 +45,11 @@ app.get("/profilee", userhandlers.retriveUserByToken);
 
 app.post("/AddAdmin", Adminhandlers.adminSignUp);
 app.post("/adminLogin", Adminhandlers.adminLogIn);
+app.post("/AddNanny", Adminhandlers.addNewNanny);
 app.post("/reserve", Nannyhandlers.reserve);
 // app.post("/sendSMS", userhandlers.sendSMS);
 app.get("/Admin", Adminhandlers.retriveAllNanies);
-app.delete("/deleteSpecificNany", Adminhandlers.deleteSpecificNany);
+app.delete("/delete/:id", Adminhandlers.deleteSpecificNany);
 app.patch("/updateNanyInformation", Adminhandlers.updateNanyInformation);
 // app.post("/checkout", payment.checkout);
 // app.get('/web/checkout/redirect',payment.redirect);

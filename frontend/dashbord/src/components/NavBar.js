@@ -17,6 +17,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 
 const useStyles = makeStyles({
@@ -28,7 +29,7 @@ const useStyles = makeStyles({
 });
 
 const Drawer = (props) => {
-  const itemsList = [
+  var itemsList = [
     {
       text: "Home",
       icon: <HomeIcon />,
@@ -50,6 +51,40 @@ const Drawer = (props) => {
         console.log("Admin loged out");
         props.history.push("/");
       },
+    },
+  ];
+  if (localStorage.usertoken) {
+    itemsList = [
+      {
+        text: "Home",
+        icon: <HomeIcon />,
+        onClick: () => 
+          props.history.push("/Admin")
+      },
+      {
+        text: "Add new admin",
+        icon: <PersonAddIcon />,
+        onClick: () => 
+          props.history.push("/AddAdmin")
+      },
+      {
+        text: "Logout",
+        icon: <ExitToAppIcon />,
+        onClick: () => {
+          console.log(props);
+          localStorage.removeItem("usertoken");
+          console.log("Admin loged out");
+          props.history.push("/");
+        },
+      },
+    ];
+  }
+  else  itemsList = [
+    {
+      text: "Login",
+      icon: <VpnKeyIcon />,
+      onClick: () => 
+        props.history.push("/AdminLogin")
     },
   ];
 

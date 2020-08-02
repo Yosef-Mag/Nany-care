@@ -1,5 +1,5 @@
 import React from 'react';
-import  {ScrollView} from 'react-native'
+import  {ScrollView, Button, Text} from 'react-native'
 import { Formik } from 'formik';
 import { View } from 'react-native-animatable';
 import { TextInput, Text, Button } from 'react-native-paper';
