@@ -9,13 +9,13 @@ var User = items.User;
 var User = items.User;
 
 const cors = require("cors");
-const router = express.Router();
+// const router = express.Router();
 var Nannyhandlers = require("./handlers/Nannyhandlers");
 var Adminhandlers = require("./handlers/Adminhandlers");
 var userhandlers = require("./handlers/userhandlers");
 
 var app = express();
-app.use(cors({ origin: true, credentials: true }));
+// app.use(cors({ origin: true, credentials: true }));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

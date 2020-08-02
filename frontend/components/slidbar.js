@@ -8,7 +8,7 @@ import {
 
 import Payment from "./payment";
 import ContactUS from "./ContactUS";
-import SignUpPage from "./signup";
+// import SignUpPage from "./signup";
 import LoginPage from "./Login";
 import AllNany from "./Home";
 
@@ -19,17 +19,9 @@ import MapScreen from "./map";
 function Profile1() {
   return <Profile />;
 }
-
-function Login() {
-  return <LoginPage />;
-}
 function payment() {
   return <Payment />;
 }
-function SignUp() {
-  return <SignUpPage />;
-}
-
 function Home1() {
   return <AllNany />;
 }
