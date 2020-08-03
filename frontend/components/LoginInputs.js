@@ -3,6 +3,8 @@ import { Formik } from "formik";
 import { View } from "react-native-animatable";
 import { TextInput, Button, Text } from "react-native-paper";
 import axios from "axios";
+import { AsyncStorage } from 'react-native';
+
 export default function Login({ navigation }) {
   return (
     <View>
@@ -33,10 +35,19 @@ export default function Login({ navigation }) {
                 .then(function (res) {
                   console.log(res.data.token);
                   if (res.data.token) {
+                    try {
+                      AsyncStorage.setItem('token', JSON.stringify(res.data.token)); 
+                       console.log(JSON.stringify(res.data.token)) 
+                    } catch (error) {
+                      console.log(error.message);
+                    }
+                    
+                      console.log(res.data.token);
                     navigation.navigate("AllNany");
                     
                   } else {
                     if (res.data === "User not exist") {
+                      
                       alert(" User does not exist");
                     }
                   }

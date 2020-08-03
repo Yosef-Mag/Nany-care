@@ -16,13 +16,13 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-
 import Payment from "./payment";
 import ContactUS from "./ContactUS";
 import AllNany from "./Home";
 import Profile from "./profile";
 import MapScreen from "./map";
 import Logout from "./Logout";
+import { AsyncStorage } from 'react-native';
 
 // import { TokenPage, TokenList } from "twilio/lib/rest/api/v2010/account/token";
 function Profile1() {
@@ -96,22 +96,37 @@ function MyDrawer() {
               }
             }
 
-            function nannyReserved(nany) {
-              // function to reserve the nanny called once the reserve button clicked
+            function nannyReserved(nany) { // function to reserve the nanny called once the reserve button clicked
+            
+              var arr = [];
+
               axios
                 .post(`http://192.168.1.16:5000/reserve`, nany)
                 .then((res) => res
-                  // navigation.navigate("SignUp");
                )
-
-                // .then(() => {
-                //   () => navigation.navigate("SignUp")
-                // } )
-                .then(() => {
-                  console.log(nany)
+                .then((data) => {
+                
+                 AsyncStorage.getItem('token').then((res) => { 
+                     arr.push(res) 
+                  }
+                // console.log(res)
+                )
+                   //console.log(arr)
+                  AsyncStorage.setItem('nany', JSON.stringify(nany))
+                  AsyncStorage.getItem('nany').then((res) => {
+                    arr.push(res) 
+                  })
+                  console.log(arr)
+                  //console.log(nany)
+                  var alldata = Object.fromEntries(arr)
+                  console.log(alldata)
+                  AsyncStorage.setItem('user&Nanny', alldata)
+                  AsyncStorage.getItem('user&Nanny').then((res) => {
+                    console.log(res)
+                    
+                  })
 
                 } )
-
                 .catch((err) => console.log(err));
             }
 
