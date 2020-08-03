@@ -5,7 +5,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import Logout from "./Logout"
+import Logout from "./Logout";
 import Payment from "./payment";
 import ContactUS from "./ContactUS";
 // import SignUpPage from "./signup";
@@ -19,8 +19,7 @@ import MapScreen from "./map";
 function Profile1() {
   return <Profile />;
 }
-function Logout1(){
- 
+function Logout1() {
   return <Logout />;
 }
 function payment() {
@@ -67,12 +66,8 @@ function MyDrawer() {
       <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="Map" component={Map} />
 
-<<<<<<< HEAD
-=======
-      
       <Drawer.Screen name="Logout" component={Logout1} />
       <Drawer.Screen name="Profile" component={Profile1} />
->>>>>>> 7d61d95a748fc4efb107abad1752a1a8fc9cb915
       <Drawer.Screen name="Contact Us" component={ContactUs} />
     </Drawer.Navigator>
   );

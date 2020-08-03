@@ -1,20 +1,21 @@
 import React from "react";
 import { Formik } from "formik";
 import { View } from "react-native-animatable";
-import { Button, Card, Icon, Input, NavBar, Text } from "galio-framework";
+import { Button, Input, Text } from "galio-framework";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
   StyleSheet,
   ImageBackground,
   KeyboardAvoidingView,
 } from "react-native";
-import axios from "axios";
 import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+
+import axios from "axios";
 const image = {
   uri:
     "https://images.theconversation.com/files/338577/original/file-20200529-78875-18d0wif.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
 };
-import { AntDesign } from "@expo/vector-icons";
 export default function Signup({ navigation }) {
   return (
     <ImageBackground
@@ -39,7 +40,6 @@ export default function Signup({ navigation }) {
                 axios
                   .post("http://192.168.127.43:5000/signup", values)
 
-<<<<<<< HEAD
                   .then(function (res) {
                     console.log(res.data);
                     if (res.data === "User authenticated") {
@@ -69,75 +69,6 @@ export default function Signup({ navigation }) {
                     }}
                   >
                     <Text>Name</Text>
-=======
-                .then(function (res) {
-                  console.log(res.data);
-                  if (res.data === "User authenticated") {
-                    navigation.navigate("Login");
-                  } else {
-                    if (res.data === "User already exists...") {
-                      alert("User already exists...");
-                    }
-                  }
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-            }}
-          >
-            {(props) => (
-              <View>
-                {/* Name inpute */}
-                <TextInput
-                  placeholder="Please enter name "
-                  onChangeText={props.handleChange("Name")}
-                  value={props.values.Name}
-                  onBlur={function allLetter(uname) {
-                    var letters = /^[A-Za-z]+$/;
-                    if (props.values.Name.match(letters)) {
-                      
-                      return true;
-                    } else {
-                      alert("Username must have alphabet characters only");
-                      uname.focus();
-                      return false;
-                    }
-                  }}
-                ></TextInput>
-                {/* Email input */}
-                <TextInput
-                  placeholder="Please enter email "
-                  onChangeText={props.handleChange("Email")}
-                  type="email-address"
-                  value={props.values.Email}
-                  onBlur={function ValidateEmail(mail) {
-                    if (
-                      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-                        props.values.Email
-                      )
-                    ) {
-                      return true;
-                    }
-                    alert("You have entered an invalid email address!");
-                    return false;
-                  }}
-                ></TextInput>
-                {/* PhoneNumber input */}
-                <TextInput
-                  placeholder="Please enter your phone number "
-                  onChangeText={props.handleChange("PhoneNumber")}
-                  value={props.values.PhoneNumber}
-                  onBlur={function phonenumber(number) {
-                    var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-                    if (props.values.PhoneNumber.match(phoneno)) {
-                      return true;
-                    } else {
-                      alert("Not a valid Phone Number");
-                      return false;
-                    }
-                  }}
-                ></TextInput>
->>>>>>> 7d61d95a748fc4efb107abad1752a1a8fc9cb915
 
                     <MaterialIcons
                       name="perm-identity"
@@ -269,7 +200,6 @@ export default function Signup({ navigation }) {
                     }}
                   ></Input>
 
-<<<<<<< HEAD
                   {/* submit bttn  */}
                   <View
                     style={{
@@ -293,23 +223,6 @@ export default function Signup({ navigation }) {
         </KeyboardAvoidingView>
       </View>
     </ImageBackground>
-=======
-                {/* submit bttn  */}
-                <Button
-                  title="signUp"
-                  mode="contained"
-                  Text="signUp"
-                  onPress={props.handleSubmit}
-                >
-                  <Text style={{ color: "pink" }}>Signup</Text>
-                </Button>
-              </View>
-            )}
-          </Formik>
-        </View>
-      </KeyboardAvoidingView>
-    </View>
->>>>>>> 7d61d95a748fc4efb107abad1752a1a8fc9cb915
   );
 }
 const style = StyleSheet.create({
@@ -317,24 +230,9 @@ const style = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
-<<<<<<< HEAD
   image: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-=======
-  textButton: {
-    width: 140,
-    padding: 10,
-    fontSize: 20,
-    marginTop: 10 + "%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    fontWeight: "bold",
-    borderRadius: 30,
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#f0f",
->>>>>>> 7d61d95a748fc4efb107abad1752a1a8fc9cb915
   },
 });

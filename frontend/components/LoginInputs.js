@@ -17,7 +17,6 @@ const image = {
 import axios from "axios";
 export default function Login({ navigation }) {
   return (
-<<<<<<< HEAD
     <ImageBackground
       source={image}
       style={style.image}
@@ -45,41 +44,6 @@ export default function Login({ navigation }) {
                       if (res.data === "User not exist") {
                         alert(" User does not exist");
                       }
-=======
-    <View>
-      <KeyboardAvoidingView behavior="position" disabled>
-        <View
-          style={{ marginTop: 50, marginLeft: "auto", marginRight: "auto" }}
-        >
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: "bold",
-              color: "#CC7575",
-              marginTop: 150,
-            }}
-          >
-            Welcome To Nany App !
-          </Text>
-        </View>
-        <View>
-          <Formik
-            initialValues={{
-              Email: "",
-              password: "",
-            }}
-            onSubmit={(values) => {
-              axios
-                .post("http://192.168.1.65:5000/login", values)
-                .then(function (res) {
-                  console.log(res.data.token);
-                  if (res.data.token) {
-                    navigation.navigate("AllNany");
-                    
-                  } else {
-                    if (res.data === "User not exist") {
-                      alert(" User does not exist");
->>>>>>> 7d61d95a748fc4efb107abad1752a1a8fc9cb915
                     }
                   })
                   .catch(function (error) {
@@ -101,7 +65,6 @@ export default function Login({ navigation }) {
                     <MaterialIcons name="email" size={24} color="black" />
                   </View>
 
-<<<<<<< HEAD
                   <Input
                     onChangeText={props.handleChange("Email")}
                     value={props.values.Email}
@@ -200,40 +163,6 @@ export default function Login({ navigation }) {
         </KeyboardAvoidingView>
       </View>
     </ImageBackground>
-=======
-                {/* submit bttn  */}
-                <Button
-                  title="login"
-                  mode="contained"
-                  onPress={props.handleSubmit}
-                  Text="Login"
-                >
-                  <Text style={{ color: "pink" }}>Login</Text>
-                </Button>
-                <Button
-                  title="SignUp"
-                  mode="contained"
-                  Text="SignUp"
-                  onPress={() => navigation.navigate("SignUp")}
-                >
-                  <Text style={{ color: "pink" }}>SignUp</Text>
-                </Button>
-                <Button
-                  title="HiringForm"
-                  mode="contained"
-                  Text="HiringForm"
-                  onPress={() => navigation.navigate("HiringForm")}
-                >
-                  <Text style={{ color: "pink" }}>HiringForm</Text>
-                </Button>
-                
-              </View>
-            )}
-          </Formik>
-        </View>
-      </KeyboardAvoidingView>
-    </View>
->>>>>>> 7d61d95a748fc4efb107abad1752a1a8fc9cb915
   );
 }
 const style = StyleSheet.create({
