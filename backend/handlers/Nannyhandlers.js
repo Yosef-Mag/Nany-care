@@ -72,13 +72,13 @@ module.exports = {
       } else {
         console.log(req);
         res.json(nany);
-      }
+      } 
     });
   },
 
-  reserve: function (req, res) {
-    var reserveData = req.body;
-    console.log(reserveData);
-    res.json(reserveData);
-  },
+  reserve: function (req, res){
+   var reserveData = req.body;
+      console.log('fnh',req.body )
+      res.json(reserveData)
+  } 
 };
