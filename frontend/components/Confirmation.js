@@ -25,6 +25,12 @@ export default function SimplePopover() {
   //     .catch(error => console.log(error));
   // }, []);
 
+  // function to calculate cost based on how many hours reserved
+
+  const calculate = (cost) => {
+
+
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

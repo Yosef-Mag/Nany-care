@@ -3,7 +3,7 @@ import axios from "axios";
 // adding admin func
 export const addadmin = (newUser) => {
   return axios
-    .post("http://172.16.0.161:5000/AddAdmin", {
+    .post("http://192.168.1.16:5000/AddAdmin", {
       userName: newUser.username,
       password: newUser.password,
     })
@@ -18,7 +18,7 @@ export const addadmin = (newUser) => {
 // login func
 export const adminlogin = (admin) => {
   return axios
-    .post("http://172.16.0.161:5000/AdminLogin", {
+    .post("http://192.168.1.16:5000/AdminLogin", {
       userName: admin.username,
       password: admin.password,
     })

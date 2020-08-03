@@ -9,7 +9,7 @@ import {
 import Payment from "./payment";
 import ContactUS from "./ContactUS";
 // import SignUpPage from "./signup";
-import LoginPage from "./Login";
+//import LoginPage from "./Login";
 import AllNany from "./Home";
 
 import Profile from "./profile";

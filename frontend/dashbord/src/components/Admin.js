@@ -11,7 +11,7 @@ export default function AllNanny() {
 
 const [nannylist, setNannylist] = useState([]); // state to hold all nanny records data
 useEffect(() => {
-    fetch(`http://192.168.127.74:5000/Admin`)
+    fetch(`http://192.168.1.16:5000/Admin`)
       .then(res => res.json())
       .then(response => {
         setNannylist(response);
