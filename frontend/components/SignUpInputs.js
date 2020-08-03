@@ -3,13 +3,13 @@ import { Formik } from "formik";
 import { View } from "react-native-animatable";
 import { Button, Input, Text } from "galio-framework";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import {
   StyleSheet,
   ImageBackground,
   KeyboardAvoidingView,
 } from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 
 import axios from "axios";
 const image = {

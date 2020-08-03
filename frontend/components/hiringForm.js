@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, SafeAreaView } from "react-native";
 import { Formik } from "formik";
 import { View } from "react-native-animatable";
 import TextTicker from "react-native-text-ticker";
@@ -64,22 +64,26 @@ export default function HiringForm() {
       style={styles.image}
       imageStyle={{ opacity: 0.7 }}
     >
-      <ScrollView>
-        <View>
-          <KeyboardAvoidingView behavior="position" disabled>
-            <View style={styles.container}>
-              <TextTicker
-                style={{ fontSize: 16 }}
-                duration={3000}
-                loop
-                bounce
-                repeatSpacer={50}
-                marqueeDelay={1000}
-              >
-                Welcome to Nany Family Welcome to Nany Family Welcome to Nany
-                Family
-              </TextTicker>
-            </View>
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={{ marginTop: "30%", marginBottom: "30%" }}>
+          <View>
+            <TextTicker
+              style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                color: "black",
+                marginTop: 50,
+                marginBottom: 50,
+              }}
+              duration={3000}
+              loop
+              bounce
+              repeatSpacer={50}
+              marqueeDelay={1000}
+            >
+              Welcome to Nany Family .. Welcome to Nany Family... Welcome to
+              Nany Family
+            </TextTicker>
             <View>
               <Formik
                 initialValues={{
@@ -234,6 +238,7 @@ export default function HiringForm() {
                       />
                     </View>
                     <Input
+                      placeholder="Enter number between 1-9"
                       onChangeText={props.handleChange(
                         "NumberOfKidsYouCanHandel"
                       )}
@@ -391,9 +396,9 @@ export default function HiringForm() {
                 )}
               </Formik>
             </View>
-          </KeyboardAvoidingView>
-        </View>
-      </ScrollView>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </ImageBackground>
   );
 }
