@@ -4,7 +4,7 @@ import { View } from "react-native-animatable";
 import { TextInput, Button } from "react-native-paper";
 import { Text, StyleSheet, KeyboardAvoidingView } from "react-native";
 import axios from "axios";
-export default function LoginInputs({ navigation }) {
+export default function Login({ navigation }) {
   return (
     <View>
       <KeyboardAvoidingView behavior="position" disabled>
@@ -35,6 +35,7 @@ export default function LoginInputs({ navigation }) {
                   console.log(res.data.token);
                   if (res.data.token) {
                     navigation.navigate("AllNany");
+                    
                   } else {
                     if (res.data === "User not exist") {
                       alert(" User does not exist");
@@ -98,6 +99,7 @@ export default function LoginInputs({ navigation }) {
                 >
                   <Text style={{ color: "pink" }}>HiringForm</Text>
                 </Button>
+                
               </View>
             )}
           </Formik>

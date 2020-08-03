@@ -38,18 +38,13 @@ export default function Signup({ navigation }) {
                 .then(function (res) {
                   console.log(res.data);
                   if (res.data === "User authenticated") {
-                    navigation.navigate("LoginPage");
+                    navigation.navigate("Login");
                   } else {
-                    if (res.data === "User authenticated") {
-                      navigation.navigate("LoginPage");
-                    } else {
-                      if (res.data === "User already exists...") {
-                        alert("User already exists...");
-                      }
+                    if (res.data === "User already exists...") {
+                      alert("User already exists...");
                     }
                   }
                 })
-
                 .catch(function (error) {
                   console.log(error);
                 });
@@ -65,6 +60,7 @@ export default function Signup({ navigation }) {
                   onBlur={function allLetter(uname) {
                     var letters = /^[A-Za-z]+$/;
                     if (props.values.Name.match(letters)) {
+                      
                       return true;
                     } else {
                       alert("Username must have alphabet characters only");
@@ -135,8 +131,6 @@ export default function Signup({ navigation }) {
                 >
                   <Text style={{ color: "pink" }}>Signup</Text>
                 </Button>
-                
-                
               </View>
             )}
           </Formik>
@@ -168,6 +162,6 @@ const style = StyleSheet.create({
     borderRadius: 30,
     color: "white",
     textAlign: "center",
-    backgroundColor: "60ecff",
+    backgroundColor: "#f0f",
   },
 });
