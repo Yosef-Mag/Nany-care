@@ -49,7 +49,7 @@ export default function MapScreen() {
 
   const onSubmit = (text) => {
     axios
-      .post("http://192.168.127.43:5000/sendSMS", selectedLocation)
+      .post("http://192.168.1.65:5000/sendSMS", selectedLocation)
       .then(function (response) {
         console.log(response);
       })

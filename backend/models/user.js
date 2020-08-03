@@ -39,16 +39,16 @@ const userSchema = new Schema({
 });
 var nanySchema = new Schema({
   name: { type: String, required: true },
-  image: { type: String, required: true },
-  email: { type: String, required: true },
   phoneNumber: { type: Number, required: true, unique: true },
-  kidsNum: { type: Number, required: true, unique: true },
+  email: { type: String, required: true },
   place: { type: String, required: true },
+  kidsNum: { type: Number, required: true, unique: true },
+  cost: { type: String, required: true },
   educationLevel: { type: String, required: true },
+  experianceLevel: { type: String, required: true },
   age: { type: Number, required: true },
   workingHour: { type: Number, required: true },
-  cost: { type: String, required: true },
-  experianceLevel: { type: String, required: true },
+  image: { type: String, required: false },
 });
 
 const adminSchema = new Schema({

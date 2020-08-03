@@ -1,11 +1,10 @@
 import React from 'react';
-import  {ScrollView, Button, Text , KeyboardAvoidingView} from 'react-native'
+import  {ScrollView, KeyboardAvoidingView} from 'react-native'
 import { Formik } from 'formik';
 import { View } from 'react-native-animatable';
-import { TextInput } from 'react-native-paper';
+import { TextInput, Text, Button } from 'react-native-paper';
 import axios from 'axios'
 import * as yup from 'yup'
-//import { Block, Button, Card, Icon, Input, NavBar, Text } from 'galio-R';
 
 const reviewSchema = yup.object({
   Name: yup.string().strict().required(),
@@ -78,7 +77,7 @@ export default function HiringForm() {
           onSubmit={(values) => {
             console.log(values);
             axios
-              .post("http://192.168.127.43:5000/HiringForm", values)
+              .post("http://192.168.1.65:5000/HiringForm", values)
               .then(function (response) {
                 console.log(response);
               })

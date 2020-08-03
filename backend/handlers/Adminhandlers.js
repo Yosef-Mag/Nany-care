@@ -127,10 +127,7 @@ module.exports = {
       });
   },
 
-  adminLogout: function (req, res) {
-    req.session.destroy();
-    return res.status(200).send("logout");
-  },
+
   retriveAllNanies: function (req, res) {
     Nany.find(function (err, nannies) {
       if (err) {
@@ -140,7 +137,7 @@ module.exports = {
     });
   },
   deleteSpecificNany: function (req, res) {
-    Nany.findById(req.params.id)
+    Nany.findOne({_id: req.params.id})
       .then((item) => item.remove().then(() => res.json({ success: true })))
       .catch((err) => res.status(404).json({ success: false }));
   },
@@ -151,4 +148,20 @@ module.exports = {
         .then(() => res.json({ success: true }))
     );
   },
+  addNewNanny: function(req, res) {
+    const newNanny = new Nany({
+        name: req.body.name,
+        phoneNumber: req.body.phoneNumber,
+        email: req.body.email,
+        place: req.body.place,
+        kidsNum: req.body.kidsNum,
+        cost: req.body.cost,
+        educationLevel: req.body.educationLevel,
+        experianceLevel: req.body.experianceLevel,
+        age: req.body.age,
+        workingHour: req.body.workingHour,
+    });
+    newNanny.save()
+          .then(console.log('added'));
+  }
 };
