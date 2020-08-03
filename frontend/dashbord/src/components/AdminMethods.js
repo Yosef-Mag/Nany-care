@@ -15,10 +15,33 @@ export const addadmin = (newUser) => {
     });
 };
 
+// adding nanny func
+export const addnanny = (newNanny) => {
+  return axios
+    .post("http://localhost:5000/AddNanny", {
+      name: newNanny.name,
+      phoneNumber: newNanny.phoneNumber,
+      email: newNanny.email,
+      place: newNanny.place,
+      kidsNum: newNanny.kidsNum,
+      cost: newNanny.cost,
+      educationLevel: newNanny.educationLevel,
+      experianceLevel: newNanny.experianceLevel,
+      age: newNanny.age,
+      workingHour: newNanny.workingHour,
+    })
+    .then((res) => {
+      console.log("New Nanny has been added");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 // login func
 export const adminlogin = (admin) => {
   return axios
-    .post("http://172.16.0.161:5000/AdminLogin", {
+    .post("http://localhost:5000/AdminLogin", {
       userName: admin.username,
       password: admin.password,
     })
@@ -35,14 +58,5 @@ export const adminlogin = (admin) => {
 };
 
 
-
-// geting all the nanny form DB
-// export function loadData()  {
-//    axios.get('http://localhost:5000/admin')
-//   .then(response => {
-//   console.log("fetched")
-//   this.setState({ nannies: nannies, dataLoaded: true, toggleEditBox: false })
-//   })
-// }
 
 // TODO ?! admin profile

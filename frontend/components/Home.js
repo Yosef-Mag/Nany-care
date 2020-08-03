@@ -108,7 +108,7 @@ function nannyReserved(nany) {// function to reserve the nanny called once the r
       <ScrollView style={{ width: '100%' }}>
 
             <View style={styles.box}>
-              <Image style={styles.image} source={{uri:nany.image}}/>
+              <Image style={styles.image} source={{uri:nany.image} }/>
               <View style={styles.boxContent}>
                 <Text style={styles.title}>Name: {nany.name}</Text>
                 <Text style={styles.title}>Place: {nany.place}</Text>
