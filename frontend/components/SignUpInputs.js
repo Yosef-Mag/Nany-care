@@ -168,6 +168,6 @@ const style = StyleSheet.create({
     borderRadius: 30,
     color: "white",
     textAlign: "center",
-    backgroundColor: "60ecff",
+    backgroundColor: "#60ecff",
   },
 });
