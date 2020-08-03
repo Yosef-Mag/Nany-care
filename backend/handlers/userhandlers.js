@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var items = require("../models/user");
 var User = items.User;
-// var config = require("../config");
+var config = require("../config");
 const cors = require("cors");
 var app = express();
 app.use(cors({ origin: true, credentials: true }));
@@ -59,6 +59,7 @@ module.exports = {
               newUser
                 .save()
                 .then(() => {
+                  console.log("user saved");
                   res.send("User authenticated");
                 })
                 .catch((err) => {
@@ -116,10 +117,9 @@ module.exports = {
               res.status(200).json({
                 message: "Auth granted, welcome!",
                 token: token,
-
               });
               console.log(token);
-            } 
+            }
             // else {
             //   res.send("User Unauthorized Access");
             // }

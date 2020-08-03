@@ -8,16 +8,15 @@ import AuthLoadingScreen from "./components/loading";
 import HiringForm from "./components/hiringForm";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-const AppStack = createStackNavigator({ 
+const AppStack = createStackNavigator({
   AllNany: AllNany,
-   MyDrawer:MyDrawer,
-   MapScreen:MapScreen,
-   });
+  MyDrawer: MyDrawer,
+  MapScreen: MapScreen,
+});
 const AuthStack = createStackNavigator({
   Login: Login,
   SignUp: SignUp,
   HiringForm: HiringForm,
-  
 });
 
 export default createAppContainer(
