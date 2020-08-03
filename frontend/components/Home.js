@@ -16,7 +16,7 @@ export default function AllNany() { // function to render results based on selec
 
 //fetching data from the db 
   useEffect(() => {
-    fetch(`http://192.168.127.74:5000/ret`)
+    fetch(`http://192.168.1.16:5000/ret`)
       .then(res => res.json())
       .then(response => {
         setNanylist(response);
