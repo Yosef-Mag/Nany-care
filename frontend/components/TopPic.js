@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#52575D",
+    marginLeft: "20px",
+    marginRight: "auto",
   },
 
   tempNav: {

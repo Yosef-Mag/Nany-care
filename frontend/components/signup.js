@@ -18,7 +18,6 @@ import SignUpInputs from "./SignUpInputs";
 export default class SignUpPage extends React.Component {
   constructor(props) {
     super(props);
-   
   }
   onPressLearnMore() {}
   render() {
@@ -41,7 +40,6 @@ export default class SignUpPage extends React.Component {
           </View>
 
           <SignUpInputs />
-
 
           {/* own buttons design */}
 

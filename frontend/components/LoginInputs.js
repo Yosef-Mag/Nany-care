@@ -4,7 +4,7 @@ import { View } from "react-native-animatable";
 import { TextInput, Button } from "react-native-paper";
 import { Text, StyleSheet, KeyboardAvoidingView } from "react-native";
 import axios from "axios";
-export default function LoginInputs({ navigation }) {
+export default function Login({ navigation }) {
   return (
     <View>
       <KeyboardAvoidingView behavior="position" disabled>
@@ -30,7 +30,7 @@ export default function LoginInputs({ navigation }) {
             }}
             onSubmit={(values) => {
               axios
-                .post("http://192.168.1.65:5000/login", values)
+                .post("http://172.16.0.161:5000/login", values)
                 .then(function (res) {
                   console.log(res.data.token);
                   if (res.data.token) {

@@ -116,10 +116,9 @@ module.exports = {
               res.status(200).json({
                 message: "Auth granted, welcome!",
                 token: token,
-
               });
               console.log(token);
-            } 
+            }
             // else {
             //   res.send("User Unauthorized Access");
             // }
@@ -149,12 +148,13 @@ module.exports = {
       });
   },
   retriveUserByToken: function (req, res) {
-    User.find({ email: "sura@gmail.com" }, function (err, user) {
+    var email = req.body.email
+    User.find({ email: email }, function (err, user) {
       if (err) {
         res.json(err);
       } else {
-        console.log(user[0]);
-        res.json(user[0]);
+        console.log(user);
+        res.send(user);
       }
     });
   },
