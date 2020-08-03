@@ -17,6 +17,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 
 const useStyles = makeStyles({
@@ -28,7 +29,7 @@ const useStyles = makeStyles({
 });
 
 const Drawer = (props) => {
-  const itemsList = [
+  var itemsList = [
     {
       text: "Home",
       icon: <HomeIcon />,
@@ -42,6 +43,12 @@ const Drawer = (props) => {
         props.history.push("/AddAdmin")
     },
     {
+      text: "Login",
+      icon: <VpnKeyIcon />,
+      onClick: () => 
+        props.history.push("/AdminLogin")
+    },
+    {
       text: "Logout",
       icon: <ExitToAppIcon />,
       onClick: () => {
@@ -53,6 +60,7 @@ const Drawer = (props) => {
     },
   ];
 
+  
   const [state, setState] = useState({
     right: false,
   });
