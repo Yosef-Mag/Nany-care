@@ -33,7 +33,7 @@ export default function Signup({ navigation }) {
             onSubmit={(values) => {
               // console.log(values);
               axios
-                .post("http://192.168.1.65:5000/signup", values)
+                .post("http://192.168.1.115:5000/signup", values)
 
                 .then(function (res) {
                   console.log(res.data);
