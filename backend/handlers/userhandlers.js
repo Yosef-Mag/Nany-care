@@ -2,7 +2,11 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var items = require("../models/user");
 var User = items.User;
+<<<<<<< HEAD
 var config = require("../config");
+=======
+// var config = require("../config");
+>>>>>>> 7d61d95a748fc4efb107abad1752a1a8fc9cb915
 const cors = require("cors");
 var app = express();
 app.use(cors({ origin: true, credentials: true }));
