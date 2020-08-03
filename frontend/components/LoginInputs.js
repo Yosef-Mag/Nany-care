@@ -1,12 +1,12 @@
 import React from "react";
 import { Formik } from "formik";
 import { View } from "react-native-animatable";
-import { TextInput, Button } from "react-native-paper";
+import { TextInput, Button, Text } from "react-native-paper";
 import axios from "axios";
 export default function Login({ navigation }) {
   return (
     <View>
-      <KeyboardAvoidingView behavior="position" disabled>
+      {/* <KeyboardAvoidingView behavior="position" disabled> */}
         <View
           style={{ marginTop: 50, marginLeft: "auto", marginRight: "auto" }}
         >
@@ -29,7 +29,7 @@ export default function Login({ navigation }) {
             }}
             onSubmit={(values) => {
               axios
-                .post("http://192.168.1.65:5000/login", values)
+                .post("http://192.168.1.16:5000/login", values)
                 .then(function (res) {
                   console.log(res.data.token);
                   if (res.data.token) {
@@ -103,7 +103,7 @@ export default function Login({ navigation }) {
             )}
           </Formik>
         </View>
-      </KeyboardAvoidingView>
+      {/* </KeyboardAvoidingView> */}
     </View>
   );
 }
