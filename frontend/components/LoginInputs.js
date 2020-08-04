@@ -34,7 +34,8 @@ export default function Login({ navigation }) {
                 .then(function (res) {
                   console.log(res.data.token);
                   if (res.data.token) {
-                    navigation.navigate("AllNany");
+                    navigation.navigate("AllNany",{'MapScreen':'MapScreen'});
+                    // { navigation.navigate('page1',{"pageName":"page1"})}
                     
                   } else {
                     if (res.data === "User not exist") {
