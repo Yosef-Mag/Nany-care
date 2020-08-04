@@ -4,6 +4,7 @@ import {
   Text,
   Picker,
   ScrollView,
+  Icon,
   ImageBackground,
   Image,
   StyleSheet,
@@ -118,15 +119,20 @@ function MyDrawer() {
               <ImageBackground
                 source={image}
                 style={styles.image}
-                imageStyle={{ opacity: 0.2 }}
+                imageStyle={{ opacity: 0.1 }}
               >
                 <View>
                   <ScrollView>
                     {/* city picker */}
 
-                    <Text> Select a city </Text>
+                    <Text style={{ marginRight: "35%", marginBottom: "5%" }}>
+                      {" "}
+                      where do you live?
+                    </Text>
+
                     <Picker
                       nanylist={nanylist}
+                      mode="dropdown"
                       style={{
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
@@ -134,6 +140,8 @@ function MyDrawer() {
                         width: "80%",
                         marginLeft: "10%",
                         marginRight: "10%",
+                        marginBottom: "10%",
+                        borderColor: "#ffb028",
                       }}
                       onValueChange={(itemValue, itemIndex) => {
                         setSelectedCity(itemValue);
@@ -147,15 +155,22 @@ function MyDrawer() {
                     </Picker>
 
                     {/* Kids can handle picker */}
-                    <Text> Kids can Handle </Text>
+                    <Text style={{ marginRight: "30%", marginBottom: "5%" }}>
+                      {" "}
+                      How many kids you have{" "}
+                    </Text>
                     <Picker
                       nanylist={nanylist}
+                      mode="dropdown"
                       style={{
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
                         padding: 5,
                         width: "80%",
                         marginLeft: "10%",
+                        borderColor: "#ffb028",
+
+                        marginBottom: "10%",
                         marginRight: "10%",
                       }}
                       onValueChange={(itemValue, itemIndex) => {
@@ -169,12 +184,19 @@ function MyDrawer() {
                     </Picker>
 
                     {/* Education level picker */}
-                    <Text> Education level </Text>
+                    <Text style={{ marginRight: "10%", marginBottom: "5%" }}>
+                      {" "}
+                      Education level for the nanny you looking for{" "}
+                    </Text>
                     <Picker
+                      mode="dropdown"
                       nanylist={nanylist}
                       style={{
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
+                        marginBottom: "10%",
+                        borderColor: "#ffb028",
+
                         padding: 5,
                         width: "80%",
                         marginLeft: "10%",
