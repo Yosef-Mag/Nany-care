@@ -98,13 +98,14 @@ module.exports = {
                 message: "Auth failed",
                 token: token,
               });
-              console.log("Error is", err.message);
             } else if (result == true) {
               // create token
               const token = jwt.sign(
                 {
                   email: profile.email,
-                  password: profile.id,
+                  name: profile.name,
+                  phoneNumber: profile.PhoneNumber,
+                  password: profile.password,
                 },
                 process.env.JWT_KEY,
                 {
@@ -129,7 +130,8 @@ module.exports = {
         console.log("Error is ", err.message);
       });
   },
-  retriveUserByEmail: function (req, res) {
+  
+  retriveUserByToken: function (req, res) {
     console.log(req.header);
     console.log(req.body, "body");
     var decoded = jwt.verify(req.headers["authorization"], process.env.JWT_KEY);
@@ -147,17 +149,19 @@ module.exports = {
         res.send("error: " + err);
       });
   },
-  retriveUserByToken: function (req, res) {
-    var email = req.body.email
-    User.find({ email: email }, function (err, user) {
-      if (err) {
-        res.json(err);
-      } else {
-        console.log(user);
-        res.send(user);
-      }
-    });
-  },
+  // retriveUserByToken: function (req, res) {
+  //   console.log(req, "hi");
+  //   console.log(localStorage.getItem(token), "token");
+  //   var email = req.body.email;
+  //   User.findOne({ email: email }, function (err, user) {
+  //     if (err) {
+  //       res.json(err);
+  //     } else {
+  //       console.log(user, "user");
+  //       res.send(user);
+  //     }
+  //   });
+  // },
   // verifyToken: (req, res, next) => {
   //   const token = req.header("auth-token");
   //   if (!token) return res.status(401).json({ error: "Access denied" });

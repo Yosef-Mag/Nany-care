@@ -14,7 +14,7 @@ import { AntDesign } from "@expo/vector-icons";
 export default function Profile() {
   const [userData, setUserData] = useState({});
   useEffect(() => {
-    axios.get("http://172.16.0.161:5000/profilee").then((res) => {
+    axios.get("http://192.168.1.115:5000/profile").then((res) => {
       // console.log(res.data);
       setUserData(res.data);
     }, []);
