@@ -23,6 +23,7 @@ import Profile from "./profile";
 import MapScreen from "./map";
 import Logout from "./Logout";
 import { AsyncStorage } from 'react-native';
+import Confirm from "./Confirmation";
 
 // import { TokenPage, TokenList } from "twilio/lib/rest/api/v2010/account/token";
 function Profile1() {
@@ -38,6 +39,10 @@ function Logout1() {
   return <Logout />;
 }
 
+
+function Confirm1() {
+  return <Confirm />;
+}
 function Map() {
   return <MapScreen />;
 }
@@ -97,35 +102,18 @@ function MyDrawer() {
             }
 
             function nannyReserved(nany) { // function to reserve the nanny called once the reserve button clicked
-            
-              var arr = [];
-
               axios
                 .post(`http://192.168.1.16:5000/reserve`, nany)
                 .then((res) => res
                )
                 .then((data) => {
                 
-                 AsyncStorage.getItem('token').then((res) => { 
-                     arr.push(res) 
-                  }
-                // console.log(res)
-                )
-                   //console.log(arr)
+                  //saving nanny info into AsyncStorage
                   AsyncStorage.setItem('nany', JSON.stringify(nany))
-                  AsyncStorage.getItem('nany').then((res) => {
-                    arr.push(res) 
-                  })
-                  console.log(arr)
-                  //console.log(nany)
-                  var alldata = Object.fromEntries(arr)
-                  console.log(alldata)
-                  AsyncStorage.setItem('user&Nanny', alldata)
-                  AsyncStorage.getItem('user&Nanny').then((res) => {
+                  // getting user token value + Nanny info
+                  AsyncStorage.multiGet(['token','nany']).then((res) => {
                     console.log(res)
-                    
                   })
-
                 } )
                 .catch((err) => console.log(err));
             }
@@ -238,6 +226,7 @@ function MyDrawer() {
         {/* <Drawer.Screen name="Contact Us" component={ContactUs} /> */}
         <Drawer.Screen name="payment screen" component={Payment} />
         <Drawer.Screen name="Logout" component={Logout1} />
+        <Drawer.Screen name="Confirm" component={Confirm1} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
