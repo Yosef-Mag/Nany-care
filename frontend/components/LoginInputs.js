@@ -1,112 +1,168 @@
 import React from "react";
 import { Formik } from "formik";
 import { View } from "react-native-animatable";
-import { TextInput, Button } from "react-native-paper";
-import { Text, StyleSheet, KeyboardAvoidingView } from "react-native";
+import { Button, Input, Text } from "galio-framework";
+import { MaterialIcons } from "@expo/vector-icons";
+import {
+  StyleSheet,
+  ImageBackground,
+  KeyboardAvoidingView,
+} from "react-native";
+import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+const image = {
+  uri:
+    "https://images.theconversation.com/files/338577/original/file-20200529-78875-18d0wif.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
+};
 import axios from "axios";
 export default function Login({ navigation }) {
   return (
-    <View>
-      <KeyboardAvoidingView behavior="position" disabled>
-        <View
-          style={{ marginTop: 50, marginLeft: "auto", marginRight: "auto" }}
-        >
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: "bold",
-              color: "#CC7575",
-              marginTop: 150,
-            }}
-          >
-            Welcome To Nany App !
-          </Text>
-        </View>
-        <View>
-          <Formik
-            initialValues={{
-              Email: "",
-              password: "",
-            }}
-            onSubmit={(values) => {
-              axios
-                .post("http://192.168.1.65:5000/login", values)
-                .then(function (res) {
-                  console.log(res.data.token);
-                  if (res.data.token) {
-                    navigation.navigate("AllNany",{'MapScreen':'MapScreen'});
-                    // { navigation.navigate('page1',{"pageName":"page1"})}
-                    
-                  } else {
-                    if (res.data === "User not exist") {
-                      alert(" User does not exist");
+    <ImageBackground
+      source={image}
+      style={style.image}
+      imageStyle={{ opacity: 0.4 }}
+    >
+      <View>
+        <KeyboardAvoidingView behavior="position" disabled>
+          <View
+            style={{ marginTop: 50, marginLeft: "auto", marginRight: "auto" }}
+          ></View>
+          <View>
+            <Formik
+              initialValues={{
+                Email: "",
+                password: "",
+              }}
+              onSubmit={(values) => {
+                axios
+                  .post("http://192.168.1.65:5000/login", values)
+                  .then(function (res) {
+                    console.log(res.data.token);
+                    if (res.data.token) {
+                      navigation.navigate("AllNany");
+                    } else {
+                      if (res.data === "User not exist") {
+                        alert(" User does not exist");
+                      }
                     }
-                  }
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-            }}
-          >
-            {(props) => (
-              <View>
-                {/* Email input */}
-                <TextInput
-                  placeholder="enter email "
-                  onChangeText={props.handleChange("Email")}
-                  value={props.values.Email}
-                  onBlur={function ValidateEmail(mail) {
-                    if (
-                      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-                        props.values.Email
-                      )
-                    ) {
-                      return true;
-                    }
-                    alert("You have entered an invalid email address!");
-                    return false;
-                  }}
-                ></TextInput>
-                {/* password input  */}
-                <TextInput
-                  placeholder="password"
-                  secureTextEntry={true}
-                  onChangeText={props.handleChange("password")}
-                  value={props.values.password}
-                ></TextInput>
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+              }}
+            >
+              {(props) => (
+                <View>
+                  {/* Email input */}
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      marginLeft: "70%",
+                    }}
+                  >
+                    <Text>E-mail</Text>
 
-                {/* submit bttn  */}
-                <Button
-                  title="login"
-                  mode="contained"
-                  onPress={props.handleSubmit}
-                  Text="Login"
-                >
-                  <Text style={{ color: "pink" }}>Login</Text>
-                </Button>
-                <Button
-                  title="SignUp"
-                  mode="contained"
-                  Text="SignUp"
-                  onPress={() => navigation.navigate("SignUp")}
-                >
-                  <Text style={{ color: "pink" }}>SignUp</Text>
-                </Button>
-                <Button
-                  title="HiringForm"
-                  mode="contained"
-                  Text="HiringForm"
-                  onPress={() => navigation.navigate("HiringForm")}
-                >
-                  <Text style={{ color: "pink" }}>HiringForm</Text>
-                </Button>
-                
-              </View>
-            )}
-          </Formik>
-        </View>
-      </KeyboardAvoidingView>
-    </View>
+                    <MaterialIcons name="email" size={24} color="black" />
+                  </View>
+
+                  <Input
+                    onChangeText={props.handleChange("Email")}
+                    value={props.values.Email}
+                    onBlur={function ValidateEmail(mail) {
+                      if (
+                        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+                          props.values.Email
+                        )
+                      ) {
+                        return true;
+                      }
+                      alert("You have entered an invalid email address!");
+                      return false;
+                    }}
+                    style={{
+                      backgroundColor: "rgba(255,255,255,0.4)",
+                      borderRadius: 5,
+                      padding: 5,
+                      width: "80%",
+                      marginLeft: "10%",
+                      marginRight: "10%",
+                    }}
+                  ></Input>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      marginLeft: "70%",
+                    }}
+                  >
+                    <Text>password</Text>
+                  </View>
+
+                  <Input
+                    secureTextEntry={true}
+                    onChangeText={props.handleChange("password")}
+                    value={props.values.password}
+                    style={{
+                      backgroundColor: "rgba(255,255,255,0.4)",
+                      borderRadius: 5,
+                      padding: 5,
+                      width: "80%",
+                      marginLeft: "10%",
+                      marginRight: "10%",
+                    }}
+                  ></Input>
+                  {/* submit bttn  */}
+                  <View
+                    style={{
+                      marginLeft: "25%",
+                    }}
+                  >
+                    <Button
+                      title="login"
+                      mode="contained"
+                      color="rgba(255,255,255,0.6)"
+                      onPress={props.handleSubmit}
+                      Text="Login"
+                    >
+                      <Text style={{ color: "black" }}>Login</Text>
+                    </Button>
+                  </View>
+                  <View
+                    style={{
+                      marginLeft: "25%",
+                    }}
+                  >
+                    <Button
+                      title="SignUp"
+                      mode="contained"
+                      Text="SignUp"
+                      color="rgba(255,255,255,0.6)"
+                      onPress={() => navigation.navigate("SignUp")}
+                    >
+                      <Text style={{ color: "black" }}>SignUp</Text>
+                    </Button>
+                  </View>
+                  <View
+                    style={{
+                      marginLeft: "25%",
+                    }}
+                  >
+                    <Button
+                      title="HiringForm"
+                      mode="contained"
+                      Text="HiringForm"
+                      color="rgba(255,255,255,0.6)"
+                      onPress={() => navigation.navigate("HiringForm")}
+                    >
+                      <Text style={{ color: "balck" }}>HiringForm</Text>
+                    </Button>
+                  </View>
+                </View>
+              )}
+            </Formik>
+          </View>
+        </KeyboardAvoidingView>
+      </View>
+    </ImageBackground>
   );
 }
 const style = StyleSheet.create({
@@ -133,5 +189,10 @@ const style = StyleSheet.create({
     color: "white",
     textAlign: "center",
     backgroundColor: "#CC7575",
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
 });

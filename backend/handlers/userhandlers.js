@@ -59,6 +59,7 @@ module.exports = {
               newUser
                 .save()
                 .then(() => {
+                  console.log("user saved");
                   res.send("User authenticated");
                 })
                 .catch((err) => {
@@ -116,10 +117,9 @@ module.exports = {
               res.status(200).json({
                 message: "Auth granted, welcome!",
                 token: token,
-
               });
               console.log(token);
-            } 
+            }
             // else {
             //   res.send("User Unauthorized Access");
             // }

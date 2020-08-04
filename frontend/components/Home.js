@@ -4,9 +4,11 @@ import {
   Text,
   Picker,
   ScrollView,
+  ImageBackground,
   Image,
   StyleSheet,
 } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
 import { Button } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
@@ -16,6 +18,7 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { Actions } from "react-native-router-flux";
+import { Card } from "galio-framework";
 
 import Payment from "./payment";
 import ContactUS from "./ContactUS";
@@ -23,6 +26,10 @@ import AllNany from "./Home";
 import Profile from "./profile";
 import MapScreen from "./map";
 import Logout from "./Logout";
+const image = {
+  uri:
+    "https://cdn.kinsights.com/cache/a3/5d/a35d9ef62daa9876a5598868592d316c.jpg",
+};
 // import { TokenPage, TokenList } from "twilio/lib/rest/api/v2010/account/token";
 function Profile1() {
   return <Profile />;
@@ -112,112 +119,133 @@ function MyDrawer({ navigation }) {
             }
 
             return (
-              <ScrollView>
+              <ImageBackground
+                source={image}
+                style={styles.image}
+                imageStyle={{ opacity: 0.2 }}
+              >
                 <View>
-                  {/* city picker */}
-                  <Text> Select a city </Text>
-                  <Picker
-                    nanylist={nanylist}
-                    style={{ height: 50, width: 150 }}
-                    onValueChange={(itemValue, itemIndex) => {
-                      setSelectedCity(itemValue);
-                    }}
-                  >
-                    <Picker.Item label="All Cities" value="allNany" />
-                    <Picker.Item label="Amman" value="Amman" />
-                    <Picker.Item label="Irbed" value="Irbed" />
-                    <Picker.Item label="Zarqa" value="Zarqa" />
-                    <Picker.Item label="Aqaba" value="Aqaba" />
-                  </Picker>
+                  <ScrollView>
+                    {/* city picker */}
 
-                  {/* Kids can handle picker */}
-                  <Text> Kids can Handle </Text>
-                  <Picker
-                    nanylist={nanylist}
-                    style={{ height: 50, width: 150 }}
-                    onValueChange={(itemValue, itemIndex) => {
-                      setSelectedKids(itemValue);
-                    }}
-                  >
-                    <Picker.Item label="1 kid" value="1" />
-                    <Picker.Item label="2 kids" value="2" />
-                    <Picker.Item label="3 kids" value="3" />
-                    <Picker.Item label="4 kids" value="4" />
-                  </Picker>
+                    <Text> Select a city </Text>
+                    <Picker
+                      nanylist={nanylist}
+                      style={{
+                        backgroundColor: "rgba(255,255,255,0.4)",
+                        borderRadius: 5,
+                        padding: 5,
+                        width: "80%",
+                        marginLeft: "10%",
+                        marginRight: "10%",
+                      }}
+                      onValueChange={(itemValue, itemIndex) => {
+                        setSelectedCity(itemValue);
+                      }}
+                    >
+                      <Picker.Item label="All Cities" value="allNany" />
+                      <Picker.Item label="Amman" value="Amman" />
+                      <Picker.Item label="Irbed" value="Irbed" />
+                      <Picker.Item label="Zarqa" value="Zarqa" />
+                      <Picker.Item label="Aqaba" value="Aqaba" />
+                    </Picker>
 
-                  {/* Education level picker */}
-                  <Text> Education level </Text>
-                  <Picker
-                    nanylist={nanylist}
-                    style={{ height: 50, width: 150 }}
-                    onValueChange={(itemValue, itemIndex) => {
-                      setSelectedEdu(itemValue);
-                    }}
-                  >
-                    <Picker.Item label="College" value="college" />
-                    <Picker.Item label="High school" value="high school" />
-                  </Picker>
+                    {/* Kids can handle picker */}
+                    <Text> Kids can Handle </Text>
+                    <Picker
+                      nanylist={nanylist}
+                      style={{
+                        backgroundColor: "rgba(255,255,255,0.4)",
+                        borderRadius: 5,
+                        padding: 5,
+                        width: "80%",
+                        marginLeft: "10%",
+                        marginRight: "10%",
+                      }}
+                      onValueChange={(itemValue, itemIndex) => {
+                        setSelectedKids(itemValue);
+                      }}
+                    >
+                      <Picker.Item label="1 kid" value="1" />
+                      <Picker.Item label="2 kids" value="2" />
+                      <Picker.Item label="3 kids" value="3" />
+                      <Picker.Item label="4 kids" value="4" />
+                    </Picker>
 
-                  <Button
-                    title="Press me"
-                    mode="contained"
-                    onPress={listFilter}
-                  />
+                    {/* Education level picker */}
+                    <Text> Education level </Text>
+                    <Picker
+                      nanylist={nanylist}
+                      style={{
+                        backgroundColor: "rgba(255,255,255,0.4)",
+                        borderRadius: 5,
+                        padding: 5,
+                        width: "80%",
+                        marginLeft: "10%",
+                        marginRight: "10%",
+                      }}
+                      onValueChange={(itemValue, itemIndex) => {
+                        setSelectedEdu(itemValue);
+                      }}
+                    >
+                      <Picker.Item label="College" value="college" />
+                      <Picker.Item label="High school" value="high school" />
+                    </Picker>
+                    <View>
+                      <Button
+                        title="Submit"
+                        mode="contained"
+                        color="rgba(255,255,255,0.6)"
+                        onPress={listFilter}
+                      >
+                        <Text style={{ color: "black" }}>Search </Text>
+                        {"        "}
+                        <FontAwesome name="search" size={24} color="black" />
+                      </Button>
+                    </View>
 
-                  {/* rendering based on the selection condition */}
-                  <View>
-                    {selected.map((nany) => (
-                      <>
-                        <ScrollView style={{ width: "100%" }}>
-                          <View style={styles.box}>
-                            <Image
-                              style={styles.image}
-                              source={{ uri: nany.image }}
-                            />
-                            <View style={styles.boxContent}>
-                              <Text style={styles.title}>
-                                Name: {nany.name}
-                              </Text>
-                              <Text style={styles.title}>
-                                Place: {nany.place}
-                              </Text>
-                              <Text style={styles.title}>
-                                Kids Can Handle: {nany.kidsNumber}
-                              </Text>
-                              <Text style={styles.title}>
-                                Education Level: {nany.educationLevel}
-                              </Text>
-                              <Text style={styles.title}>
-                                Cost: {nany.cost}
-                              </Text>
-                              <Text style={styles.title}>
-                                Email: {nany.email}
-                              </Text>
-
-                              <View style={styles.buttons}>
+                    {/* rendering based on the selection condition */}
+                    <View>
+                      {selected.map((nany) => (
+                        <>
+                          <ScrollView style={{ width: "100%" }}>
+                            <View
+                              style={{
+                                flex: 1,
+                                flexDirection: "column",
+                                marginBottom: "10%",
+                                marginTop: "10%",
+                              }}
+                            >
+                              <Card
+                                flex
+                                borderless
+                                title={nany.name}
+                                caption={nany.cost + "$ /H"}
+                                location={nany.place}
+                                image={nany.image}
+                                style={{ backgroundColor: "white" }}
+                              />
+                              <View>
                                 <Button
-                                  style={[styles.button, styles.view]}
-                                  onPress={ nannyReserved(nany)}
-               
-                                 >
-                                  <Image
-                                    style={styles.icon}
-                                    source={{
-                                      uri:
-                                        "https://cdn.pixabay.com/photo/2016/01/20/18/59/confirmation-1152155__340.png",
-                                    }}
-                                  />
+                                  title="Submit"
+                                  mode="contained"
+                                  color="rgba(255,255,255,0.6)"
+                                  onPress={() => nannyReserved(nany)}
+                                >
+                                  <Text style={{ color: "black" }}>
+                                    Reserve {nany.name}
+                                  </Text>
                                 </Button>
                               </View>
                             </View>
-                          </View>
-                        </ScrollView>
-                        <View></View>
-                      </>
-                    ))}
-                  </View>
+                          </ScrollView>
+                        </>
+                      ))}
+                    </View>
+                  </ScrollView>
                 </View>
-              </ScrollView>
+              </ImageBackground>
             );
           }}
         />
@@ -284,5 +312,11 @@ const styles = StyleSheet.create({
   },
   message: {
     backgroundColor: "#228B22",
+  },
+
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
 });

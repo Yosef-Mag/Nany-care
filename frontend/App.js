@@ -2,7 +2,7 @@ import SignUp from "./components/SignUpInputs";
 import Login from "./components/LoginInputs";
 import AllNany from "./components/Home";
 import MapScreen from "./components/map";
-// import nannyReserved from "./components/Home";
+
 import MyDrawer from "./components/Home";
 import NanyApp  from "./Routs"
 import AuthLoadingScreen from "./components/loading";
@@ -20,16 +20,9 @@ const AuthStack = createStackNavigator({
   Login: Login,
   SignUp: SignUp,
   HiringForm: HiringForm,
-  
 });
 
-// class reactApp extends Component {
-//   render() {
-//      return (
-//                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-//      )
-//   }
-// }
+
 
 export default createAppContainer(
   createSwitchNavigator(
