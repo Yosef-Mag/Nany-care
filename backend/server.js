@@ -7,7 +7,6 @@ var items = require("./models/user");
 var Nany = items.Nany;
 var User = items.User;
 var User = items.User;
-
 const cors = require("cors");
 // const router = express.Router();
 var Nannyhandlers = require("./handlers/Nannyhandlers");
@@ -32,7 +31,6 @@ app.use(
 );
 var port = process.env.PORT || 5000;
 require("dotenv").config(); // to read .env file
-// test get req
 
 app.post("/HiringForm", Nannyhandlers.HiringForm);
 app.post("/signup", userhandlers.userSignUp);

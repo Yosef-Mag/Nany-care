@@ -63,13 +63,12 @@ function MyDrawer() {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen name="Home" component={Home1} />
+      <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="Map" component={Map} />
 
       <Drawer.Screen name="Logout" component={Logout1} />
       <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="Contact Us" component={ContactUs} />
-      <Drawer.Screen name="payment screen" component={Payment} />
-      <Drawer.Screen name="Hiring Form" component={HiringForm} />
     </Drawer.Navigator>
   );
 }
