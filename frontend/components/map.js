@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  Keyboard,
-  Platform,
-  StyleSheet,
-  View,
-  Text,
-  Button,
-} from "react-native";
+import { Keyboard, Platform, StyleSheet, View, Text } from "react-native";
+import { Button } from "galio-framework";
 
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Constants from "expo-constants";
@@ -49,7 +43,7 @@ export default function MapScreen() {
 
   const onSubmit = (text) => {
     axios
-      .post("http://192.168.1.65:5000/sendSMS", selectedLocation)
+      .post("http://192.168.127.43:5000/sendSMS", selectedLocation)
       .then(function (response) {
         console.log(response);
       })
@@ -130,16 +124,6 @@ export default function MapScreen() {
 
   return (
     <View style={styles.mapContainer}>
-      <Text
-        style={{
-          fontWeight: "200",
-          fontSize: 20,
-          marginTop: 40,
-          marginRight: 50,
-        }}
-      >
-        select your location
-      </Text>
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
@@ -150,8 +134,17 @@ export default function MapScreen() {
           <Marker title="Picked Location" coordinate={markerCoordinates} />
         )}
       </MapView>
-      <View style={styles.button}>
-        <Button onPress={onSubmit} title="NEXT!" color="blue" />
+      <View>
+        <Button
+          title="Next"
+          mode="contained"
+          Text="Next"
+          size="large"
+          color="rgba(255,255,255,0.6)"
+          onPress={onSubmit}
+        >
+          <Text style={{ color: "black" }}>Next</Text>
+        </Button>
       </View>
     </View>
   );
@@ -162,8 +155,9 @@ const styles = StyleSheet.create({
     top: 60 + "%",
   },
   map: {
-    marginTop: 30 + "%",
-    flex: 0.9,
+    flex: 1,
+    width: "100%",
+    height: "100%",
   },
 
   mapContainer: {
@@ -173,13 +167,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-  map: {
-    position: "absolute",
-    top: 100,
-    left: 0,
-    right: 0,
-    bottom: 200,
-  },
+
   rad: {
     height: 50,
     width: 50,
