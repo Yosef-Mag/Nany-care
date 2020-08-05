@@ -9,7 +9,6 @@ import Logout from "./Logout";
 import Payment from "./payment";
 import ContactUS from "./ContactUS";
 // import SignUpPage from "./signup";
-
 import AllNany from "./Home";
 
 import Profile from "./profile";

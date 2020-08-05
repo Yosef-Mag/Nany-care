@@ -148,7 +148,7 @@ export default function MapScreen() {
       </View>
     </View>
   );
-}
+        }
 
 const styles = StyleSheet.create({
   button: {
