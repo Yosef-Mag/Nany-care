@@ -15,6 +15,8 @@ const image = {
     "https://images.theconversation.com/files/338577/original/file-20200529-78875-18d0wif.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
 };
 import axios from "axios";
+import { AsyncStorage } from 'react-native';
+
 export default function Login({ navigation }) {
   return (
     <ImageBackground
@@ -35,13 +37,23 @@ export default function Login({ navigation }) {
               }}
               onSubmit={(values) => {
                 axios
-                  .post("http://192.168.1.65:5000/login", values)
+                  .post("http://192.168.1.16:5000/login", values)
                   .then(function (res) {
                     console.log(res.data.token);
                     if (res.data.token) {
+                      try {
+                        AsyncStorage.setItem('token', JSON.stringify(res.data.token)); 
+                         console.log(JSON.stringify(res.data.token)) 
+                      } catch (error) {
+                        console.log(error.message);
+                      }
+                      
+                        console.log(res.data.token);
                       navigation.navigate("AllNany");
+                      
                     } else {
                       if (res.data === "User not exist") {
+                        
                         alert(" User does not exist");
                       }
                     }
