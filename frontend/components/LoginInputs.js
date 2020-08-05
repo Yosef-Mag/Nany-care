@@ -50,6 +50,9 @@ export default function Login({ navigation }) {
                     if (res.data === "User not exist") {
                       alert(" User does not exist");
                     }
+                    if (res.data === "password or email wrong") {
+                      alert("wrong password or email");
+                    }
                   }
                 })
                 .catch(function (error) {

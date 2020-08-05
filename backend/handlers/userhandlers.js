@@ -102,6 +102,9 @@ module.exports = {
                 token: token,
               });
               console.log("Error is", err.message);
+            } else if (result == false) {
+              console.log("password or email wrong");
+              res.send("password or email wrong");
             } else if (result == true) {
               // create token
               token = jwt.sign(

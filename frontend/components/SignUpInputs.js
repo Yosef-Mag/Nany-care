@@ -44,6 +44,7 @@ export default function Signup({ navigation }) {
                     console.log(res.data);
                     if (res.data === "User authenticated") {
                       navigation.navigate("LoginPage");
+                      alert("You signed up , please back to login page");
                     } else {
                       if (res.data === "User authenticated") {
                         navigation.navigate("LoginPage");
