@@ -17,6 +17,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
+import { Actions } from "react-native-router-flux";
 import { Card } from "galio-framework";
 
 import Payment from "./payment";
@@ -43,12 +44,15 @@ function Logout1() {
   return <Logout />;
 }
 
-function Map() {
+function Map1() {
   return <MapScreen />;
 }
 function ContactUs() {
   return <ContactUS />;
 }
+
+
+
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -57,7 +61,7 @@ function CustomDrawerContent(props) {
   );
 }
 const Drawer = createDrawerNavigator();
-function MyDrawer() {
+function MyDrawer({ navigation }) {
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -76,7 +80,7 @@ function MyDrawer() {
 
             //fetching data from the db
             useEffect(() => {
-              fetch(`http://192.168.127.43:5000/ret`)
+              fetch(`http://192.168.1.65:5000/ret`)
                 .then((res) => res.json())
                 .then((response) => {
                   setNanylist(response);
@@ -103,12 +107,12 @@ function MyDrawer() {
 
             function nannyReserved(nany) {
               // function to reserve the nanny called once the reserve button clicked
-              axios
-                .post(`http://192.168.127.43:5000/reserve`, nany)
-                .then((res) => res)
 
+             
+              axios
+                .post(`http://192.168.1.65:5000/reserve`, nany)
                 .then(() => {
-                  console.log(nany);
+                  Actions.push("MapScreen");
                 })
 
                 .catch((err) => console.log(err));
@@ -245,7 +249,6 @@ function MyDrawer() {
             );
           }}
         />
-        {/* <Drawer.Screen name="Map" component={Map} /> */}
 
         <Drawer.Screen name="Profile" component={Profile1} />
         {/* <Drawer.Screen name="Contact Us" component={ContactUs} /> */}
@@ -257,7 +260,6 @@ function MyDrawer() {
 }
 export default MyDrawer;
 
-/*******************************Styling********************************/
 /*******************************Styling********************************/
 const styles = StyleSheet.create({
   image: {
