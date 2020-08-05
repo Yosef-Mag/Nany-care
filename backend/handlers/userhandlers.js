@@ -143,12 +143,12 @@ module.exports = {
       email: decode.email,
     })
       .then((user) => {
-            if (user) {
-              res.send(user);
-            } else {
-              res.send("User does not exist");
-            }
-          })
+        if (user) {
+          res.send(user);
+        } else {
+          res.send("User does not exist");
+        }
+      })
       .catch((err) => {
         res.send("error: " + err);
       });

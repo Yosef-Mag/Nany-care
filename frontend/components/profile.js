@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import jwt_decode from 'jwt-decode'
+import jwt_decode from "jwt-decode";
 import { Text } from "galio-framework";
 import axios from "axios";
 import {
@@ -10,27 +10,28 @@ import {
   ScrollView,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { AsyncStorage } from 'react-native';
-
+import { AsyncStorage } from "react-native";
 
 export default function Profile() {
   const [userData, setUserData] = useState({});
   useEffect(() => {
     axios.get("http://172.16.0.161:5000/profile").then((res) => {
-      AsyncStorage.getItem('token').then((res) => {
-         console.log(res.data)
+      AsyncStorage.getItem("token").then((res) => {
+        console.log(res.data);
       });
       setUserData(res.data);
     }, {});
     console.log(userData);
   });
-  
+
   return (
     <ImageBackground
       source={{
-        uri: "https://wallpaperplay.com/walls/full/a/5/a/93367.jpg",
+        uri: "https://images.theconversation.com/files/338577/original/file-20200529-78875-18d0wif.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
       }}
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%"}}
+      imageStyle={{ opacity: 0.3 }}
+
     >
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ alignSelf: "center" }}>
@@ -46,20 +47,20 @@ export default function Profile() {
           </View>
           <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>
             {"\n"}
-            <AntDesign name="user" size={33} color="black" />
-            {userData[0].name}
+            <AntDesign name="user" size={33} color="black"  />
+            : {userData[0].name}
           </Text>
           <View style={styles.infoContainer}>
-            <Text style={[styles.text, { fontSize: 24 }]}>
+            <Text style={[styles.text, { fontSize: 17 }]}>
               {"\n"}
               <AntDesign name="mail" size={20} color="black" />
-              {userData[0].email}
+              : {userData[0].email}
             </Text>
             <Text size={20} color="black">
               {"\n"}
               {"\n"}
               <AntDesign name="phone" size={24} color="black" />
-              {userData[0].phoneNumber}
+              : {userData[0].phoneNumber}
             </Text>
           </View>
         </View>
@@ -91,13 +92,14 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 200,
+    borderWidth : 3,
     borderColor: "pink",
     overflow: "hidden",
   },
   infoContainer: {
     alignSelf: "center",
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 60,
   },
   icon: {
     marginRight: "10px",

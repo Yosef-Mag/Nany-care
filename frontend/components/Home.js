@@ -51,8 +51,6 @@ function ContactUs() {
   return <ContactUS />;
 }
 
-
-
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -108,7 +106,6 @@ function MyDrawer({ navigation }) {
             function nannyReserved(nany) {
               // function to reserve the nanny called once the reserve button clicked
 
-             
               axios
                 .post(`http://192.168.1.65:5000/reserve`, nany)
                 .then(() => {
