@@ -46,7 +46,7 @@ export default function Confirm() {
                                           ></TextInput>
                                         </View>
 
-                                   <View >
+                                        <View >
                                               <Button
                                                 mode="contained"
                                                 color="rgba(255,255,255,0.6)"
@@ -56,10 +56,10 @@ export default function Confirm() {
                                                      Calculate
                                                     </Text>
                                               </Button>
-                                  </View>
-                              </View>
-                                  <View >
-                                      <View >
+                                        </View>
+                                </View>
+                                <View >
+                                        <View >
                                               <Button
                                                 title="Submit"
                                                 mode="contained"
@@ -82,9 +82,9 @@ export default function Confirm() {
                                                     Cancel
                                                     </Text>
                                               </Button>
-                                        </View>
-                                     </View>  
-                              </View>
+                                      </View>
+                               </View>  
+                        </View>
           </>                    
         </View>
        
@@ -93,3 +93,13 @@ export default function Confirm() {
   )
 
 }
+
+
+/*******************************Styling********************************/
+const styles = StyleSheet.create({
+  image: {
+    width: 100,
+    height: 100,
+  }
+
+})
