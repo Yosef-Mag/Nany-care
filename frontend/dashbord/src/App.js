@@ -1,36 +1,28 @@
-import logo from "./logo.svg";
 import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AddAdmin from "./components/AddAdmin";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+// import Landing from './components/Landing *TODO 
+import Admin from "./components/Admin";
+import AddNanny from './components/AddNanny'
+import LoginAdmin from "./components/Login";
+import Landing from './components/Landing'
+import Drawer from "./components/NavBar";
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="base-container" ref={this.props.containerRef}>
-        <div className="header">Login</div>
-        <div className="content">
-          <div className="image">
-            <img src={logo} />
-          </div>
-          <div className="form">
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <input type="text" name="username" placeholder="username" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input type="password" name="password" placeholder="password" />
-            </div>
-          </div>
-        </div>
-        <div className="footer">
-          <button type="button" className="btn">
-            Login
-          </button>
-        </div>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div className="App">
+      <Router>
+      <CssBaseline />
+        <Drawer />
+        <Route exact path="/" component={Landing} /> 
+        <Route exact path="/AdminLogin" component={LoginAdmin} />
+        <Route exact path="/AddNanny" component={AddNanny} />
+        <Route exact path="/AddAdmin" component={AddAdmin} />
+        <Route exact path="/Admin" component={Admin} />
+      </Router>
+    </div>
+  );
 }
+
+export default App;

@@ -1,145 +1,129 @@
 // import React, { useState, useEffect } from "react";
-// import {
-//   Keyboard,
-//   Platform,
-//   StyleSheet,
-//   View,
-//   Text,
-//   Button,
-// } from "react-native";
+// import { Keyboard, Platform, StyleSheet, View, Text } from "react-native";
+// import { Button } from "galio-framework";
 
-// import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-// import Constants from "expo-constants";
-// import * as Location from "expo-location";
-// import axios from "axios";
+// // import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+// // import Constants from "expo-constants";
+// // import * as Location from "expo-location";
+// // import axios from "axios";
 
-// import { Notifications } from "expo";
-// import * as Permissions from "expo-permissions";
+// // import { Notifications } from "expo";
+// // import * as Permissions from "expo-permissions";
 
-// const localNotification = {
-//   title: "Nany APP",
-//   body: "You send yor location successfully!!",
-// };
+// // const localNotification = {
+// //   title: "Nany APP",
+// //   body: "You send yor location successfully!!",
+// // };
 
-// const handleNotification = () => {
-//   console.warn("ok! got your notif");
-// };
+// // const handleNotification = () => {
+// //   console.warn("ok! got your notif");
+// // };
 
-// const askNotification = async () => {
-//   // We need to ask for Notification permissions for ios devices
-//   const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-//   if (Constants.isDevice && status === "granted")
-//     console.log("Notification permissions granted.");
-// };
-// export default function MapScreen() {
-//   const [selectedLocation, setSelectedLocation] = useState();
-//   const [location, setLocation] = useState({
-//     coords: {
-//       accuracy: 20,
-//       altitude: 5,
-//       heading: 0,
-//       latitude: 37.4219983,
-//       longitude: -122.084,
-//       speed: 0,
-//     },
-//     mocked: false,
-//     timestamp: 1577294172000,
-//   });
-//   const [errorMsg, setErrorMsg] = useState(null);
+// // const askNotification = async () => {
+// //   // We need to ask for Notification permissions for ios devices
+// //   const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+// //   if (Constants.isDevice && status === "granted")
+// //     console.log("Notification permissions granted.");
+// // };
+// // export default function MapScreen() {
+// //   const [selectedLocation, setSelectedLocation] = useState();
+// //   const [location, setLocation] = useState({
+// //     coords: {
+// //       accuracy: 20,
+// //       altitude: 5,
+// //       heading: 0,
+// //       latitude: 37.4219983,
+// //       longitude: -122.084,
+// //       speed: 0,
+// //     },
+// //     mocked: false,
+// //     timestamp: 1577294172000,
+// //   });
+// //   const [errorMsg, setErrorMsg] = useState(null);
 
-//   const onSubmit = (text) => {
-//     axios
-//       .post("http://192.168.127.105:5000/select", selectedLocation)
-//       .then(function (response) {
-//         console.log(response);
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
-//     Keyboard.dismiss();
-//     const schedulingOptions = {
-//       time: new Date().getTime() + 1000,
-//     };
-//     // Notifications show only when app is not active.
-//     // (ie. another app being used or device's screen is locked)
-//     Notifications.scheduleLocalNotificationAsync(
-//       localNotification,
-//       schedulingOptions
-//     );
-//   };
-//   useEffect(() => {
-//     if (Platform.OS === "android" && !Constants.isDevice) {
-//       setErrorMsg(
-//         "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
-//       );
-//     } else {
-//       (async () => {
-//         let { status } = await Location.requestPermissionsAsync();
-//         if (status !== "granted") {
-//           setErrorMsg("Permission to access location was denied");
-//         }
+// //   const onSubmit = (text) => {
+// //     axios
+// //       .post("http://192.168.127.105:5000/select", selectedLocation)
+// //       .then(function (response) {
+// //         console.log(response);
+// //       })
+// //       .catch(function (error) {
+// //         console.log(error);
+// //       });
+// //     Keyboard.dismiss();
+// //     const schedulingOptions = {
+// //       time: new Date().getTime() + 1000,
+// //     };
+// //     // Notifications show only when app is not active.
+// //     // (ie. another app being used or device's screen is locked)
+// //     Notifications.scheduleLocalNotificationAsync(
+// //       localNotification,
+// //       schedulingOptions
+// //     );
+// //   };
+// //   useEffect(() => {
+// //     if (Platform.OS === "android" && !Constants.isDevice) {
+// //       setErrorMsg(
+// //         "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
+// //       );
+// //     } else {
+// //       (async () => {
+// //         let { status } = await Location.requestPermissionsAsync();
+// //         if (status !== "granted") {
+// //           setErrorMsg("Permission to access location was denied");
+// //         }
 
-//         let userLocation = await Location.getCurrentPositionAsync({});
+// //         let userLocation = await Location.getCurrentPositionAsync({});
 
-//         console.log(JSON.stringify(userLocation));
-//         setLocation(userLocation);
-//       })();
-//     }
-//   }, []);
-//   var mapRegion = {
-//     latitude: location.coords.latitude,
-//     longitude: location.coords.longitude,
-//     latitudeDelta: 0.005,
-//     longitudeDelta: 0.005,
-//   };
+// //         console.log(JSON.stringify(userLocation));
+// //         setLocation(userLocation);
+// //       })();
+// //     }
+// //   }, []);
+// //   var mapRegion = {
+// //     latitude: location.coords.latitude,
+// //     longitude: location.coords.longitude,
+// //     latitudeDelta: 0.005,
+// //     longitudeDelta: 0.005,
+// //   };
 
-//   const selectLocationHandler = (event) => {
-//     event.preventDefault();
-//     setSelectedLocation({
-//       latitude: event.nativeEvent.coordinate.latitude,
-//       longitude: event.nativeEvent.coordinate.longitude,
-//     });
-//   };
+// //   const selectLocationHandler = (event) => {
+// //     event.preventDefault();
+// //     setSelectedLocation({
+// //       latitude: event.nativeEvent.coordinate.latitude,
+// //       longitude: event.nativeEvent.coordinate.longitude,
+// //     });
+// //   };
 
-//   let markerCoordinates;
+// //   let markerCoordinates;
 
-//   if (selectedLocation) {
-//     markerCoordinates = {
-//       latitude: selectedLocation.latitude,
-//       longitude: selectedLocation.longitude,
-//       latitudeDelta: 0.005,
-//       longitudeDelta: 0.005,
-//     };
-//   }
-//   if (selectedLocation) {
-//     mapRegion = {
-//       latitude: selectedLocation.latitude,
-//       longitude: selectedLocation.longitude,
-//       latitudeDelta: 0.005,
-//       longitudeDelta: 0.005,
-//     };
-//   }
-//   useEffect(() => {
-//     askNotification();
-//     // If we want to do something with the notification when the app
-//     // is active, we need to listen to notification events and
-//     // handle them in a callback
-//     const listener = Notifications.addListener(handleNotification);
-//     return () => listener.remove();
-//   }, []);
+// //   if (selectedLocation) {
+// //     markerCoordinates = {
+// //       latitude: selectedLocation.latitude,
+// //       longitude: selectedLocation.longitude,
+// //       latitudeDelta: 0.005,
+// //       longitudeDelta: 0.005,
+// //     };
+// //   }
+// //   if (selectedLocation) {
+// //     mapRegion = {
+// //       latitude: selectedLocation.latitude,
+// //       longitude: selectedLocation.longitude,
+// //       latitudeDelta: 0.005,
+// //       longitudeDelta: 0.005,
+// //     };
+// //   }
+// //   useEffect(() => {
+// //     askNotification();
+// //     // If we want to do something with the notification when the app
+// //     // is active, we need to listen to notification events and
+// //     // handle them in a callback
+// //     const listener = Notifications.addListener(handleNotification);
+// //     return () => listener.remove();
+// //   }, []);
 
 //   return (
 //     <View style={styles.mapContainer}>
-//       <Text
-//         style={{
-//           fontWeight: "200",
-//           fontSize: 20,
-//           marginTop: 40,
-//           marginRight: 50,
-//         }}
-//       >
-//         select your location
-//       </Text>
 //       <MapView
 //         provider={PROVIDER_GOOGLE}
 //         style={styles.map}
@@ -150,20 +134,30 @@
 //           <Marker title="Picked Location" coordinate={markerCoordinates} />
 //         )}
 //       </MapView>
-//       <View style={styles.button}>
-//         <Button onPress={onSubmit} title="NEXT!" color="blue" />
+//       <View>
+//         <Button
+//           title="Next"
+//           mode="contained"
+//           Text="Next"
+//           size="large"
+//           color="rgba(255,255,255,0.6)"
+//           onPress={onSubmit}
+//         >
+//           <Text style={{ color: "black" }}>Next</Text>
+//         </Button>
 //       </View>
 //     </View>
 //   );
-// }
+//         }
 
 // const styles = StyleSheet.create({
 //   button: {
 //     top: 60 + "%",
 //   },
 //   map: {
-//     marginTop: 30 + "%",
-//     flex: 0.9,
+//     flex: 1,
+//     width: "100%",
+//     height: "100%",
 //   },
 
 //   mapContainer: {
@@ -173,13 +167,7 @@
 //     right: 0,
 //     bottom: 0,
 //   },
-//   map: {
-//     position: "absolute",
-//     top: 100,
-//     left: 0,
-//     right: 0,
-//     bottom: 200,
-//   },
+
 //   rad: {
 //     height: 50,
 //     width: 50,

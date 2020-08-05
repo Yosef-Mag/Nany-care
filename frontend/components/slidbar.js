@@ -5,11 +5,10 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-
+import Logout from "./Logout";
 import Payment from "./payment";
 import ContactUS from "./ContactUS";
-import SignUpPage from "./signup";
-import LoginPage from "./Login";
+// import SignUpPage from "./signup";
 import AllNany from "./Home";
 
 import Profile from "./profile";
@@ -19,17 +18,12 @@ import MapScreen from "./map";
 function Profile1() {
   return <Profile />;
 }
-
-function Login() {
-  return <LoginPage />;
+function Logout1() {
+  return <Logout />;
 }
 function payment() {
   return <Payment />;
 }
-function SignUp() {
-  return <SignUpPage />;
-}
-
 function Home1() {
   return <AllNany />;
 }
@@ -68,15 +62,12 @@ function MyDrawer() {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen name="Home" component={Home1} />
+      <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="Map" component={Map} />
 
-      <Drawer.Screen name="Sign Up" component={SignUp} />
-      <Drawer.Screen name="Log in " component={Login} />
-
+      <Drawer.Screen name="Logout" component={Logout1} />
       <Drawer.Screen name="Profile" component={Profile1} />
       <Drawer.Screen name="Contact Us" component={ContactUs} />
-      <Drawer.Screen name="payment screen" component={Payment} />
-      <Drawer.Screen name="Hiring Form" component={HiringForm} />
     </Drawer.Navigator>
   );
 }

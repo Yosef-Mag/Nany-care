@@ -23,6 +23,7 @@ var port = process.env.PORT || 5000;
 require("dotenv").config(); // to read .env file
 module.exports = {
   HiringForm: function (req, res) {
+    console.log(req.body);
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -65,6 +66,7 @@ module.exports = {
     });
   },
   retrieve: function (req, res) {
+    console.log("Hi");
     Nany.find({}, function (err, nany) {
       if (err) {
         res.json(err);
@@ -73,5 +75,11 @@ module.exports = {
         res.json(nany);
       }
     });
+  },
+
+  reserve: function (req, res) {
+    var reserveData = req.body;
+    console.log("fnh", req.body);
+    res.json(reserveData);
   },
 };
