@@ -57,3 +57,5 @@ mongoose
 app.listen(port, () => {
   console.log(`Server is running on ${port} Visit https://localhost:${port}`);
 });
+
+module.exports = app; // for testing
