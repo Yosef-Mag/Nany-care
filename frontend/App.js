@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+import LoginPage from "./components/Login";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+//import Home from "./components/Home";
+// import Confirmation from "./components/Confirmation";
+//import Confirmation from "./components/Confirmation";
+
+export default function App() {
+  return ( 
+    <NavigationContainer>
+      <LoginPage />
+    </NavigationContainer>
+  );
+}
+=======
 import SignUp from "./components/SignUpInputs";
 import Login from "./components/LoginInputs";
 import AllNany from "./components/Home";
@@ -38,3 +54,4 @@ export default createAppContainer(
 );
 
  
+>>>>>>> 6cdd8a2511b7700e93ae393c511622fc2db4bdce

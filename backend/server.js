@@ -1,12 +1,12 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+
 var items = require("./models/user");
-// var checkAuth = require('./handlers/check-auth-middleware')
-// var config = require("./config");
 var Nany = items.Nany;
 var User = items.User;
 var User = items.User;
+
 const cors = require("cors");
 // const router = express.Router();
 var Nannyhandlers = require("./handlers/Nannyhandlers");
@@ -30,6 +30,7 @@ app.use(
   })
 );
 var port = process.env.PORT || 5000;
+
 require("dotenv").config(); // to read .env file
 
 app.post("/HiringForm", Nannyhandlers.HiringForm);
@@ -61,3 +62,5 @@ mongoose
 app.listen(port, () => {
   console.log(`Server is running on ${port} Visit https://localhost:${port}`);
 });
+
+module.exports = app; // for testing
