@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var items = require("../models/user");
 var User = items.User;
-var config = require("../config");
+// var config = require("../config");
 const cors = require("cors");
 var app = express();
 app.use(cors({ origin: true, credentials: true }));
@@ -10,6 +10,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var jwt = require("jsonwebtoken");
+var jwtDecode = require("jwt-decode");
+
 // const nodemailer = require("nodemailer");
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
@@ -19,7 +21,7 @@ var saltRounds = 10;
 // var fromNum = config.fromNum;
 // var twilio = require("twilio");
 // var client = new twilio(accountSid, authToken);
-
+var token = {};
 require("dotenv").config(); // to read .env file
 module.exports = {
   sendSMS: function (req, res) {
@@ -101,11 +103,11 @@ module.exports = {
               });
             } else if (result == true) {
               // create token
-              const token = jwt.sign(
+              token = jwt.sign(
                 {
                   email: profile.email,
                   name: profile.name,
-                  phoneNumber: profile.PhoneNumber,
+                  phoneNumber: profile.phoneNumber,
                   password: profile.password,
                 },
                 process.env.JWT_KEY,
@@ -114,12 +116,13 @@ module.exports = {
                 }
               );
               // console.log(res.message)
+              var decode = jwtDecode(token);
 
               res.status(200).json({
                 message: "Auth granted, welcome!",
                 token: token,
               });
-              console.log(token);
+              console.log(decode);
             }
             // else {
             //   res.send("User Unauthorized Access");
@@ -131,29 +134,28 @@ module.exports = {
         console.log("Error is ", err.message);
       });
   },
-  
+
   retriveUserByToken: function (req, res) {
-    console.log(req.header);
-    console.log(req.body, "body");
-    var decoded = jwt.verify(req.headers["authorization"], process.env.JWT_KEY);
-    User.findOne({
-      _id: decoded._id,
+    console.log(token, "this is the token ");
+    var decode = jwtDecode(token);
+    console.log(decode, "from pro");
+    User.find({
+      email: decode.email,
     })
       .then((user) => {
-        if (user) {
-          res.json(user);
-        } else {
-          res.send("User does not exist");
-        }
-      })
+            if (user) {
+              res.send(user);
+            } else {
+              res.send("User does not exist");
+            }
+          })
       .catch((err) => {
         res.send("error: " + err);
       });
   },
-  // retriveUserByToken: function (req, res) {
-  //   console.log(req, "hi");
-  //   console.log(localStorage.getItem(token), "token");
+  // retriveUserByEmail: function (req, res) {
   //   var email = req.body.email;
+  //   console.log(email)
   //   User.findOne({ email: email }, function (err, user) {
   //     if (err) {
   //       res.json(err);

@@ -10,6 +10,9 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { AsyncStorage } from 'react-native';
+import jwt_decode from 'jwt-decode'
+
 const image = {
   uri:
     "https://images.theconversation.com/files/338577/original/file-20200529-78875-18d0wif.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
@@ -35,10 +38,12 @@ export default function Login({ navigation }) {
               }}
               onSubmit={(values) => {
                 axios
-                  .post("http://192.168.127.43:5000/login", values)
+                  .post("http://172.16.0.161:5000/login", values)
                   .then(function (res) {
+                    
                     console.log(res.data.token);
                     if (res.data.token) {
+                      AsyncStorage.setItem('token', JSON.stringify(res.data.token));
                       navigation.navigate("AllNany");
                     } else {
                       if (res.data === "User not exist") {

@@ -104,16 +104,8 @@ function MyDrawer() {
             function nannyReserved(nany) {
               // function to reserve the nanny called once the reserve button clicked
               axios
-<<<<<<< HEAD
-                .post(`http://192.168.1.65:5000/reserve`, nany)
-                .then(
-                  (res) => res
-                  // navigation.navigate("SignUp");
-                )
-=======
                 .post(`http://192.168.127.43:5000/reserve`, nany)
                 .then((res) => res)
->>>>>>> 8925b0dc22d0f60302a2426f55dc93710382c61f
 
                 .then(() => {
                   console.log(nany);

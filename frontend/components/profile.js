@@ -10,16 +10,21 @@ import {
   ScrollView,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { AsyncStorage } from 'react-native';
+
 
 export default function Profile() {
   const [userData, setUserData] = useState({});
   useEffect(() => {
-    axios.get("http://192.168.1.115:5000/profile").then((res) => {
-      // console.log(res.data);
+    axios.get("http://172.16.0.161:5000/profile").then((res) => {
+      AsyncStorage.getItem('token').then((res) => {
+         console.log(res.data)
+      });
       setUserData(res.data);
-    }, []);
+    }, {});
     console.log(userData);
   });
+  
   return (
     <ImageBackground
       source={{
@@ -42,19 +47,19 @@ export default function Profile() {
           <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>
             {"\n"}
             <AntDesign name="user" size={33} color="black" />
-            {userData.name}
+            {userData[0].name}
           </Text>
           <View style={styles.infoContainer}>
             <Text style={[styles.text, { fontSize: 24 }]}>
               {"\n"}
               <AntDesign name="mail" size={20} color="black" />
-              {userData.email}
+              {userData[0].email}
             </Text>
             <Text size={20} color="black">
               {"\n"}
               {"\n"}
               <AntDesign name="phone" size={24} color="black" />
-              {userData.phoneNumber}
+              {userData[0].phoneNumber}
             </Text>
           </View>
         </View>
