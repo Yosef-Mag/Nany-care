@@ -37,8 +37,7 @@ app.post("/signup", userhandlers.userSignUp);
 app.get("/logout", userhandlers.userLogOut);
 app.post("/login", userhandlers.userLogIn);
 app.get("/ret", Nannyhandlers.retrieve);
-app.get("/profile", userhandlers.retriveUserByEmail);
-app.get("/profilee", userhandlers.retriveUserByToken);
+app.get("/profile", userhandlers.retriveUserByToken);
 // app.post("/api/doPayment/", userhandlers.payment);
 
 app.post("/AddAdmin", Adminhandlers.adminSignUp);

@@ -9,6 +9,8 @@ import {
   KeyboardAvoidingView,
   Image,
 } from "react-native";
+import { AsyncStorage } from "react-native";
+
 const image = {
   uri:
     "https://cdn.pixabay.com/photo/2017/06/18/18/39/baby-2416718_960_720.jpg",
@@ -39,6 +41,10 @@ export default function Login({ navigation }) {
                 .then(function (res) {
                   console.log(res.data.token);
                   if (res.data.token) {
+                    AsyncStorage.setItem(
+                      "token",
+                      JSON.stringify(res.data.token)
+                    );
                     navigation.navigate("AllNany");
                   } else {
                     if (res.data === "User not exist") {
