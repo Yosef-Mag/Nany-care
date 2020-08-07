@@ -48,6 +48,9 @@ app.post("/reserve", Nannyhandlers.reserve);
 app.get("/Admin", Adminhandlers.retriveAllNanies);
 app.delete("/delete/:id", Adminhandlers.deleteSpecificNany);
 app.patch("/updateNanyInformation", Adminhandlers.updateNanyInformation);
+app.post("/send",function(req ,res){
+  console.log(req.body)
+})
 // app.post("/checkout", payment.checkout);
 // app.get('/web/checkout/redirect',payment.redirect);
 // app.get('/payment/success',payment.success);

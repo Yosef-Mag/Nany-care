@@ -38,22 +38,20 @@ export default function Signup({ navigation }) {
               }}
               onSubmit={(values) => {
                 axios
-                  .post("http://192.168.127.43:5000/signup", values)
+                  .post("http://192.168.1.19:5000/signup", values)
 
                   .then(function (res) {
                     console.log(res.data);
                     if (res.data === "User authenticated") {
-                      navigation.navigate("LoginPage");
-                    } else {
-                      if (res.data === "User authenticated") {
-                        navigation.navigate("LoginPage");
-                      } else {
+                      navigation.navigate("Login");
+                    } 
+                       else {
                         if (res.data === "User already exists...") {
                           alert("User already exists...");
                         }
                       }
                     }
-                  })
+                  )
 
                   .catch(function (error) {
                     console.log(error);
