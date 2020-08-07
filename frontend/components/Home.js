@@ -20,6 +20,7 @@ import {
 } from "@react-navigation/drawer";
 import { Actions } from "react-native-router-flux";
 import { Card } from "galio-framework";
+
 import Payment from "./payment";
 import ContactUS from "./ContactUS";
 import AllNany from "./Home";
@@ -39,17 +40,12 @@ const image = {
 function Profile1() {
   return <Profile />;
 }
-function payment() {
-  return <Payment />;
-}
+
 function Home1() {
   return <AllNany />;
 }
 function Logout1() {
   return <Logout />;
-}
-function Confirm1() {
-  return <Confirm />;
 }
 function Map1() {
   return <MapScreen />;
@@ -58,6 +54,7 @@ function Map1() {
 function ContactUs() {
   return <ContactUS />;
 }
+
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -82,6 +79,7 @@ function MyDrawer({ navigation }) {
             const [selectedKids, setSelectedKids] = useState([]); // state to change the selected Kids number based on picker selection
             const [selectedEdu, setSelectedEdu] = useState([]); // state to change the selected education level based on picker selection
             const [selected, setSelected] = useState([]); // state to save all selected nannies based on selection
+
             //fetching data from the db
             useEffect(() => {
               fetch(`192.168.8.100:5000/ret`)
@@ -91,6 +89,7 @@ function MyDrawer({ navigation }) {
                 })
                 .catch((error) => console.log(error));
             }, []);
+
             // filtering the list data
             function listFilter() {
               if (selectedCity === "allNany") {
@@ -107,7 +106,10 @@ function MyDrawer({ navigation }) {
                 setSelected(selected1);
               }
             }
-          function nannyReserved(nany) { // function to reserve the nanny called once the reserve button clicked
+
+            function nannyReserved(nany) {
+              // function to reserve the nanny called once the reserve button clicked
+
               axios
                 .post(`192.168.8.100:5000/reserve`, nany)
                 .then((res) => res
@@ -125,9 +127,10 @@ function MyDrawer({ navigation }) {
                 .then(() => {
                   Actions.push("MapScreen");
                 })
-                
+
                 .catch((err) => console.log(err));
             }
+
             return (
               <ImageBackground
                 source={image}
@@ -137,10 +140,12 @@ function MyDrawer({ navigation }) {
                 <View>
                   <ScrollView>
                     {/* city picker */}
+
                     <Text style={{ marginRight: "35%", marginBottom: "5%" }}>
                       {" "}
                       Where do you live?
                     </Text>
+
                     <Picker
                       selectedValue={selectedCity}
                       mode="dropdown"
@@ -164,6 +169,7 @@ function MyDrawer({ navigation }) {
                       <Picker.Item label="Zarqa" value="Zarqa" />
                       <Picker.Item label="Aqaba" value="Aqaba" />
                     </Picker>
+
                     {/* Kids can handle picker */}
                     <Text style={{ marginRight: "30%", marginBottom: "5%" }}>
                       {" "}
@@ -179,6 +185,7 @@ function MyDrawer({ navigation }) {
                         width: "80%",
                         marginLeft: "10%",
                         borderColor: "#ffb028",
+
                         marginBottom: "10%",
                         marginRight: "10%",
                       }}
@@ -191,6 +198,7 @@ function MyDrawer({ navigation }) {
                       <Picker.Item label="3 kids" value="3" />
                       <Picker.Item label="4 kids" value="4" />
                     </Picker>
+
                     {/* Education level picker */}
                     <Text style={{ marginRight: "10%", marginBottom: "5%" }}>
                       {" "}
@@ -204,6 +212,7 @@ function MyDrawer({ navigation }) {
                         borderRadius: 5,
                         marginBottom: "10%",
                         borderColor: "#ffb028",
+
                         padding: 5,
                         width: "80%",
                         marginLeft: "10%",
@@ -228,6 +237,7 @@ function MyDrawer({ navigation }) {
                         <FontAwesome name="search" size={24} color="black" />
                       </Button>
                     </View>
+
                     {/* rendering based on the selection condition */}
                     <View>
                       {selected.map((nany) => (
@@ -273,9 +283,9 @@ function MyDrawer({ navigation }) {
             );
           }}
         />
+
         <Drawer.Screen name="Profile" component={Profile1} />
-        {/* <Drawer.Screen name="Contact Us" component={ContactUs} /> */}
-        <Drawer.Screen name="payment screen" component={Payment} />
+        <Drawer.Screen name="Contact Us" component={ContactUs} />
         <Drawer.Screen name="Logout" component={Logout1} />
         <Drawer.Screen name="Confirm" component={Confirm1} />
       </Drawer.Navigator>
@@ -283,6 +293,7 @@ function MyDrawer({ navigation }) {
   );
 }
 export default MyDrawer;
+
 /*******************************Styling********************************/
 const styles = StyleSheet.create({
   image: {
@@ -336,6 +347,7 @@ const styles = StyleSheet.create({
   message: {
     backgroundColor: "#228B22",
   },
+
   image: {
     flex: 1,
     resizeMode: "cover",

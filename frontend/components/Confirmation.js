@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Card } from "galio-framework";
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from "react-native";
 import { Button } from "react-native-paper";
 import axios from "axios";
 import * as Location from "expo-location";
@@ -38,10 +38,10 @@ export default function Confirm() {
 
 
 
-async () => {
+
       try {
       //Retrieving user token, reserved nanny information and user location value from AsyncStorage
-     AsyncStorage.multiGet(['token','nany','location']).then((res) => {
+    await AsyncStorage.multiGet(['token','nany','location']).then((res) => {
       var nany =  JSON.parse(res[1][1]);
       var location =  JSON.parse(res[2][1]);
       setInfo(nany)
@@ -52,7 +52,7 @@ async () => {
     catch (error) {
        throw error
        }
-     }
+     
   
 // function to send user location and total cost to the nanny via SMS
 
@@ -86,8 +86,7 @@ async () => {
     setTotal(totalCost)
     alert('Your reservation done \n Your service costs: '+total)
   }
-  
-  return (  
+  return (
     <View>
     <>
             <View >
@@ -160,8 +159,6 @@ async () => {
   )
 
 }
-
-
 /*******************************Styling********************************/
 const styles = StyleSheet.create({
   image: {

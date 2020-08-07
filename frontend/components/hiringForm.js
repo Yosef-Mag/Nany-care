@@ -20,7 +20,7 @@ import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
 const image = {
   uri:
-    "https://images.theconversation.com/files/338577/original/file-20200529-78875-18d0wif.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
+    "https://cdn.pixabay.com/photo/2015/06/23/09/13/music-818459_960_720.jpg",
 };
 const reviewSchema = yup.object({
   Name: yup.string().strict().required(),
@@ -62,10 +62,10 @@ export default function HiringForm() {
     <ImageBackground
       source={image}
       style={styles.image}
-      imageStyle={{ opacity: 0.7 }}
+      imageStyle={{ opacity: 0.5 }}
     >
       <SafeAreaView style={styles.container}>
-        <ScrollView style={{ marginTop: "30%", marginBottom: "30%" }}>
+        <ScrollView style={{ marginTop: "10%", marginBottom: "30%" }}>
           <View>
             <TextTicker
               style={{
@@ -134,6 +134,7 @@ export default function HiringForm() {
                       style={{
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
+                        borderColor: "#ffb028",
                         padding: 5,
                         width: "80%",
                         marginLeft: "10%",
@@ -160,6 +161,8 @@ export default function HiringForm() {
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
                         padding: 5,
+                        borderColor: "#ffb028",
+
                         width: "80%",
                         marginLeft: "10%",
                         marginRight: "10%",
@@ -186,6 +189,8 @@ export default function HiringForm() {
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
                         padding: 5,
+                        borderColor: "#ffb028",
+
                         width: "80%",
                         marginLeft: "10%",
                         marginRight: "10%",
@@ -211,6 +216,8 @@ export default function HiringForm() {
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
                         padding: 5,
+                        borderColor: "#ffb028",
+
                         width: "80%",
                         marginLeft: "10%",
                         marginRight: "10%",
@@ -254,6 +261,7 @@ export default function HiringForm() {
                         width: "80%",
                         marginLeft: "10%",
                         marginRight: "10%",
+                        borderColor: "#ffb028",
                       }}
                     ></Input>
                     {/* Handling test for numberOfKids   */}
@@ -282,6 +290,8 @@ export default function HiringForm() {
                         borderRadius: 5,
                         padding: 5,
                         width: "80%",
+                        borderColor: "#ffb028",
+
                         marginLeft: "10%",
                         marginRight: "10%",
                       }}
@@ -308,6 +318,8 @@ export default function HiringForm() {
                         padding: 5,
                         width: "80%",
                         marginLeft: "10%",
+                        borderColor: "#ffb028",
+
                         marginRight: "10%",
                       }}
                     ></Input>
@@ -340,6 +352,8 @@ export default function HiringForm() {
                         padding: 5,
                         width: "80%",
                         marginLeft: "10%",
+                        borderColor: "#ffb028",
+
                         marginRight: "10%",
                       }}
                     ></Input>
@@ -368,6 +382,8 @@ export default function HiringForm() {
                         padding: 5,
                         width: "80%",
                         marginLeft: "10%",
+                        borderColor: "#ffb028",
+
                         marginRight: "10%",
                       }}
                     ></Input>

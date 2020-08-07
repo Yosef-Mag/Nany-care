@@ -14,7 +14,7 @@ import {
 import axios from "axios";
 const image = {
   uri:
-    "https://images.theconversation.com/files/338577/original/file-20200529-78875-18d0wif.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
+    "https://static1.squarespace.com/static/5acd47d075f9ee414f7214a3/5ad63461f950b76468caca95/5e5eacc468162464f584d1e5/1583263576371/the-honest-company-uM-WXMr0YXc-unsplash.jpg?format=1500w",
 };
 export default function Signup({ navigation }) {
   return (
@@ -43,17 +43,15 @@ export default function Signup({ navigation }) {
                   .then(function (res) {
                     console.log(res.data);
                     if (res.data === "User authenticated") {
-                      navigation.navigate("LoginPage");
-                    } else {
-                      if (res.data === "User authenticated") {
-                        navigation.navigate("LoginPage");
-                      } else {
+                      navigation.navigate("Login");
+                    } 
+                       else {
                         if (res.data === "User already exists...") {
                           alert("User already exists...");
                         }
                       }
                     }
-                  })
+                  )
 
                   .catch(function (error) {
                     console.log(error);
@@ -96,6 +94,7 @@ export default function Signup({ navigation }) {
                       width: "80%",
                       marginLeft: "10%",
                       marginRight: "10%",
+                      borderColor: "#ffb028",
                     }}
                   ></Input>
                   <View
@@ -131,6 +130,7 @@ export default function Signup({ navigation }) {
                       width: "80%",
                       marginLeft: "10%",
                       marginRight: "10%",
+                      borderColor: "#ffb028",
                     }}
                   ></Input>
                   {/* PhoneNumber input */}
@@ -161,6 +161,8 @@ export default function Signup({ navigation }) {
                       padding: 5,
                       width: "80%",
                       marginLeft: "10%",
+                      borderColor: "#ffb028",
+
                       marginRight: "10%",
                     }}
                   ></Input>
@@ -193,6 +195,8 @@ export default function Signup({ navigation }) {
                     style={{
                       backgroundColor: "rgba(255,255,255,0.4)",
                       borderRadius: 5,
+                      borderColor: "#ffb028",
+
                       padding: 5,
                       width: "80%",
                       marginLeft: "10%",
