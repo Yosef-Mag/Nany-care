@@ -8,9 +8,6 @@ import axios from "axios";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 import { Actions } from "react-native-router-flux";
-import { AsyncStorage } from "react-native";
-
- 
 
 const localNotification = {
   title: "Nany APP",
@@ -39,10 +36,6 @@ export default function MapScreen() {
     mocked: false,
     timestamp: 1577294172000,
   });
-
-   //store user location in AsyncStorage
-   AsyncStorage.setItem('location', JSON.stringify(selectedLocation))
-   
   const [errorMsg, setErrorMsg] = useState(null);
   const onSubmit = (text) => {
     axios
