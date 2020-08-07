@@ -15,7 +15,7 @@ import TopPic from "./TopPic";
 export default function Profile() {
   const [userData, setUserData] = useState({});
   useEffect(() => {
-    axios.get("http://192.168.1.16:5000/profilee").then((res) => {
+    axios.get("http://192.168.8.100:5000/profilee").then((res) => {
       // console.log(res.data);
       setUserData(res.data);
     }, []);
