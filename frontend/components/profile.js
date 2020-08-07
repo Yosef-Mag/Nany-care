@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
+//import jwt_decode from "jwt-decode";
 import { Text } from "galio-framework";
 import axios from "axios";
 import {
@@ -26,9 +26,12 @@ export default function Profile() {
     // }, {});
     // // console.log(Object.Values(userData[0]), "u");
     // console.log(userData, "uuu");
-    fetch(`http://192.168.1.19:5000/profile`)
+    fetch(`http://192.168.8.100:5000/profile`)
       .then((res) => res.json())
       .then((response) => {
+        AsyncStorage.getItem("token").then((res) => {
+          // console.log(res.data, "Hi");
+        });
         console.log(response[0].name, "here");
         setUserData(response[0]);
         userData.name = response[0].name;

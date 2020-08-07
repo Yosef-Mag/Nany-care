@@ -27,6 +27,11 @@ import AllNany from "./Home";
 import Profile from "./profile";
 import MapScreen from "./map";
 import Logout from "./Logout";
+import Confirm from "./Confirmation";
+import { AsyncStorage } from 'react-native';
+
+
+
 const image = {
   uri:
     "https://cdn.kinsights.com/cache/a3/5d/a35d9ef62daa9876a5598868592d316c.jpg",
@@ -42,10 +47,10 @@ function Home1() {
 function Logout1() {
   return <Logout />;
 }
-
 function Map1() {
   return <MapScreen />;
 }
+
 function ContactUs() {
   return <ContactUS />;
 }
@@ -77,7 +82,7 @@ function MyDrawer({ navigation }) {
 
             //fetching data from the db
             useEffect(() => {
-              fetch(`http://192.168.1.19:5000/ret`)
+              fetch(`192.168.8.100:5000/ret`)
                 .then((res) => res.json())
                 .then((response) => {
                   setNanylist(response);
@@ -106,7 +111,19 @@ function MyDrawer({ navigation }) {
               // function to reserve the nanny called once the reserve button clicked
 
               axios
-                .post(`http://192.168.1.19:5000/reserve`, nany)
+                .post(`192.168.8.100:5000/reserve`, nany)
+                .then((res) => res
+               )
+                .then((data) => {
+                
+                  //saving nanny info into AsyncStorage
+                  AsyncStorage.setItem('nany', JSON.stringify(nany))
+                  // getting user token value + Nanny info
+                  AsyncStorage.multiGet(['token','nany']).then((res) => {
+                    console.log(res)
+                  })
+                
+                } )
                 .then(() => {
                   Actions.push("MapScreen");
                 })
@@ -126,11 +143,11 @@ function MyDrawer({ navigation }) {
 
                     <Text style={{ marginRight: "35%", marginBottom: "5%" }}>
                       {" "}
-                      where do you live?
+                      Where do you live?
                     </Text>
 
                     <Picker
-                      nanylist={nanylist}
+                      selectedValue={selectedCity}
                       mode="dropdown"
                       style={{
                         backgroundColor: "rgba(255,255,255,0.4)",
@@ -159,7 +176,7 @@ function MyDrawer({ navigation }) {
                       How many kids you have{" "}
                     </Text>
                     <Picker
-                      nanylist={nanylist}
+                      selectedValue={selectedKids}
                       mode="dropdown"
                       style={{
                         backgroundColor: "rgba(255,255,255,0.4)",
@@ -189,7 +206,7 @@ function MyDrawer({ navigation }) {
                     </Text>
                     <Picker
                       mode="dropdown"
-                      nanylist={nanylist}
+                      selectedValue={selectedEdu}
                       style={{
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
@@ -238,7 +255,7 @@ function MyDrawer({ navigation }) {
                                 flex
                                 borderless
                                 title={nany.name}
-                                caption={nany.cost + "$ /H"}
+                                caption={nany.cost + " $ /H"}
                                 location={nany.place}
                                 image={nany.image}
                                 style={{ backgroundColor: "white" }}
@@ -270,6 +287,7 @@ function MyDrawer({ navigation }) {
         <Drawer.Screen name="Profile" component={Profile1} />
         <Drawer.Screen name="Contact Us" component={ContactUs} />
         <Drawer.Screen name="Logout" component={Logout1} />
+        <Drawer.Screen name="Confirm" component={Confirm1} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

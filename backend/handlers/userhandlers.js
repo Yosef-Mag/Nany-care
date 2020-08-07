@@ -13,7 +13,7 @@ var jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
-var jwtDecode = require("jwt-decode");
+//var jwtDecode = require("jwt-decode");
 
 // var accountSid = config.accountSid; // Your Account SID from www.twilio.com/console
 // var authToken = config.authToken; // Your Auth Token from www.twilio.com/console
