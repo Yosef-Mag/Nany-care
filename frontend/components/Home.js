@@ -10,6 +10,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
 import { Button } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
@@ -239,12 +240,30 @@ function MyDrawer({ navigation }) {
                               <Card
                                 flex
                                 borderless
-                                title={nany.name}
-                                caption={nany.cost + "$ /H"}
-                                location={nany.place}
+                                title={
+                                  nany.name +
+                                  "                 " +
+                                  nany.age +
+                                  "Years old"
+                                }
+                                caption={nany.cost + "    JD /H"}
                                 image={nany.image}
                                 style={{ backgroundColor: "white" }}
-                              />
+                              >
+                                <View
+                                  style={{
+                                    flexDirection: "row",
+                                    marginLeft: "70%",
+                                  }}
+                                >
+                                  <MaterialIcons
+                                    name="place"
+                                    size={24}
+                                    color="black"
+                                  />
+                                  <Text>{nany.place}</Text>
+                                </View>
+                              </Card>
                               <View>
                                 <Button
                                   title="Submit"
