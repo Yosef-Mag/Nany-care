@@ -15,13 +15,15 @@ import { AsyncStorage } from "react-native";
 export default function Profile() {
   const [userData, setUserData] = useState({});
   useEffect(() => {
-    axios.get("http://172.16.0.161:5000/profile").then((res) => {
-      AsyncStorage.getItem("token").then((res) => {
-        console.log(res.data);
-      });
-      setUserData(res.data);
-    }, {});
-    console.log(userData);
+    return () => {
+      axios.get("http://172.16.0.161:5000/profile").then((res) => {
+        AsyncStorage.getItem("token").then((res) => {
+          console.log(res.data.name);
+        }, setUserData(res.data));
+      }, []);
+      console.log(userData, 'new state');
+
+    }
   });
 
   return (

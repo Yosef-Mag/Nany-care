@@ -78,7 +78,7 @@ function MyDrawer({ navigation }) {
 
             //fetching data from the db
             useEffect(() => {
-              fetch(`http://192.168.1.65:5000/ret`)
+              fetch(`http://172.16.0.161:5000/ret`)
                 .then((res) => res.json())
                 .then((response) => {
                   setNanylist(response);
@@ -107,7 +107,7 @@ function MyDrawer({ navigation }) {
               // function to reserve the nanny called once the reserve button clicked
 
               axios
-                .post(`http://192.168.1.65:5000/reserve`, nany)
+                .post(`http://172.16.0.161:5000/reserve`, nany)
                 .then(() => {
                   Actions.push("MapScreen");
                 })

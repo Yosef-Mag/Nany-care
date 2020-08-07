@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { AsyncStorage } from 'react-native';
-import jwt_decode from 'jwt-decode'
+import { AsyncStorage } from "react-native";
+import jwt_decode from "jwt-decode";
 
 const image = {
   uri:
@@ -40,10 +40,12 @@ export default function Login({ navigation }) {
                 axios
                   .post("http://172.16.0.161:5000/login", values)
                   .then(function (res) {
-                    
                     console.log(res.data.token);
                     if (res.data.token) {
-                      AsyncStorage.setItem('token', JSON.stringify(res.data.token));
+                      AsyncStorage.setItem(
+                        "token",
+                        JSON.stringify(res.data.token)
+                      );
                       navigation.navigate("AllNany");
                     } else {
                       if (res.data === "User not exist") {

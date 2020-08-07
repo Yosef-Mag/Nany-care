@@ -10,33 +10,7 @@ db.on("error", function () {
 db.once("open", function () {
   console.log("mongoose connected successfully");
 });
-const userSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    minlength: 3,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 8,
-  },
 
-  name: {
-    type: String,
-    required: true,
-  },
-  phoneNumber: {
-    type: Number,
-    required: true,
-    unique: true,
-    minlength: 10,
-  },
-  image: {
-    type: String,
-  },
-});
 var nanySchema = new Schema({
   name: { type: String, required: true },
   phoneNumber: { type: Number, required: true, unique: true },
@@ -63,9 +37,8 @@ const adminSchema = new Schema({
     minlength: 8,
   },
 });
+
 const Admin = mongoose.model("Admin", adminSchema);
 const Nany = mongoose.model("Nany", nanySchema);
-const User = mongoose.model("User", userSchema);
 module.exports.Admin = Admin;
 module.exports.Nany = Nany;
-module.exports.User = User;
