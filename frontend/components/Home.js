@@ -36,9 +36,7 @@ const image = {
 function Profile1() {
   return <Profile />;
 }
-function payment() {
-  return <Payment />;
-}
+
 function Home1() {
   return <AllNany />;
 }
@@ -240,13 +238,8 @@ function MyDrawer({ navigation }) {
                               <Card
                                 flex
                                 borderless
-                                title={
-                                  nany.name +
-                                  "                 " +
-                                  nany.age +
-                                  "Years old"
-                                }
-                                caption={nany.cost + "    JD /H"}
+                                title={nany.name + "-" + nany.age + "Years old"}
+                                caption={nany.cost + " JD /H"}
                                 image={nany.image}
                                 style={{ backgroundColor: "white" }}
                               >
@@ -289,8 +282,7 @@ function MyDrawer({ navigation }) {
         />
 
         <Drawer.Screen name="Profile" component={Profile1} />
-        {/* <Drawer.Screen name="Contact Us" component={ContactUs} /> */}
-        <Drawer.Screen name="payment screen" component={Payment} />
+        <Drawer.Screen name="Contact Us" component={ContactUs} />
         <Drawer.Screen name="Logout" component={Logout1} />
       </Drawer.Navigator>
     </NavigationContainer>

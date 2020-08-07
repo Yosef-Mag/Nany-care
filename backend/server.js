@@ -1,12 +1,12 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+
 var items = require("./models/user");
-// var checkAuth = require('./handlers/check-auth-middleware')
-// var config = require("./config");
 var Nany = items.Nany;
 var User = items.User;
 var User = items.User;
+
 const cors = require("cors");
 // const router = express.Router();
 var Nannyhandlers = require("./handlers/Nannyhandlers");
@@ -30,6 +30,7 @@ app.use(
   })
 );
 var port = process.env.PORT || 5000;
+
 require("dotenv").config(); // to read .env file
 
 app.post("/HiringForm", Nannyhandlers.HiringForm);
@@ -38,21 +39,19 @@ app.get("/logout", userhandlers.userLogOut);
 app.post("/login", userhandlers.userLogIn);
 app.get("/ret", Nannyhandlers.retrieve);
 app.get("/profile", userhandlers.retriveUserByToken);
-// app.post("/api/doPayment/", userhandlers.payment);
 
 app.post("/AddAdmin", Adminhandlers.adminSignUp);
 app.post("/adminLogin", Adminhandlers.adminLogIn);
 app.post("/AddNanny", Adminhandlers.addNewNanny);
 app.post("/reserve", Nannyhandlers.reserve);
-// app.post("/sendSMS", userhandlers.sendSMS);
 app.get("/Admin", Adminhandlers.retriveAllNanies);
 app.delete("/delete/:id", Adminhandlers.deleteSpecificNany);
 app.patch("/updateNanyInformation", Adminhandlers.updateNanyInformation);
-// app.post("/checkout", payment.checkout);
-// app.get('/web/checkout/redirect',payment.redirect);
-// app.get('/payment/success',payment.success);
-// app.get('/payment/cancel',payment.cancel);
-// app.post('/stripe/webhook',payment.webhook)
+app.post("/send", function (req, res) {
+  console.log(req.body);
+});
+app.post("/sendFeedBack", userhandlers.sendFeedBack);
+
 const mongoURI = process.env.ATLAS_URI;
 mongoose
   .connect(mongoURI, { useNewUrlParser: true })
@@ -61,3 +60,5 @@ mongoose
 app.listen(port, () => {
   console.log(`Server is running on ${port} Visit https://localhost:${port}`);
 });
+
+module.exports = app; // for testing

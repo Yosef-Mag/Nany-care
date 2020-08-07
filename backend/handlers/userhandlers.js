@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var items = require("../models/user");
 var User = items.User;
-var config = require("../config");
+// var config = require("../config");
 const cors = require("cors");
 var app = express();
 app.use(cors({ origin: true, credentials: true }));
@@ -15,12 +15,12 @@ var bcrypt = require("bcrypt");
 var saltRounds = 10;
 var jwtDecode = require("jwt-decode");
 
-var accountSid = config.accountSid; // Your Account SID from www.twilio.com/console
-var authToken = config.authToken; // Your Auth Token from www.twilio.com/console
-var toNum = config.toNum;
-var fromNum = config.fromNum;
-var twilio = require("twilio");
-var client = new twilio(accountSid, authToken);
+// var accountSid = config.accountSid; // Your Account SID from www.twilio.com/console
+// var authToken = config.authToken; // Your Auth Token from www.twilio.com/console
+// var toNum = config.toNum;
+// var fromNum = config.fromNum;
+// var twilio = require("twilio");
+// var client = new twilio(accountSid, authToken);
 
 require("dotenv").config(); // to read .env file
 module.exports = {
@@ -63,6 +63,7 @@ module.exports = {
                 .then(() => {
                   console.log("user saved");
                   res.send("User authenticated");
+                  // console.log(res);
                 })
                 .catch((err) => {
                   console.log("Error is ", err.message);
@@ -81,6 +82,7 @@ module.exports = {
   userLogOut: function (req, res) {
     res.status(200).send({ auth: false, token: null });
   },
+
   userLogIn: function (req, res) {
     console.log(req);
     var newUser = {};
@@ -132,31 +134,49 @@ module.exports = {
         console.log("Error is ", err.message);
       });
   },
-  retriveUserByEmail: function (req, res) {
-    console.log(req.header);
-    console.log(req.body, "body");
-    var decoded = jwt.verify(req.headers["authorization"], process.env.JWT_KEY);
-    User.findOne({
-      _id: decoded._id,
-    })
-      .then((user) => {
-        if (user) {
-          res.json(user);
-        } else {
-          res.send("User does not exist");
-        }
-      })
-      .catch((err) => {
-        res.send("error: " + err);
-      });
+  sendFeedBack: function (req, res) {
+    var decode = jwtDecode(token);
+    console.log(decode);
+    var userMail = decode.email;
+    var phone = decode.phoneNumber;
+    var Name = decode.name;
+    console.log(req.body);
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "nannyHirring@gmail.com",
+        pass: "nannyHirring12345",
+      },
+    });
+
+    let mailOptions = {
+      from: userMail,
+      to: "nannycarecom@gmail.com",
+      subject: "Feed Back",
+      text:
+        "Name : " +
+        Name +
+        "\n Phone Number : " +
+        phone +
+        "\n Email : " +
+        userMail +
+        "\n Says : " +
+        req.body.text,
+    };
+
+    // Step 3
+    transporter.sendMail(mailOptions, (err, data) => {
+      if (err) {
+        res.status(400).json("Error:" + err);
+      }
+      res.json("Email send");
+    });
   },
   retriveUserByToken: function (req, res) {
-    // console.log("hi from server");
-    // console.log(req.header);
-    // console.log(token, "this is the token ");
-    // console.log(req.body, "body");
+    console.log(token, "token");
     var decode = jwtDecode(token);
-    // console.log(decode, "from pro");
+    console.log(decode, "decode");
+
     User.find({
       email: decode.email,
     })

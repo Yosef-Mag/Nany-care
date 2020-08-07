@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Keyboard, Platform, StyleSheet, View, Text } from "react-native";
 import { Button } from "galio-framework";
-
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
 import axios from "axios";
-
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
+import { Actions } from "react-native-router-flux";
 
 const localNotification = {
   title: "Nany APP",
   body: "You send yor location successfully!!",
 };
-
 const handleNotification = () => {
   console.warn("ok! got your notif");
 };
-
 const askNotification = async () => {
   // We need to ask for Notification permissions for ios devices
   const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
@@ -40,13 +37,17 @@ export default function MapScreen() {
     timestamp: 1577294172000,
   });
   const [errorMsg, setErrorMsg] = useState(null);
-
   const onSubmit = (text) => {
     axios
-      .post("http://192.168.127.43:5000/sendSMS", selectedLocation)
+      .post("http://192.168.127.43:5000/send", selectedLocation)
+      .then(
+        // console.log('fnh');
+        Actions.push("Confirm")
+      )
       .then(function (response) {
         console.log(response);
       })
+
       .catch(function (error) {
         console.log(error);
       });
@@ -72,9 +73,7 @@ export default function MapScreen() {
         if (status !== "granted") {
           setErrorMsg("Permission to access location was denied");
         }
-
         let userLocation = await Location.getCurrentPositionAsync({});
-
         console.log(JSON.stringify(userLocation));
         setLocation(userLocation);
       })();
@@ -86,7 +85,6 @@ export default function MapScreen() {
     latitudeDelta: 0.005,
     longitudeDelta: 0.005,
   };
-
   const selectLocationHandler = (event) => {
     event.preventDefault();
     setSelectedLocation({
@@ -94,9 +92,7 @@ export default function MapScreen() {
       longitude: event.nativeEvent.coordinate.longitude,
     });
   };
-
   let markerCoordinates;
-
   if (selectedLocation) {
     markerCoordinates = {
       latitude: selectedLocation.latitude,
@@ -121,7 +117,6 @@ export default function MapScreen() {
     const listener = Notifications.addListener(handleNotification);
     return () => listener.remove();
   }, []);
-
   return (
     <View style={styles.mapContainer}>
       <MapView
@@ -148,8 +143,7 @@ export default function MapScreen() {
       </View>
     </View>
   );
-        }
-
+}
 const styles = StyleSheet.create({
   button: {
     top: 60 + "%",
@@ -159,7 +153,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-
   mapContainer: {
     position: "absolute",
     top: 0,
@@ -167,7 +160,6 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-
   rad: {
     height: 50,
     width: 50,

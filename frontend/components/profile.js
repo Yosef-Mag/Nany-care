@@ -18,17 +18,23 @@ export default function Profile() {
     fetch(`http://192.168.127.43:5000/profile`)
       .then((res) => res.json())
       .then((response) => {
-        console.log(response[0].name, "here");
         setUserData(response[0]);
         userData.name = response[0].name;
         userData.email = response[0].email;
         userData.image = response[0].image;
         userData.phoneNumber = response[0].phoneNumber;
-        console.log(userData, "data");
       })
       .catch((error) => console.log(error));
   }, []);
-
+  useEffect(() => {
+    axios.get("http://172.16.0.161:5000/profile").then((res) => {
+      AsyncStorage.getItem("token").then((res) => {
+        console.log(res.data);
+      });
+      setUserData(res.data);
+    }, {});
+    console.log(userData);
+  });
   return (
     <ImageBackground
       source={{
