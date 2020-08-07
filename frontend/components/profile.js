@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
+//import jwt_decode from "jwt-decode";
 import { Text } from "galio-framework";
 import axios from "axios";
 import {
@@ -15,9 +15,30 @@ import { AsyncStorage } from "react-native";
 export default function Profile() {
   const [userData, setUserData] = useState({});
   useEffect(() => {
+<<<<<<< HEAD
     fetch(`http://192.168.127.43:5000/profile`)
       .then((res) => res.json())
       .then((response) => {
+=======
+    // axios.get("http://192.168.127.43:5000/profile").then((res) => {
+    //   // console.log(res, "this is res");
+    //   AsyncStorage.getItem("token").then((res) => {
+    //     // console.log(res.data, "Hi");
+    //   });
+    //   // console.log(res.data, "hellllllllo");
+
+    //   setUserData(res.data);
+    // }, {});
+    // // console.log(Object.Values(userData[0]), "u");
+    // console.log(userData, "uuu");
+    fetch(`http://192.168.8.100:5000/profile`)
+      .then((res) => res.json())
+      .then((response) => {
+        AsyncStorage.getItem("token").then((res) => {
+          // console.log(res.data, "Hi");
+        });
+        console.log(response[0].name, "here");
+>>>>>>> 98ed32d2e62bd3c0702649c50e1f565cfc997294
         setUserData(response[0]);
         userData.name = response[0].name;
         userData.email = response[0].email;
