@@ -39,7 +39,6 @@ app.get("/logout", userhandlers.userLogOut);
 app.post("/login", userhandlers.userLogIn);
 app.get("/ret", Nannyhandlers.retrieve);
 app.get("/profile", userhandlers.retriveUserByToken);
-app.post("/sendSMS", userhandlers.sendSMS);
 
 app.post("/AddAdmin", Adminhandlers.adminSignUp);
 app.post("/adminLogin", Adminhandlers.adminLogIn);
@@ -50,11 +49,6 @@ app.delete("/delete/:id", Adminhandlers.deleteSpecificNany);
 app.patch("/updateNanyInformation", Adminhandlers.updateNanyInformation);
 app.post("/send", function (req, res) {
   console.log(req.body);
-});
-app.post("/send2", function (req, res) {
-  console.log("here1", req.body[0].latitude, "this is latitude");
-  console.log("here2", req.body[1], "total");
-  console.log("here3", req.body[2].name, "name");
 });
 app.post("/sendFeedBack", userhandlers.sendFeedBack);
 

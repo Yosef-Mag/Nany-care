@@ -26,7 +26,7 @@ export default function Profile() {
     // }, {});
     // // console.log(Object.Values(userData[0]), "u");
     // console.log(userData, "uuu");
-    fetch(`http://192.168.127.43:5000/profile`)
+    fetch(`http://192.168.8.100:5000/profile`)
       .then((res) => res.json())
       .then((response) => {
         AsyncStorage.getItem("token").then((res) => {

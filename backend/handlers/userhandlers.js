@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var items = require("../models/user");
 var User = items.User;
-var config = require("../config");
+// var config = require("../config");
 const cors = require("cors");
 var app = express();
 app.use(cors({ origin: true, credentials: true }));
@@ -13,50 +13,27 @@ var jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
-var jwtDecode = require("jwt-decode");
+//var jwtDecode = require("jwt-decode");
 
-var accountSid = config.accountSid; // Your Account SID from www.twilio.com/console
-var authToken = config.authToken; // Your Auth Token from www.twilio.com/console
-var toNum = config.toNum;
-var fromNum = config.fromNum;
-var twilio = require("twilio");
-var client = new twilio(accountSid, authToken);
+// var accountSid = config.accountSid; // Your Account SID from www.twilio.com/console
+// var authToken = config.authToken; // Your Auth Token from www.twilio.com/console
+// var toNum = config.toNum;
+// var fromNum = config.fromNum;
+// var twilio = require("twilio");
+// var client = new twilio(accountSid, authToken);
 
 require("dotenv").config(); // to read .env file
 module.exports = {
   sendSMS: function (req, res) {
-    // console.log("here1", req.body[0].latitude, "this is latitude");
-    console.log("here2", req.body[1], "total");
-    console.log("here3", req.body[2].name, "name");
     console.log("hi from send sms");
-    var location = req.body[0];
-    var total = req.body[1];
-    var info = req.body[2];
-    var decode = jwtDecode(token);
-    console.log(decode);
-    var userMail = decode.email;
-    var phone = decode.phoneNumber;
-    var userName = decode.name;
+    var location = req.body;
     client.messages
       .create({
         body:
-          " \n Hi " +
-          info.name +
-          " from Nanny app \n You have been reserved by " +
-          userName +
-          " and his/her location, https://www.google.com/maps/search/?api=1&query=" +
+          "Hi from Nanny app you have been reserved by a new mommy and this is the location, https://www.google.com/maps/search/?api=1&query=" +
           location.latitude +
           "," +
-          location.longitude +
-          " \n here is The contact information: \n Phone number : 0" +
-          phone +
-          " \n E-mail: " +
-          userMail +
-          " \n he/she will pay " +
-          total +
-          " in the end of the visit , he/she reserved you for " +
-          total / info.cost +
-          " hours .",
+          location.longitude,
         to: toNum, // Text this number
         from: fromNum, // From a valid Twilio number
       })
