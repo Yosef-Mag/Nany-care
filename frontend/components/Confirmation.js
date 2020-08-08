@@ -1,89 +1,151 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Popover from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import React, { useState, useEffect } from "react";
+import { Card } from "galio-framework";
+import { AsyncStorage } from "react-native";
+import { Button } from "react-native-paper";
+import axios from "axios";
+import { View, Text, TextInput, StyleSheet } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
-const useStyles = makeStyles((theme) => ({
-  typography: {
-    padding: theme.spacing(2),
-  },
-}));
+export default function Confirm() {
+  const [info, setInfo] = useState([]);
+  const [value, onChangeText] = React.useState("0");
+  const [total, setTotal] = useState("0");
+  const [selectedLocation, setSelectedLocation] = useState({});
+  var calculate;
+  var onSubmit;
+  useEffect(() => {
+    try {
+      //Retrieving user token, reserved nanny information and user location value from AsyncStorage
+      AsyncStorage.multiGet(["token", "nany", "location"]).then((res) => {
+        var nany = JSON.parse(res[1][1]);
+        var location = JSON.parse(res[2][1]);
+        setInfo(nany);
+        console.log("hi3");
+        setSelectedLocation(location);
+      });
+    } catch (error) {
+      throw error;
+    }
+  }, []);
 
-export default function SimplePopover() {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  // function to send user location and total cost to the nanny via SMS
 
-  // //fetching data from the db
-  // useEffect(() => {
-  //   fetch(`http://192.168.127.74:5000/ret`)
-  //     .then(res => res.json())
-  //     .then(response => {
-  //       setNanylist(response);
-  //     })
-  //     .catch(error => console.log(error));
-  // }, []);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  onSubmit = () => {
+    axios
+      .post("http://192.168.127.43:5000/sendSMS1", [
+        selectedLocation,
+        total,
+        info,
+      ])
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  console.log(total);
+  //Calculating total cost based on user input for how many hours he will reserve the nanny service
 
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  calculate = function calculateTotal() {
+    console.log(info.cost * value);
+    var totalCost = info.cost * value;
+    setTotal(totalCost);
+    console.log(total, "to");
+
+    alert("Your reservation done \n Your service costs: " + total);
+  };
 
   return (
-    <div>
-      <Button
-        aria-describedby={id}
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        Confirm
-      </Button>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-      >
-        <Typography className={classes.typography}>nanny name: </Typography>
-        <Typography className={classes.typography}>
-          nanny education:{" "}
-        </Typography>
-        <Typography className={classes.typography}>nanny place: </Typography>
-        <Typography className={classes.typography}> nanny cost: </Typography>
-        <Button
-          aria-describedby={id}
-          variant="contained"
-          color="primary"
-          onClick={handleClick}
-        >
-          {" "}
-          Done{" "}
-        </Button>
-        <Button
-          aria-describedby={id}
-          variant="contained"
-          color="primary"
-          onClick={handleClose}
-        >
-          {" "}
-          Cancel{" "}
-        </Button>
-      </Popover>
-    </div>
+    <View>
+      <>
+        <View>
+          <Card
+            title={info.name}
+            caption={info.cost + "  JD  /H"}
+            // location={info.place}
+            image={info.image}
+            // style={{ backgroundColor: "white" }}
+            style={styles.card}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                marginRight: "40%",
+              }}
+            >
+              <MaterialIcons name="place" size={24} color="black" />
+              <Text>{info.place}</Text>
+            </View>
+          </Card>
+          <View>
+            <View>
+              <Text style={styles.text}>
+                Enter how many hours you need our service
+              </Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => onChangeText(text)}
+                value={value}
+              ></TextInput>
+            </View>
+
+            <View>
+              <Button
+                mode="contained"
+                color="rgba(255,255,255,0.6)"
+                onPress={calculate}
+              >
+                <Text>Calculate total</Text>
+              </Button>
+            </View>
+          </View>
+          <View>
+            <View>
+              <Button
+                title="Submit"
+                mode="contained"
+                color="rgba(255,255,255,0.6)"
+                onPress={onSubmit}
+              >
+                <Text>Done</Text>
+              </Button>
+            </View>
+            <View>
+              <Button
+                title="Submit"
+                mode="contained"
+                color="rgba(255,255,255,0.6)"
+              >
+                <Text>Cancel</Text>
+              </Button>
+            </View>
+          </View>
+        </View>
+      </>
+    </View>
   );
 }
+// export default Confirm;
+/*******************************Styling********************************/
+const styles = StyleSheet.create({
+  image: {
+    width: 100,
+    height: 100,
+  },
+  card: {
+    width: 300,
+    height: 250,
+    marginLeft: 55,
+    marginTop: 100,
+    fontSize: 20,
+  },
+  input: {
+    textAlign: "center",
+  },
+  text: {
+    marginTop: 30,
+    textAlign: "center",
+  },
+});

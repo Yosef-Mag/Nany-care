@@ -4,11 +4,13 @@ import {
   Text,
   Picker,
   ScrollView,
+  Icon,
   ImageBackground,
   Image,
   StyleSheet,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
 import { Button } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
@@ -26,6 +28,9 @@ import AllNany from "./Home";
 import Profile from "./profile";
 import MapScreen from "./map";
 import Logout from "./Logout";
+import Confirm from "./Confirmation";
+import { AsyncStorage } from "react-native";
+
 const image = {
   uri:
     "https://cdn.kinsights.com/cache/a3/5d/a35d9ef62daa9876a5598868592d316c.jpg",
@@ -34,19 +39,17 @@ const image = {
 function Profile1() {
   return <Profile />;
 }
-function payment() {
-  return <Payment />;
-}
+
 function Home1() {
   return <AllNany />;
 }
 function Logout1() {
   return <Logout />;
 }
-
 function Map1() {
   return <MapScreen />;
 }
+
 function ContactUs() {
   return <ContactUS />;
 }
@@ -78,7 +81,7 @@ function MyDrawer({ navigation }) {
 
             //fetching data from the db
             useEffect(() => {
-              fetch(`http://172.16.0.161:5000/ret`)
+              fetch(`http://172.16.0.124:5000/ret`)
                 .then((res) => res.json())
                 .then((response) => {
                   setNanylist(response);
@@ -107,7 +110,16 @@ function MyDrawer({ navigation }) {
               // function to reserve the nanny called once the reserve button clicked
 
               axios
-                .post(`http://172.16.0.161:5000/reserve`, nany)
+                .post(`http://172.16.0.124:5000/reserve`, nany)
+                .then((res) => res)
+                .then((data) => {
+                  //saving nanny info into AsyncStorage
+                  AsyncStorage.setItem("nany", JSON.stringify(nany));
+                  // getting user token value + Nanny info
+                  AsyncStorage.multiGet(["token", "nany"]).then((res) => {
+                    console.log(res);
+                  });
+                })
                 .then(() => {
                   Actions.push("MapScreen");
                 })
@@ -119,15 +131,20 @@ function MyDrawer({ navigation }) {
               <ImageBackground
                 source={image}
                 style={styles.image}
-                imageStyle={{ opacity: 0.2 }}
+                imageStyle={{ opacity: 0.1 }}
               >
                 <View>
                   <ScrollView>
                     {/* city picker */}
 
-                    <Text> Select a city </Text>
+                    <Text style={{ marginRight: "35%", marginBottom: "5%" }}>
+                      {" "}
+                      Where do you live?
+                    </Text>
+
                     <Picker
-                      nanylist={nanylist}
+                      selectedValue={selectedCity}
+                      mode="dropdown"
                       style={{
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
@@ -135,6 +152,8 @@ function MyDrawer({ navigation }) {
                         width: "80%",
                         marginLeft: "10%",
                         marginRight: "10%",
+                        marginBottom: "10%",
+                        borderColor: "#ffb028",
                       }}
                       onValueChange={(itemValue, itemIndex) => {
                         setSelectedCity(itemValue);
@@ -148,15 +167,22 @@ function MyDrawer({ navigation }) {
                     </Picker>
 
                     {/* Kids can handle picker */}
-                    <Text> Kids can Handle </Text>
+                    <Text style={{ marginRight: "30%", marginBottom: "5%" }}>
+                      {" "}
+                      How many kids you have{" "}
+                    </Text>
                     <Picker
-                      nanylist={nanylist}
+                      selectedValue={selectedKids}
+                      mode="dropdown"
                       style={{
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
                         padding: 5,
                         width: "80%",
                         marginLeft: "10%",
+                        borderColor: "#ffb028",
+
+                        marginBottom: "10%",
                         marginRight: "10%",
                       }}
                       onValueChange={(itemValue, itemIndex) => {
@@ -169,13 +195,20 @@ function MyDrawer({ navigation }) {
                       <Picker.Item label="4 kids" value="4" />
                     </Picker>
 
-                    {/* Education level picker */}
-                    <Text> Education level </Text>
+                    {/* Experiance Level picker */}
+                    <Text style={{ marginRight: "10%", marginBottom: "5%" }}>
+                      {" "}
+                      Experiance Level for the nanny you looking for{" "}
+                    </Text>
                     <Picker
-                      nanylist={nanylist}
+                      mode="dropdown"
+                      selectedValue={selectedEdu}
                       style={{
                         backgroundColor: "rgba(255,255,255,0.4)",
                         borderRadius: 5,
+                        marginBottom: "10%",
+                        borderColor: "#ffb028",
+
                         padding: 5,
                         width: "80%",
                         marginLeft: "10%",
@@ -185,8 +218,9 @@ function MyDrawer({ navigation }) {
                         setSelectedEdu(itemValue);
                       }}
                     >
-                      <Picker.Item label="College" value="college" />
-                      <Picker.Item label="High school" value="high school" />
+                      <Picker.Item label="0-3 years" value="0-3 years" />
+                      <Picker.Item label="3-6 years" value="3-6 years" />
+                      <Picker.Item label="6+ years" value="6+ years" />
                     </Picker>
                     <View>
                       <Button
@@ -217,12 +251,25 @@ function MyDrawer({ navigation }) {
                               <Card
                                 flex
                                 borderless
-                                title={nany.name}
-                                caption={nany.cost + "$ /H"}
-                                location={nany.place}
+                                title={nany.name + "-" + nany.age + "Years old"}
+                                caption={nany.cost + " JD /H"}
                                 image={nany.image}
                                 style={{ backgroundColor: "white" }}
-                              />
+                              >
+                                <View
+                                  style={{
+                                    flexDirection: "row",
+                                    marginLeft: "70%",
+                                  }}
+                                >
+                                  <MaterialIcons
+                                    name="place"
+                                    size={24}
+                                    color="black"
+                                  />
+                                  <Text>{nany.place}</Text>
+                                </View>
+                              </Card>
                               <View>
                                 <Button
                                   title="Submit"
@@ -248,9 +295,9 @@ function MyDrawer({ navigation }) {
         />
 
         <Drawer.Screen name="Profile" component={Profile1} />
-        {/* <Drawer.Screen name="Contact Us" component={ContactUs} /> */}
-        <Drawer.Screen name="payment screen" component={Payment} />
+        <Drawer.Screen name="Contact Us" component={ContactUs} />
         <Drawer.Screen name="Logout" component={Logout1} />
+        {/* <Drawer.Screen name="Confirm" component={Confirm1} /> */}
       </Drawer.Navigator>
     </NavigationContainer>
   );
